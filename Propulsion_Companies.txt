@@ -1,7 +1,0 @@
-aerojet: http://www.rocket.com/cubesat
-cubesatshop: http://www.cubesatshop.com/index.php?option=com_virtuemart&Itemid=69
-tethers unlimited: http://www.tethers.com/microPET.html
-tethers unlimited: http://www.tethers.com/HYDROS.html
-clydespace: http://www.clyde-space.com/cubesat_shop/propulsion
-busek: http://www.busek.com/capabilities__propulsion.htm
-dssp: http://dsspropulsion.com/
