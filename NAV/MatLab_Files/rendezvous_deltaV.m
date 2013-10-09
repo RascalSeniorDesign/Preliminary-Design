@@ -14,8 +14,15 @@
 %============================Inputs========================================
 % Rp = Orbital Periapsis Altitude (km)
 % Ra = Orbital Apoapsis Altitude (km)
-% delta_r0 =Inital Relative Displacement Vector b/w Sundance and Butch(km)
+% rstar_ =Inital Location of Chase Satellite Relative to Focal Point(km)
+% r_ = Initial Location of Target Satellite Relatvie to Focal Point (km)
 %    NOTE: This is assumed to be a 2-D Vector input [x, y]
+%
+% All variables with star in name are of chase satellite. All others are of
+% the target satellite.
+%
+% All variables with an underscore are vectors
+
 
 %===========================Outputs========================================
 % Total Delta V to go from intial positon to one within 10 m of Sundance
@@ -29,5 +36,17 @@ Ra = input('Please input the apoapsis of a selected orbit: ');
 e = (Ra-Rp)/(Ra+Rp); %Eccentricity of Orbit
 a = Ra/(1+e); %Semi-Major Axis, km
 mu = 398600; %Standard Gravitational Parameter of Earth, m^3/s^2
+
+% Ask for Initial Locations of Satellites
+rstar_ = input('Please input the inital displacement vector of chase satellite: ');
+r_ = input('Please input the initial displacement vector of target satellite: ');
+
+
+
+
+
+
+
+
 
 
