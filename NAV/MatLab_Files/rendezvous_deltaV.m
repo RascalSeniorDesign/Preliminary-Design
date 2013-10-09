@@ -19,3 +19,15 @@
 
 %===========================Outputs========================================
 % Total Delta V to go from intial positon to one within 10 m of Sundance
+
+%==========================Begin Code======================================
+
+Rp = input('Please input the periapsis of a selected orbit: ');
+Ra = input('Please input the apoapsis of a selected orbit: ');
+
+% Calculate Orbital Parameters
+e = (Ra-Rp)/(Ra+Rp); %Eccentricity of Orbit
+a = Ra/(1+e); %Semi-Major Axis, km
+mu = 398600; %Standard Gravitational Parameter of Earth, m^3/s^2
+
+
