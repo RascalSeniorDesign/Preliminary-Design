@@ -29,6 +29,9 @@
 
 %==========================Begin Code======================================
 
+clear
+clc
+
 Rp = input('Please input the periapsis of a selected orbit: ');
 Ra = input('Please input the apoapsis of a selected orbit: ');
 
@@ -49,22 +52,25 @@ n=sqrt(mu/rstar_(1)^3);
 
 %Indicate desired orbital time step for final rendezvous
 
-t=linspace(.5,12*pi,50);
+t=linspace(0,12*pi,250);
+%t=pi;
 
 for i=1:length(t)
 	
-	% Calculate Delta V
+	%Calculate Delta V
 
 	s=sin(n*t(i)*(180/pi));
 	c=cos(n*t(i)*(180/pi));
 
-	M=[4-3*c 0 0; 6*(s-n*t) 1 0; 0 0 c];
-	N=[s/n (2/n)*(1-c) 0; -(2/n)*(1-c) (4*s-3*n*t)/n 0; 0 0 s/n];
+	M=[(4-3*c) 0 0;6*(s-n*t(i)) 1 0;0 0 c];
+	N=[s/n (2/n)*(1-c) 0; -(2/n)*(1-c) (4*s-3*n*t(i))/n 0; 0 0 s/n];
 	S=[3*n*s 0 0; -6*n*(1-c) 0 0; 0 0 -n*s];
 	T=[c 2*s 0; -2*s 4*c-3 0; 0 0 c];
 
-	deltav_x(i)=(T*inv(N)*M-S)*r_(1);
-	deltav_y(i)=(T*inv(N)*M-S)*r_(2);
+	deltav=(T/N*M-S)*r_;
+    deltav_x(i)=deltav(1);
+    deltav_y(i)=deltav(2);
+	%deltav_y=(T/N*M-S)*r_(2);
 
 end
 
@@ -72,6 +78,8 @@ plot(t,deltav_x,t,deltav_y)
 xlabel('Time (Period Step Size)')
 ylabel('Delta V (km/s)')
 legend('Delta V: X Direction','Delta V: Y Direction')
+
+
 
 
 
