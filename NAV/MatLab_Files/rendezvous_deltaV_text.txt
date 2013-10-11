@@ -66,7 +66,12 @@ for i=1:length(t)
 	deltav_x(i)=(T*inv(N)*M-S)*r_(1);
 	deltav_y(i)=(T*inv(N)*M-S)*r_(2);
 
+end
+
 plot(t,deltav_x,t,deltav_y)
+xlabel('Time (Period Step Size)')
+ylabel('Delta V (km/s)')
+legend('Delta V: X Direction','Delta V: Y Direction')
 
 
 
