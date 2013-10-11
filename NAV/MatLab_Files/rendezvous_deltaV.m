@@ -36,10 +36,31 @@ Ra = input('Please input the apoapsis of a selected orbit: ');
 e = (Ra-Rp)/(Ra+Rp); %Eccentricity of Orbit
 a = Ra/(1+e); %Semi-Major Axis, km
 mu = 398600; %Standard Gravitational Parameter of Earth, m^3/s^2
+period=2*pi*sqrt(a^3/mu);
 
 % Ask for Initial Locations of Satellites
 rstar_ = input('Please input the inital displacement vector of chase satellite: ');
 r_ = input('Please input the initial displacement vector of target satellite: ');
+
+grav_=(mu/rstar_(1)^3)*[2 0 0 ; 0 -1 0; 0 0 -1];
+n=sqrt(mu/rstar_(1)^3);
+
+A=[3*n^2 0 0; 0 0 0; 0 0 -n^2];
+B=[0 2*n 0; -2*n 0 0; 0 0 0];
+
+t=pi;
+
+s=sin(n*t*(180/pi));
+c=cos(n*t*(180/pi));
+
+M=[4-3*c 0 0; 6*(s-n*t) 1 0; 0 0 c];
+N=[s/n (2/n)*(1-c) 0; -(2/n)*(1-c) (4*s-3*n*t)/n 0; 0 0 s/n];
+S=[3*n*s 0 0; -6*n*(1-c) 0 0; 0 0 -n*s];
+T=[c 2*s 0; -2*s 4*c-3 0; 0 0 c];
+
+deltav=(T*inv(N)*M-S)*r_
+
+
 
 
 
