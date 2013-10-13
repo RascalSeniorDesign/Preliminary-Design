@@ -34,8 +34,8 @@ clc
 
 % Create Delta V Structure
 
-deltaV_total=struct('rstar_',rstar_value,'dr_',dr_value,'deltav_x',deltav_xvalue,...
-    'deltav_y',deltav_yvalue,'Rp',Rpvalue,'Ra',Ravalue,'period',period_value,'n',nvalue,'t',tvalue);
+deltaV_total=struct('rstar_',{},'dr_',{},'deltav_x',{},...
+    'deltav_y',{},'Rp',{},'Ra',{},'period',{},'n',{},'t',{});
 
 Ra=linspace(200,900,10);
 Rp=linspace(200,900,10);
@@ -52,7 +52,8 @@ rstar_x=linspace(200,900,10);
 mu = 398600;
 
 for i=1:length(Ra)
-    a = Ra(i)/(1+e(i)); %Semi-Major Axis, km
+    e=0;
+    a = Ra(i)/(1+e); %Semi-Major Axis, km
     period_value=2*pi*sqrt(a(i)^3/mu);
     deltaV_total(i).period=period_value;
     deltaV_total(1,i).dr_=dr_x(i);
