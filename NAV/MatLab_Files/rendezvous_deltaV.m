@@ -35,12 +35,14 @@ clc
 % Create Delta V Structure
 
 deltaV_total=struct('rstar_',{},'dr_',{},'deltav_x',{},...
-    'deltav_y',{},'Rp',{},'Ra',{},'period',{},'n',{},'t',{});
+    'deltav_y',{},'Rp',{},'Ra',{},'period',{},'n',{},'t',{},'deltav',{});
 
-Ra=linspace(200,900,10);
-Rp=linspace(200,900,10);
-dr_=[linspace(.001,1,10);linspace(.001,1,10);linspace(0,0,10)];
-rstar_=[linspace(200,900,10);linspace(0,0,10);linspace(0,0,10)];
+norbits=3;
+
+Ra=linspace(200,900,norbits);
+Rp=linspace(200,900,norbits);
+dr_=[linspace(.1,.1,norbits);linspace(.1,.1,norbits);linspace(0,0,norbits)];
+rstar_=[linspace(200,900,norbits);linspace(0,0,norbits);linspace(0,0,norbits)];
 
 % Rp = input('Please input the periapsis of a selected orbit: ');
 % Ra = input('Please input the apoapsis of a selected orbit: ');
@@ -71,8 +73,6 @@ for j=1:length(Ra)
     for i=1:length(tvalue)
 	
 	%Calculate Delta V
-    
-        deltaV_total(i).t=tvalue(i);
 
         s=sin(deltaV_total(j).n*tvalue(i)*(180/pi));
         c=cos(deltaV_total(j).n*tvalue(i)*(180/pi));
@@ -82,24 +82,40 @@ for j=1:length(Ra)
         S=[3*deltaV_total(j).n*s 0 0; -6*deltaV_total(j).n*(1-c) 0 0; 0 0 -deltaV_total(j).n*s];
         T=[c 2*s 0; -2*s 4*c-3 0; 0 0 c];
 
-        deltav=(T/N*M-S)*deltaV_total(:,j).rstar_;
-        deltavx(j,i)=deltav(1);
-        deltavy(j,i)=deltav(2);
+        deltavtemp=(T/N*M-S)*deltaV_total(:,j).rstar_;
+        if deltavtemp(1)>1000
+            deltavx(j,i)=1000;
+        elseif deltavtemp(1)<-1000
+            deltavx(j,i)=-1000;    
+        else
+            deltavx(j,i)=deltavtemp(1);
+        end
+        
+        if deltavtemp(2)>1000
+             deltavy(j,i)=1000;
+        elseif deltavtemp(2)<-1000
+             deltavy(j,i)=-1000;    
+        else
+             deltavy(j,i)=deltavtemp(2);
+        end
     end
+    deltaV_total(j).t=tvalue(1,:);
+    deltaV_total(j).deltav_x=deltavx(j,:);
+    deltaV_total(j).dletav_y=deltavy(j,:);
 end
 
-for j=1:length(Ra)
-    for i=1:length(tvalue)
-        deltaV_total(j).deltav_x=deltavx(j,i);
-        deltaV_total(j).deltav_y=deltavy(j,i);
-    end
-end
+cc=jet(20);
 
-% for i=1:length(tvalue)
-%     plot(deltaV_total(i).t,deltaV_total(i).deltav_x,deltaV_total(i).t,deltaV_total(i).deltav_y)
-% end
-% xlabel('Time (Period Step Size)')
-% ylabel('Delta V (km/s)')
+hold on
+for i=1:norbits
+    plot(tvalue,deltaV_total(i).deltav_x,'color',cc(i,:))
+    legendinfo{i}=['Orbit (km): ' int2str(rstar_(1,i))];
+end
+legend(legendinfo)
+xlabel('Time (Period Step Size)')
+ylabel('Delta V in Local X Direction (km/s)')
+
+    
 
 
 
