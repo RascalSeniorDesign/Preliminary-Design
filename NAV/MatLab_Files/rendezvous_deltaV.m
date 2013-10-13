@@ -56,7 +56,7 @@ for i=1:length(Ra)
     deltaV_total(i).period=period_value;
     deltaV_total(i).dr_=dr_(:,i);
     deltaV_total(i).rstar_=rstar_(:,i);
-    deltaV_total(i).n=sqrt(mu/(deltaV_total(1,i).rstar_)^3);
+    deltaV_total(i).n=sqrt(mu/(rstar_(1,i))^3);
     deltaV_total(i).Ra=Ra(i);
     deltaV_total(i).Rp=Rp(i);
 end
@@ -64,33 +64,43 @@ end
 
 %Indicate desired orbital time step for final rendezvous
 
-tvalue=linspace(0,12*pi,250);
+tvalue=linspace(0.1,12*pi,250);
 
 
-for i=1:length(tvalue)
+for j=1:length(Ra)
+    for i=1:length(tvalue)
 	
 	%Calculate Delta V
     
-    deltaV_total(i).t=tvalue(i);
+        deltaV_total(i).t=tvalue(i);
 
-	s=sin(deltaV_total(i).n*tvalue(i)*(180/pi));
-	c=cos(deltaV_total(i).n*tvalue(i)*(180/pi));
+        s=sin(deltaV_total(j).n*tvalue(i)*(180/pi));
+        c=cos(deltaV_total(j).n*tvalue(i)*(180/pi));
 
-	M=[(4-3*c) 0 0;6*(s-deltaV_total(i).n*tvalue(i)) 1 0;0 0 c];
-	N=[s/deltaV_total(i).n (2/deltaV_total(i).n)*(1-c) 0; -(2/deltaV_total(i).n)*(1-c) (4*s-3*deltaV_total(i).n*tvalue(i))/deltaV_total(i).n 0; 0 0 s/deltaV_total(i).n];
-	S=[3*deltaV_total(i).n*s 0 0; -6*deltaV_total(i).n*(1-c) 0 0; 0 0 -deltaV_total(i).n*s];
-	T=[c 2*s 0; -2*s 4*c-3 0; 0 0 c];
+        M=[(4-3*c) 0 0;6*(s-deltaV_total(j).n*tvalue(i)) 1 0;0 0 c];
+        N=[s/deltaV_total(j).n (2/deltaV_total(j).n)*(1-c) 0; -(2/deltaV_total(j).n)*(1-c) (4*s-3*deltaV_total(j).n*tvalue(i))/deltaV_total(j).n 0; 0 0 s/deltaV_total(j).n];
+        S=[3*deltaV_total(j).n*s 0 0; -6*deltaV_total(j).n*(1-c) 0 0; 0 0 -deltaV_total(j).n*s];
+        T=[c 2*s 0; -2*s 4*c-3 0; 0 0 c];
 
-	deltav=(T/N*M-S)*deltaV_total(:,i).rstar_;
-    deltaV_total(i).deltav_x=deltav(1);
-    deltaV_total(i).deltav_y=deltav(2);
+        deltav=(T/N*M-S)*deltaV_total(:,j).rstar_;
+        deltavx(j,i)=deltav(1);
+        deltavy(j,i)=deltav(2);
+    end
 end
-for i=1:length(t)
-    plot(deltaV_total(i).t,deltaV_total(i).deltav_x,deltaV_total(i).t,deltaV_total(i).deltav_y)
+
+for j=1:length(Ra)
+    for i=1:length(tvalue)
+        deltaV_total(j).deltav_x=deltavx(j,i);
+        deltaV_total(j).deltav_y=deltavy(j,i);
+    end
 end
-xlabel('Time (Period Step Size)')
-ylabel('Delta V (km/s)')
-legend('Delta V: X Direction','Delta V: Y Direction')
+
+% for i=1:length(tvalue)
+%     plot(deltaV_total(i).t,deltaV_total(i).deltav_x,deltaV_total(i).t,deltaV_total(i).deltav_y)
+% end
+% xlabel('Time (Period Step Size)')
+% ylabel('Delta V (km/s)')
+
 
 
 
