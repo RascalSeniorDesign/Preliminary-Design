@@ -2,8 +2,8 @@
 %============================RCL-C-NAV1====================================
 %=======================Author: Tom Moline=================================
 %=====================Approval: Nate Richard===============================
-%=====================Revision: - =========================================
-%===============Last Edit Date: October 9, 2013============================
+%=====================Revision: 1 =========================================
+%===============Last Edit Date: October 13, 2013============================
 
 %============================Summary=======================================
 %This script serves as a preliminary method of calculating the delta V
@@ -32,49 +32,67 @@
 clear
 clc
 
-Rp = input('Please input the periapsis of a selected orbit: ');
-Ra = input('Please input the apoapsis of a selected orbit: ');
+% Create Delta V Structure
+
+deltaV_total=struct('rstar_',rstar_value,'dr_',dr_value,'deltav_x',deltav_xvalue,...
+    'deltav_y',deltav_yvalue,'Rp',Rpvalue,'Ra',Ravalue,'period',period_value,'n',nvalue,'t',tvalue);
+
+Ra=linspace(200,900,10);
+Rp=linspace(200,900,10);
+dr_x=linspace(.001,1,10);
+dr_y=linspace(.001,1,10);
+dr_z=linspace(0,0,10);
+rstar_x=linspace(200,900,10);
+
+% Rp = input('Please input the periapsis of a selected orbit: ');
+% Ra = input('Please input the apoapsis of a selected orbit: ');
 
 % Calculate Orbital Parameters
-e = (Ra-Rp)/(Ra+Rp); %Eccentricity of Orbit
-a = Ra/(1+e); %Semi-Major Axis, km
-mu = 398600; %Standard Gravitational Parameter of Earth, m^3/s^2
-period=2*pi*sqrt(a^3/mu);
 
-% Ask for Initial Locations of Satellites
-rstar_ = input('Please input the inital displacement vector of chase satellite: ');
-r_ = input('Please input the initial displacement vector of target satellite: ');
+mu = 398600;
 
-% Calculate Local Gravity Gradient Matrix
+for i=1:length(Ra)
+    a = Ra(i)/(1+e(i)); %Semi-Major Axis, km
+    period_value=2*pi*sqrt(a(i)^3/mu);
+    deltaV_total(i).period=period_value;
+    deltaV_total(1,i).dr_=dr_x(i);
+    deltaV_total(2,i).dr_=dr_y(i);
+    deltaV_total(3,i).dr_=dr_z(i);
+    deltaV_total(1,i).rstar_=rstar_x(i);
+    deltaV_total(2,i).rstar_=dr_z(i);
+    deltaV_total(3,i).drstar_=dr_z(i);
+    deltaV_total(i).n=sqrt(mu/deltaV_total(1,i)^3);
+    deltaV_total(i).Ra=Ra(i);
+    deltaV_total(i).Rp=Rp(i);
+end
 
-grav_=(mu/rstar_(1)^3)*[2 0 0 ; 0 -1 0; 0 0 -1];
-n=sqrt(mu/rstar_(1)^3);
 
 %Indicate desired orbital time step for final rendezvous
 
-t=linspace(0,12*pi,250);
-%t=pi;
+tvalue=linspace(0,12*pi,250);
 
-for i=1:length(t)
+
+for i=1:length(tvalue)
 	
 	%Calculate Delta V
+    
+    deltaV_total(i).t=tvalue(i);
 
-	s=sin(n*t(i)*(180/pi));
-	c=cos(n*t(i)*(180/pi));
+	s=sin(deltaV_total(i).n*tvalue(i)*(180/pi));
+	c=cos(deltaV_total(i).n*tvalue(i)*(180/pi));
 
-	M=[(4-3*c) 0 0;6*(s-n*t(i)) 1 0;0 0 c];
-	N=[s/n (2/n)*(1-c) 0; -(2/n)*(1-c) (4*s-3*n*t(i))/n 0; 0 0 s/n];
-	S=[3*n*s 0 0; -6*n*(1-c) 0 0; 0 0 -n*s];
+	M=[(4-3*c) 0 0;6*(s-deltaV_total(i).n*tvalue(i)) 1 0;0 0 c];
+	N=[s/deltaV_total(i).n (2/deltaV_total(i).n)*(1-c) 0; -(2/deltaV_total(i).n)*(1-c) (4*s-3*deltaV_total(i).n*tvalue(i))/n 0; 0 0 s/deltaV_total(i).n];
+	S=[3*deltaV_total(i).n*s 0 0; -6*deltaV_total(i).n*(1-c) 0 0; 0 0 -deltaV_total(i).n*s];
 	T=[c 2*s 0; -2*s 4*c-3 0; 0 0 c];
 
-	deltav=(T/N*M-S)*r_;
-    deltav_x(i)=deltav(1);
-    deltav_y(i)=deltav(2);
-	%deltav_y=(T/N*M-S)*r_(2);
-
+	deltav=(T/N*M-S)*deltV_total(i).rstar_;
+    deltaV_total(i).deltav_x=deltav(1);
+    deltaV_total(i).deltav_y=deltav(2);
 end
-
-plot(t,deltav_x,t,deltav_y)
+for i=1:length(t)
+    plot(deltaV_total(i).t,deltaV_total(i).deltav_x,deltaV_total(i).t,deltaV_total(i).deltav_y)
+end
 xlabel('Time (Period Step Size)')
 ylabel('Delta V (km/s)')
 legend('Delta V: X Direction','Delta V: Y Direction')
