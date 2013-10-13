@@ -3,7 +3,7 @@
 %=======================Author: Tom Moline=================================
 %=====================Approval: Nate Richard===============================
 %=====================Revision: 1 =========================================
-%===============Last Edit Date: October 13, 2013============================
+%===============Last Edit Date: October 13, 2013===========================
 
 %============================Summary=======================================
 %This script serves as a preliminary method of calculating the delta V
@@ -39,10 +39,8 @@ deltaV_total=struct('rstar_',{},'dr_',{},'deltav_x',{},...
 
 Ra=linspace(200,900,10);
 Rp=linspace(200,900,10);
-dr_x=linspace(.001,1,10);
-dr_y=linspace(.001,1,10);
-dr_z=linspace(0,0,10);
-rstar_x=linspace(200,900,10);
+dr_=[linspace(.001,1,10);linspace(.001,1,10);linspace(0,0,10)];
+rstar_=[linspace(200,900,10);linspace(0,0,10);linspace(0,0,10)];
 
 % Rp = input('Please input the periapsis of a selected orbit: ');
 % Ra = input('Please input the apoapsis of a selected orbit: ');
@@ -54,15 +52,11 @@ mu = 398600;
 for i=1:length(Ra)
     e=0;
     a = Ra(i)/(1+e); %Semi-Major Axis, km
-    period_value=2*pi*sqrt(a(i)^3/mu);
+    period_value=2*pi*sqrt(a^3/mu);
     deltaV_total(i).period=period_value;
-    deltaV_total(1,i).dr_=dr_x(i);
-    deltaV_total(2,i).dr_=dr_y(i);
-    deltaV_total(3,i).dr_=dr_z(i);
-    deltaV_total(1,i).rstar_=rstar_x(i);
-    deltaV_total(2,i).rstar_=dr_z(i);
-    deltaV_total(3,i).drstar_=dr_z(i);
-    deltaV_total(i).n=sqrt(mu/deltaV_total(1,i)^3);
+    deltaV_total(i).dr_=dr_(:,i);
+    deltaV_total(i).rstar_=rstar_(:,i);
+    deltaV_total(i).n=sqrt(mu/(deltaV_total(1,i).rstar_)^3);
     deltaV_total(i).Ra=Ra(i);
     deltaV_total(i).Rp=Rp(i);
 end
@@ -83,11 +77,11 @@ for i=1:length(tvalue)
 	c=cos(deltaV_total(i).n*tvalue(i)*(180/pi));
 
 	M=[(4-3*c) 0 0;6*(s-deltaV_total(i).n*tvalue(i)) 1 0;0 0 c];
-	N=[s/deltaV_total(i).n (2/deltaV_total(i).n)*(1-c) 0; -(2/deltaV_total(i).n)*(1-c) (4*s-3*deltaV_total(i).n*tvalue(i))/n 0; 0 0 s/deltaV_total(i).n];
+	N=[s/deltaV_total(i).n (2/deltaV_total(i).n)*(1-c) 0; -(2/deltaV_total(i).n)*(1-c) (4*s-3*deltaV_total(i).n*tvalue(i))/deltaV_total(i).n 0; 0 0 s/deltaV_total(i).n];
 	S=[3*deltaV_total(i).n*s 0 0; -6*deltaV_total(i).n*(1-c) 0 0; 0 0 -deltaV_total(i).n*s];
 	T=[c 2*s 0; -2*s 4*c-3 0; 0 0 c];
 
-	deltav=(T/N*M-S)*deltV_total(i).rstar_;
+	deltav=(T/N*M-S)*deltaV_total(:,i).rstar_;
     deltaV_total(i).deltav_x=deltav(1);
     deltaV_total(i).deltav_y=deltav(2);
 end
