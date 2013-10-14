@@ -35,7 +35,7 @@ clc
 % Create Delta V Structure
 
 deltaV_total=struct('rstar_',{},'dr_',{},'deltav_x',{},...
-    'deltav_y',{},'Rp',{},'Ra',{},'period',{},'n',{},'t',{},'deltav',{},'numorbits',{},'deltav_total',{});
+    'deltav_y',{},'Rp',{},'Ra',{},'period',{},'n',{},'t',{},'deltav',{},'numorbits',{},'deltav_total',{},'deltav_z',{});
 
 %Define number of cases to observe
 
@@ -45,7 +45,7 @@ norbits=5;
 
 Ra=linspace(300+6731,300+6731,norbits);
 Rp=linspace(300+6731,300+6731,norbits);
-dr_=[linspace(.001,1,norbits);linspace(.001,1,norbits);linspace(0,0,norbits)];
+dr_=[linspace(.001,.1,norbits);linspace(.001,.1,norbits);linspace(.001,.1,norbits)];
 rstar_=[linspace(300+6731,300+6731,norbits);linspace(0,0,norbits);linspace(0,0,norbits)];
 
 % Calculate Orbital Parameters
@@ -112,12 +112,21 @@ for j=1:length(Ra)
         else
              deltavy(j,i)=deltavtemp(2);
         end
+        
+        if deltavtemp(3)>.25
+             deltavz(j,i)=.25;
+        elseif deltavtemp(3)<-.25
+             deltavz(j,i)=-.25;    
+        else
+             deltavz(j,i)=deltavtemp(3);
+        end
     end
     deltaV_total(j).numorbits=numberorbits(j,:);
     deltaV_total(j).t=tvaluetemp(j,:);
     deltaV_total(j).deltav_x=deltavx(j,:);
     deltaV_total(j).deltav_y=deltavy(j,:);
-    deltaV_total(j).deltav_total=(deltavx(j,:).^2+deltavy(j,:).^2).^(.5);
+    deltaV_total(j).deltav_z=deltavz(j,:);
+    deltaV_total(j).deltav_total=(deltavx(j,:).^2+deltavy(j,:).^2+deltavz(j,:).^2).^(.5);
 end
 
 %Create a Color Map
@@ -131,34 +140,48 @@ figure(1)
 hold on
 for i=1:norbits
     plot(deltaV_total(i).numorbits,deltaV_total(i).deltav_x,'color',cc(i,:))
-    legendinfo{i}=['Initial Separation (km): ' num2str(sqrt(2*dr_(1,i)^2))];
+    legendinfo{i}=['Initial Separation (km): ' num2str(sqrt(3*dr_(1,i)^2))];
 end
 legend(legendinfo)
-xlabel('Number of Orbits')
+xlabel('Number of Orbits Until Rendezvous')
 ylabel('Delta V in Local X Direction (km/s)')
+title(['Total Delta Vx vs Number of Orbits Until Rendezvous, Starting Range between 0.001 km and ' num2str(sqrt(dr_(1,length(Ra))^2+dr_(2,length(Ra))^2+dr_(3,length(Ra))^2)) ' km'])
 
 figure(2)
 
 hold on
 for i=1:norbits
     plot(deltaV_total(i).numorbits,deltaV_total(i).deltav_y,'color',cc(i,:))
-    legendinfo{i}=['Initial Separation (km): ' num2str(sqrt(2*dr_(1,i)^2))];
+    legendinfo{i}=['Initial Separation (km): ' num2str(sqrt(3*dr_(1,i)^2))];
 end
 legend(legendinfo)
-xlabel('Number of Orbits')
+xlabel('Number of Orbits Until Rendezvous')
 ylabel('Delta V in Local Y Direction (km/s)')
+title(['Total Delta Vy vs Number of Orbits Until Rendezvous, Starting Range between 0.001 km and ' num2str(sqrt(dr_(1,length(Ra))^2+dr_(2,length(Ra))^2+dr_(3,length(Ra))^2)) ' km'])
 
 figure(3)
 
 hold on
 for i=1:norbits
+    plot(deltaV_total(i).numorbits,deltaV_total(i).deltav_z,'color',cc(i,:))
+    legendinfo{i}=['Initial Separation (km): ' num2str(sqrt(3*dr_(1,i)^2))];
+end
+legend(legendinfo)
+xlabel('Number of Orbits Until Rendezvous')
+ylabel('Delta V in Local Z Direction (km/s)')
+title(['Total Delta Vz vs Number of Orbits Until Rendezvous, Starting Range between 0.001 km and ' num2str(sqrt(dr_(1,length(Ra))^2+dr_(2,length(Ra))^2+dr_(3,length(Ra))^2)) ' km'])
+
+figure(4)
+
+hold on
+for i=1:norbits
     plot(deltaV_total(i).numorbits,deltaV_total(i).deltav_total,'color',cc(i,:))
-    legendinfo{i}=['Initial Separation (km): ' num2str(sqrt(2*dr_(1,i)^2))];
+    legendinfo{i}=['Initial Separation (km): ' num2str(sqrt(3*dr_(1,i)^2))];
 end
 legend(legendinfo)
 xlabel('Number of Orbits Until Rendezvous')
 ylabel('Total Delta V (km/s)')
-title(['Total Delta V vs Number of Orbits Until Rendezvous, Starting Range between 0.001 km and ' num2str(sqrt(2*dr_(1,length(Ra))^2)) ' km. Assumptions: Coplaner, Impulsive, Hohmann Transfer, With no Atmospheric Considerations and Final CGs in Same Location'])
+title(['Total Delta V vs Number of Orbits Until Rendezvous, Starting Range between 0.001 km and ' num2str(sqrt(dr_(1,length(Ra))^2+dr_(2,length(Ra))^2+dr_(3,length(Ra))^2)) ' km. Assumptions: Coplaner, Impulsive, Hohmann Transfer, With no Atmospheric Considerations and Final CGs in Same Location'])
 
     
 
