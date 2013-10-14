@@ -40,16 +40,16 @@ deltaV_total=struct('rstar_',{},'dr_',{},'deltav_x',{},...
 norbits=5;
 initialdistance=.15;
 
-Ra=linspace(900+6731,900+6731,norbits);
-Rp=linspace(900+6731,900+6731,norbits);
+Ra=linspace(300+6731,300+6731,norbits);
+Rp=linspace(300+6731,300+6731,norbits);
 dr_=[linspace(.001,1,norbits);linspace(.001,1,norbits);linspace(0,0,norbits)];
-rstar_=[linspace(900+6731,900+6731,norbits);linspace(0,0,norbits);linspace(0,0,norbits)];
+rstar_=[linspace(300+6731,300+6731,norbits);linspace(0,0,norbits);linspace(0,0,norbits)];
 
 % Calculate Orbital Parameters
 
 mu = 398600;
-maxorbitnumber=2;
-tvalue=linspace(0.1*pi,maxorbitnumber*2*pi,250);
+maxorbitnumber=100;
+tvalue=linspace(0.1*pi,maxorbitnumber*2*pi,10000);
 
 for i=1:length(Ra)
     e=0;
