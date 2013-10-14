@@ -136,8 +136,9 @@ for i=1:norbits
     legendinfo{i}=['Initial Separation (km): ' num2str(sqrt(2*dr_(1,i)^2))];
 end
 legend(legendinfo)
-xlabel('Number of Orbits')
+xlabel('Number of Orbits Until Rendezvous')
 ylabel('Total Delta V (km/s)')
+title(['Total Delta V vs Number of Orbits Until Rendezvous, Starting Range between 0.001 km and ' num2str(sqrt(2*dr_(1,length(Ra))^2)) ' km. Assumptions: Coplaner, Impulsive, Hohmann Transfer, With no Atmospheric Considerations and Final CGs in Same Location'])
 
     
 
