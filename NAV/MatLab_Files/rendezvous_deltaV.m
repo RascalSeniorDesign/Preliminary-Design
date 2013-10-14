@@ -35,7 +35,8 @@ clc
 % Create Delta V Structure
 
 deltaV_total=struct('rstar_',{},'dr_',{},'deltav_x',{},...
-    'deltav_y',{},'Rp',{},'Ra',{},'period',{},'n',{},'t',{},'deltav',{},'numorbits',{},'deltav_total',{},'deltav_z',{});
+    'deltav_y',{},'Rp',{},'Ra',{},'period',{},'n',{},'t',{},'deltav',{},'numorbits',{},'deltav_total',{},'deltav_z',{},...
+    'deltav_xi',{},'deltav_xf',{},'deltav_yi',{},'deltav_yf',{},'deltav_zi',{},'deltav_zf');
 
 %Define number of cases to observe
 
@@ -55,7 +56,7 @@ maxorbitnumber=100;%Desired number of orbits until rendezvous
 
 %Define Orbit Range and Step Size
 
-tvalue=linspace(0.1*pi,maxorbitnumber*2*pi,10000);
+tvalue=linspace(0.1*pi,maxorbitnumber*2*pi,25000);
 
 %Find n value (Eq. 8.15 in Orbital Mechanics, Page 143, Conway)
 
@@ -97,28 +98,46 @@ for j=1:length(Ra)
         deltavtempfinal=(T/N*M-S)*deltaV_total(:,j).dr_;
         deltavtempinitial=-inv(N)*M*deltaV_total(:,j).dr_-(S-T*inv(N)*M)*deltaV_total(:,j).dr_;
         deltavtemp=deltavtempfinal+deltavtempinitial;
-        if deltavtemp(1)>.25
+        if deltavtempfinal(1)>.25 || deltavtempinitial(1)>.25 || deltavtemp(1)>.25
             deltavx(j,i)=.25;
-        elseif deltavtemp(1)<-.25
+            deltavxi(j,i)=.25;
+            deltavxf(j,i)=.25;
+        elseif deltavtempfinal(1)<-.25 || deltavtempinitial(1)<-.25 || deltavtemp(1)<-.25
             deltavx(j,i)=-.25;    
+            deltavxi(j,i)=-.25;
+            deltavxf(j,i)=-.25;
         else
-            deltavx(j,i)=deltavtempfinal(1);
+            deltavx(j,i)=deltavtemp(1);
+            deltavxi(j,i)=deltavtempfinal(1);
+            deltavxf(j,i)=deltavtempinitial(1);
         end
         
-        if deltavtemp(2)>.25
-             deltavy(j,i)=.25;
-        elseif deltavtemp(2)<-.25
-             deltavy(j,i)=-.25;    
+        if deltavtempfinal(2)>.25 || deltavtempinitial(2)>.25 || deltavtemp(2)>.25
+            deltavy(j,i)=.25;
+            deltavyi(j,i)=.25;
+            deltavyf(j,i)=.25;
+        elseif deltavtempfinal(2)<-.25 || deltavtempinitial(2)<-.25 || deltavtemp(2)<-.25
+            deltavy(j,i)=-.25;    
+            deltavyi(j,i)=-.25;
+            deltavyf(j,i)=-.25;
         else
-             deltavy(j,i)=deltavtemp(2);
+            deltavy(j,i)=deltavtemp(2);
+            deltavyi(j,i)=deltavtempfinal(2);
+            deltavyf(j,i)=deltavtempinitial(2);
         end
         
-        if deltavtemp(3)>.25
-             deltavz(j,i)=.25;
-        elseif deltavtemp(3)<-.25
-             deltavz(j,i)=-.25;    
+        if deltavtempfinal(3)>.25 || deltavtempinitial(3)>.25 || deltavtemp(3)>.25
+            deltavz(j,i)=.25;
+            deltavzi(j,i)=.25;
+            deltavzf(j,i)=.25;
+        elseif deltavtempfinal(3)<-.25 || deltavtempinitial(3)<-.25 || deltavtemp(3)<-.25
+            deltavz(j,i)=-.25;    
+            deltavzi(j,i)=-.25;
+            deltavzf(j,i)=-.25;
         else
-             deltavz(j,i)=deltavtemp(3);
+            deltavz(j,i)=deltavtemp(3);
+            deltavzi(j,i)=deltavtempfinal(3);
+            deltavzf(j,i)=deltavtempinitial(3);
         end
     end
     deltaV_total(j).numorbits=numberorbits(j,:);
@@ -126,6 +145,12 @@ for j=1:length(Ra)
     deltaV_total(j).deltav_x=deltavx(j,:);
     deltaV_total(j).deltav_y=deltavy(j,:);
     deltaV_total(j).deltav_z=deltavz(j,:);
+    deltaV_total(j).deltav_zi=deltavzi(j,:);
+    deltaV_total(j).deltav_zf=deltavzf(j,:);
+    deltaV_total(j).deltav_xi=deltavxi(j,:);
+    deltaV_total(j).deltav_xf=deltavxf(j,:);
+    deltaV_total(j).deltav_yi=deltavyi(j,:);
+    deltaV_total(j).deltav_yf=deltavyf(j,:);
     deltaV_total(j).deltav_total=(deltavx(j,:).^2+deltavy(j,:).^2+deltavz(j,:).^2).^(.5);
 end
 
