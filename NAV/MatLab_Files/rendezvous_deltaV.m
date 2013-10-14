@@ -35,25 +35,25 @@ clc
 % Create Delta V Structure
 
 deltaV_total=struct('rstar_',{},'dr_',{},'deltav_x',{},...
-    'deltav_y',{},'Rp',{},'Ra',{},'period',{},'n',{},'t',{},'deltav',{});
+    'deltav_y',{},'Rp',{},'Ra',{},'period',{},'n',{},'t',{},'deltav',{},'numorbits',{},'deltav_total',{});
 
-norbits=3;
+norbits=5;
+initialdistance=.15;
 
-Ra=linspace(200,900,norbits);
-Rp=linspace(200,900,norbits);
-dr_=[linspace(.1,.1,norbits);linspace(.1,.1,norbits);linspace(0,0,norbits)];
-rstar_=[linspace(200,900,norbits);linspace(0,0,norbits);linspace(0,0,norbits)];
-
-% Rp = input('Please input the periapsis of a selected orbit: ');
-% Ra = input('Please input the apoapsis of a selected orbit: ');
+Ra=linspace(900+6731,900+6731,norbits);
+Rp=linspace(900+6731,900+6731,norbits);
+dr_=[linspace(.001,1,norbits);linspace(.001,1,norbits);linspace(0,0,norbits)];
+rstar_=[linspace(900+6731,900+6731,norbits);linspace(0,0,norbits);linspace(0,0,norbits)];
 
 % Calculate Orbital Parameters
 
 mu = 398600;
+maxorbitnumber=2;
+tvalue=linspace(0.1*pi,maxorbitnumber*2*pi,250);
 
 for i=1:length(Ra)
     e=0;
-    a = Ra(i)/(1+e); %Semi-Major Axis, km
+    a = Ra(1,i)/(1+e); %Semi-Major Axis, km
     period_value=2*pi*sqrt(a^3/mu);
     deltaV_total(i).period=period_value;
     deltaV_total(i).dr_=dr_(:,i);
@@ -63,57 +63,81 @@ for i=1:length(Ra)
     deltaV_total(i).Rp=Rp(i);
 end
 
-
-%Indicate desired orbital time step for final rendezvous
-
-tvalue=linspace(0.1,12*pi,250);
-
-
 for j=1:length(Ra)
     for i=1:length(tvalue)
 	
 	%Calculate Delta V
-
-        s=sin(deltaV_total(j).n*tvalue(i)*(180/pi));
-        c=cos(deltaV_total(j).n*tvalue(i)*(180/pi));
+    
+        tvaluetemp(j,i)=(tvalue(1,i)/2*pi)*deltaV_total(j).period;
+        numberorbits(j,i)=(tvalue(1,i)/(2*pi));
+        s=sin(deltaV_total(j).n*tvaluetemp(j,i)*(180/pi));
+        c=cos(deltaV_total(j).n*tvaluetemp(j,i)*(180/pi));
 
         M=[(4-3*c) 0 0;6*(s-deltaV_total(j).n*tvalue(i)) 1 0;0 0 c];
-        N=[s/deltaV_total(j).n (2/deltaV_total(j).n)*(1-c) 0; -(2/deltaV_total(j).n)*(1-c) (4*s-3*deltaV_total(j).n*tvalue(i))/deltaV_total(j).n 0; 0 0 s/deltaV_total(j).n];
+        N=[s/deltaV_total(j).n (2/deltaV_total(j).n)*(1-c) 0; -(2/deltaV_total(j).n)*(1-c) (4*s-3*deltaV_total(j).n*tvaluetemp(j,i))/deltaV_total(j).n 0; 0 0 s/deltaV_total(j).n];
         S=[3*deltaV_total(j).n*s 0 0; -6*deltaV_total(j).n*(1-c) 0 0; 0 0 -deltaV_total(j).n*s];
         T=[c 2*s 0; -2*s 4*c-3 0; 0 0 c];
 
-        deltavtemp=(T/N*M-S)*deltaV_total(:,j).rstar_;
-        if deltavtemp(1)>1000
-            deltavx(j,i)=1000;
-        elseif deltavtemp(1)<-1000
-            deltavx(j,i)=-1000;    
+        deltavtempfinal=(T/N*M-S)*deltaV_total(:,j).dr_;
+        deltavtempinitial=-inv(N)*M*deltaV_total(:,j).dr_-(S-T*inv(N)*M)*deltaV_total(:,j).dr_;
+        deltavtemp=deltavtempfinal+deltavtempinitial;
+        if deltavtemp(1)>.25
+            deltavx(j,i)=.25;
+        elseif deltavtemp(1)<-.25
+            deltavx(j,i)=-.25;    
         else
-            deltavx(j,i)=deltavtemp(1);
+            deltavx(j,i)=deltavtempfinal(1);
         end
         
-        if deltavtemp(2)>1000
-             deltavy(j,i)=1000;
-        elseif deltavtemp(2)<-1000
-             deltavy(j,i)=-1000;    
+        if deltavtemp(2)>.25
+             deltavy(j,i)=.25;
+        elseif deltavtemp(2)<-.25
+             deltavy(j,i)=-.25;    
         else
              deltavy(j,i)=deltavtemp(2);
         end
     end
-    deltaV_total(j).t=tvalue(1,:);
+    deltaV_total(j).numorbits=numberorbits(j,:);
+    deltaV_total(j).t=tvaluetemp(j,:);
     deltaV_total(j).deltav_x=deltavx(j,:);
-    deltaV_total(j).dletav_y=deltavy(j,:);
+    deltaV_total(j).deltav_y=deltavy(j,:);
+    deltaV_total(j).deltav_total=(deltavx(j,:).^2+deltavy(j,:).^2).^(.5);
 end
 
-cc=jet(20);
+cc=jet(2*norbits);
+
+figure(1)
 
 hold on
 for i=1:norbits
-    plot(tvalue,deltaV_total(i).deltav_x,'color',cc(i,:))
-    legendinfo{i}=['Orbit (km): ' int2str(rstar_(1,i))];
+    plot(deltaV_total(i).numorbits,deltaV_total(i).deltav_x,'color',cc(i,:))
+    legendinfo{i}=['Initial Separation (km): ' num2str(sqrt(2*dr_(1,i)^2))];
 end
 legend(legendinfo)
-xlabel('Time (Period Step Size)')
+xlabel('Number of Orbits')
 ylabel('Delta V in Local X Direction (km/s)')
+
+figure(2)
+
+hold on
+for i=1:norbits
+    plot(deltaV_total(i).numorbits,deltaV_total(i).deltav_y,'color',cc(i,:))
+    legendinfo{i}=['Initial Separation (km): ' num2str(sqrt(2*dr_(1,i)^2))];
+end
+legend(legendinfo)
+xlabel('Number of Orbits')
+ylabel('Delta V in Local Y Direction (km/s)')
+
+figure(3)
+
+hold on
+for i=1:norbits
+    plot(deltaV_total(i).numorbits,deltaV_total(i).deltav_total,'color',cc(i,:))
+    legendinfo{i}=['Initial Separation (km): ' num2str(sqrt(2*dr_(1,i)^2))];
+end
+legend(legendinfo)
+xlabel('Number of Orbits')
+ylabel('Total Delta V (km/s)')
 
     
 
