@@ -14,7 +14,7 @@
 %============================Inputs========================================
 % Rp = Orbital Periapsis Altitude (km)
 % Ra = Orbital Apoapsis Altitude (km)
-% rstar_ =Inital Location of Chase Satellite Relative to Focal Point(km)
+% dr_ =Inital displacement vector between each satellite (km)
 % r_ = Initial Location of Target Satellite Relatvie to Focal Point (km)
 %    NOTE: This is assumed to be a 3-D Vector input [x, y]
 %
@@ -37,8 +37,11 @@ clc
 deltaV_total=struct('rstar_',{},'dr_',{},'deltav_x',{},...
     'deltav_y',{},'Rp',{},'Ra',{},'period',{},'n',{},'t',{},'deltav',{},'numorbits',{},'deltav_total',{});
 
+%Define number of cases to observe
+
 norbits=5;
-initialdistance=.15;
+
+%Create initial displacement vector array for each case
 
 Ra=linspace(300+6731,300+6731,norbits);
 Rp=linspace(300+6731,300+6731,norbits);
@@ -47,9 +50,14 @@ rstar_=[linspace(300+6731,300+6731,norbits);linspace(0,0,norbits);linspace(0,0,n
 
 % Calculate Orbital Parameters
 
-mu = 398600;
-maxorbitnumber=100;
+mu = 398600; %Gravitational Coefficient of Earth
+maxorbitnumber=100;%Desired number of orbits until rendezvous
+
+%Define Orbit Range and Step Size
+
 tvalue=linspace(0.1*pi,maxorbitnumber*2*pi,10000);
+
+%Find n value (Eq. 8.15 in Orbital Mechanics, Page 143, Conway)
 
 for i=1:length(Ra)
     e=0;
@@ -62,6 +70,14 @@ for i=1:length(Ra)
     deltaV_total(i).Ra=Ra(i);
     deltaV_total(i).Rp=Rp(i);
 end
+
+%Find State Transition Matrix (Equation 8.26, page 149-150)
+%Determine Initial DeltaV (Equations 8.34 and 8.36, page 151)
+%Determine Final DeltaV (Equation 8.38, page 152)
+%Find Total DeltaV (Combine Each)
+
+%Note: Values above and below 0.25 and -.25 km/s are ignored
+
 
 for j=1:length(Ra)
     for i=1:length(tvalue)
@@ -104,7 +120,11 @@ for j=1:length(Ra)
     deltaV_total(j).deltav_total=(deltavx(j,:).^2+deltavy(j,:).^2).^(.5);
 end
 
+%Create a Color Map
+
 cc=jet(2*norbits);
+
+%Plot Results
 
 figure(1)
 
