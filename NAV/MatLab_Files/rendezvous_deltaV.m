@@ -22,7 +22,7 @@
 % the target satellite.
 %
 % All variables with an underscore are vectors
-
+ 
 
 %===========================Outputs========================================
 % Total Delta V to go from intial positon to one within 10 m of Sundance
@@ -46,7 +46,7 @@ norbits=5;
 
 Ra=linspace(300+6731,300+6731,norbits);
 Rp=linspace(300+6731,300+6731,norbits);
-dr_=[linspace(.001,.1,norbits);linspace(.001,.1,norbits);linspace(.001,.1,norbits)];
+dr_=[linspace(.001,1,norbits);linspace(.001,1,norbits);linspace(.001,1,norbits)];
 rstar_=[linspace(300+6731,300+6731,norbits);linspace(0,0,norbits);linspace(0,0,norbits)];
 
 % Calculate Orbital Parameters
