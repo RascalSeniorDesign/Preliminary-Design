@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="Rascal Senior Desgin" company="SSRL" webLink="https://sites.google.com/a/slu.edu/aeng-senior-design/team-websites/rascal" view-date="2013-08-01" view-index="0" gantt-divider-location="353" resource-divider-location="300" version="2.0">
+<project name="Rascal Senior Desgin" company="SSRL" webLink="https://sites.google.com/a/slu.edu/aeng-senior-design/team-websites/rascal" view-date="2013-09-15" view-index="0" gantt-divider-location="564" resource-divider-location="300" version="2.0">
     <description><![CDATA[GANTT Chart for Rascal Senior Design Project 1st and 2nd semester]]></description>
-    <view zooming-state="default:9" id="gantt-chart"/>
+    <view zooming-state="default:7" id="gantt-chart"/>
     <view id="resource-table">
-        <field id="0" name="Name" width="52" order="0"/>
-        <field id="1" name="Default role" width="47" order="1"/>
+        <field id="0" name="Name" width="50" order="0"/>
+        <field id="1" name="Default role" width="49" order="1"/>
     </view>
     <!-- -->
     <calendars>
@@ -32,6 +32,10 @@
             <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
             <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
         </taskproperties>
+        <task id="135" name="System Concept Review Phase" color="#ff0033" meeting="false" start="2013-08-26" duration="50" complete="0" expand="true"/>
+        <task id="133" name="System Requirment Review Phase" color="#ff0033" meeting="false" start="2013-10-16" duration="16" complete="0" expand="true"/>
+        <task id="131" name="Preliminary Design Reveiw Phase" color="#ff0033" meeting="false" start="2013-11-01" duration="36" complete="0" expand="true"/>
+        <task id="129" name="Critical Design Review Phase" color="#ff0033" meeting="false" start="2014-01-13" duration="124" complete="0" expand="true"/>
         <task id="0" name="System Concept Review (SCR)" color="#990000" meeting="true" start="2013-10-15" duration="1" complete="100" priority="2" expand="true">
             <depend id="9" type="4" difference="0" hardness="Strong"/>
             <depend id="13" type="4" difference="0" hardness="Strong"/>
@@ -43,14 +47,49 @@
             <task id="9" name="Finish Preliminary Mission Success Criterea" color="#cc6600" meeting="false" start="2013-10-12" duration="3" complete="0" priority="2" expand="true"/>
             <task id="68" name="Create Rendezvous Delta V Caclulations" color="#cc6600" meeting="false" start="2013-10-12" duration="3" complete="0" expand="true"/>
         </task>
-        <task id="2" name="System Requirements Review (SRR)" color="#8cb6ce" meeting="true" start="2013-10-31" duration="1" complete="0" priority="4" expand="true">
-            <notes><![CDATA[Need to have full mission success criterea checklist and full mission definition.]]></notes>
-            <depend id="32" type="3" difference="0" hardness="Strong"/>
+        <task id="69" name="Final RFP Revision" color="#ffcc00" meeting="true" start="2013-10-24" duration="1" complete="0" priority="4" expand="true"/>
+        <task id="78" name="Systems Requirments Review (SRR)" color="#ff9900" meeting="true" start="2013-10-31" duration="1" complete="0" priority="4" expand="true">
+            <depend id="80" type="4" difference="0" hardness="Strong"/>
+            <depend id="86" type="4" difference="0" hardness="Strong"/>
+            <depend id="92" type="4" difference="0" hardness="Strong"/>
+            <depend id="94" type="4" difference="0" hardness="Strong"/>
+            <depend id="101" type="4" difference="0" hardness="Strong"/>
+            <depend id="110" type="4" difference="0" hardness="Strong"/>
+            <depend id="112" type="4" difference="0" hardness="Strong"/>
+            <depend id="114" type="4" difference="0" hardness="Strong"/>
+            <depend id="121" type="4" difference="0" hardness="Strong"/>
+            <depend id="127" type="4" difference="0" hardness="Strong"/>
+            <depend id="137" type="4" difference="0" hardness="Strong"/>
         </task>
-        <task id="32" name="Finish Mission Success Criterea Checklist" color="#ff9900" meeting="false" start="2013-10-31" duration="1" complete="0" priority="2" expand="true"/>
+        <task id="80" name="Full Mission Success Criteria Checklist" color="#cc0033" meeting="false" start="2013-10-15" duration="16" complete="0" priority="4" expand="true">
+            <task id="86" name="Second Revision of Delta V Calculations" color="#ffff00" meeting="false" start="2013-10-16" duration="15" complete="0" expand="true"/>
+            <task id="92" name="Second Revision of Alternative Mission Trade Studies" color="#ffff00" meeting="false" start="2013-10-16" duration="15" complete="0" expand="true"/>
+            <task id="110" name="Preliminary CONOPS Plan" color="#ffff00" meeting="false" start="2013-10-21" duration="10" complete="0" expand="true"/>
+            <task id="112" name="CONOPS Success Checklist" color="#ffff00" meeting="false" start="2013-10-21" duration="10" complete="0" expand="true"/>
+            <task id="137" name="Event Timeline Plan" color="#ffff00" meeting="false" start="2013-10-15" duration="16" complete="0" expand="true"/>
+        </task>
+        <task id="94" name="Preliminary Satellite Attachment Configuration Design" color="#ffff00" meeting="false" start="2013-10-21" duration="10" complete="0" expand="true">
+            <task id="100" name="Preliminary Baseplate Orientation Plan" color="#99ff33" meeting="false" start="2013-10-21" duration="10" complete="0" expand="true"/>
+            <task id="101" name="Preliminary Separtion Reaction Calculations" color="#99ff33" meeting="false" start="2013-10-23" duration="8" complete="0" expand="true"/>
+        </task>
+        <task id="114" name="Preliminary Satellite Component List" color="#00cc99" meeting="false" start="2013-10-23" duration="8" complete="0" expand="true">
+            <task id="121" name="Commercial Off the Shelf Components Trade Studies" color="#00cc99" meeting="false" start="2013-10-23" duration="8" complete="0" expand="true"/>
+            <task id="127" name="Subsystem Component Breakdown" color="#00cc99" meeting="false" start="2013-10-25" duration="6" complete="0" expand="true"/>
+        </task>
         <task id="4" name="Preliminary Design Review (PDR)" color="#990000" meeting="true" start="2013-12-06" duration="1" complete="0" priority="4" expand="true">
             <notes><![CDATA[Includes mass budgets, advanced CONOPS, configuration designs, etc.]]></notes>
+            <depend id="139" type="4" difference="0" hardness="Strong"/>
         </task>
+        <task id="217" name="Second Revision of Satellite Component List" color="#666666" meeting="false" start="2013-11-01" duration="15" complete="0" expand="true">
+            <task id="222" name="Second Revision of COTS Trade Studies" color="#666666" meeting="false" start="2013-11-01" duration="8" complete="0" expand="true">
+                <task id="227" name="Attitude Determination and Control Sensor Studies" color="#666666" meeting="false" start="2013-11-01" duration="8" complete="0" expand="true"/>
+                <task id="229" name="Image Processing Sensor Design Decisions" color="#666666" meeting="false" start="2013-11-01" duration="8" complete="0" expand="true"/>
+                <task id="232" name="Propulsion Unit Design Decisions" color="#666666" meeting="false" start="2013-11-01" duration="8" complete="0" expand="true"/>
+            </task>
+            <task id="219" name="Specific Subsystem Component Breakdown" color="#666666" meeting="false" start="2013-11-08" duration="8" complete="0" expand="true"/>
+        </task>
+        <task id="234" name="Second Revision of Satellite Attachement Configuration Design" color="#660066" meeting="false" start="2013-11-01" duration="22" complete="0" expand="true"/>
+        <task id="139" name="Final Report Documentation Process" color="#3333ff" meeting="false" start="2013-10-13" duration="54" complete="0" expand="true"/>
         <task id="8" name="Critical Design Review (CDR)" color="#009933" meeting="true" start="2014-05-16" duration="1" complete="0" priority="4" expand="true">
             <notes><![CDATA[Prototype designs, advanced budgets, final design configuration, etc.]]></notes>
         </task>
@@ -67,9 +106,9 @@
         <displaycolumn property-id="tpd9" order="-1" width="75" visible="false"/>
         <displaycolumn property-id="tpd1" order="-1" width="75" visible="false"/>
         <displaycolumn property-id="tpd0" order="-1" width="75" visible="false"/>
-        <displaycolumn property-id="tpd3" order="0" width="199" visible="true"/>
-        <displaycolumn property-id="tpd4" order="1" width="75" visible="true"/>
-        <displaycolumn property-id="tpd5" order="2" width="75" visible="true"/>
+        <displaycolumn property-id="tpd3" order="0" width="401" visible="true"/>
+        <displaycolumn property-id="tpd4" order="1" width="90" visible="true"/>
+        <displaycolumn property-id="tpd5" order="2" width="69" visible="true"/>
     </taskdisplaycolumns>
     <previous>
         <previous-tasks name="System Concept Review (SCR)">
