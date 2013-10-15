@@ -40,14 +40,15 @@ deltaV_total=struct('rstar_',{},'dr_',{},'deltav_x',{},...
 
 %Define number of cases to observe
 
-norbits=5;
+norbits=2;
 
-%Create initial displacement vector array for each case
+%Create initial displacement and velocity vector arrays for each case
 
 Ra=linspace(300+6731,300+6731,norbits);
 Rp=linspace(300+6731,300+6731,norbits);
-dr_=[linspace(.001,1,norbits);linspace(.001,1,norbits);linspace(.001,1,norbits)];
+dr_=[linspace(.1,.1,norbits);linspace(.1,.1,norbits);linspace(.1,.1,norbits)];
 rstar_=[linspace(300+6731,300+6731,norbits);linspace(0,0,norbits);linspace(0,0,norbits)];
+dv_initial=[linspace(.001,.0025,norbits);linspace(.001,.0025,norbits);linspace(.001,.0025,norbits)];
 
 % Calculate Orbital Parameters
 
@@ -96,7 +97,7 @@ for j=1:length(Ra)
         T=[c 2*s 0; -2*s 4*c-3 0; 0 0 c];
 
         deltavtempfinal=(T/N*M-S)*deltaV_total(:,j).dr_;
-        deltavtempinitial=-inv(N)*M*deltaV_total(:,j).dr_-(S-T*inv(N)*M)*deltaV_total(:,j).dr_;
+        deltavtempinitial=-inv(N)*M*deltaV_total(:,j).dr_-dv_initial(:,j);
         deltavtemp=deltavtempfinal+deltavtempinitial;
         if deltavtempfinal(1)>.25 || deltavtempinitial(1)>.25 || deltavtemp(1)>.25
             deltavx(j,i)=.25;
