@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="Rascal Senior Desgin" company="SSRL" webLink="https://sites.google.com/a/slu.edu/aeng-senior-design/team-websites/rascal" view-date="2013-09-15" view-index="0" gantt-divider-location="564" resource-divider-location="300" version="2.0">
+<project name="Rascal Senior Desgin" company="SSRL" webLink="https://sites.google.com/a/slu.edu/aeng-senior-design/team-websites/rascal" view-date="2013-09-01" view-index="0" gantt-divider-location="564" resource-divider-location="300" version="2.0">
     <description><![CDATA[GANTT Chart for Rascal Senior Design Project 1st and 2nd semester]]></description>
     <view zooming-state="default:7" id="gantt-chart"/>
     <view id="resource-table">
@@ -89,6 +89,11 @@
             <task id="219" name="Specific Subsystem Component Breakdown" color="#666666" meeting="false" start="2013-11-08" duration="8" complete="0" expand="true"/>
         </task>
         <task id="234" name="Second Revision of Satellite Attachement Configuration Design" color="#660066" meeting="false" start="2013-11-01" duration="22" complete="0" expand="true"/>
+        <task id="237" name="Preliminary Budgets" color="#990099" meeting="false" start="2013-11-18" duration="12" complete="0" expand="true">
+            <task id="239" name="Mass Budget" color="#990099" meeting="false" start="2013-11-18" duration="12" complete="0" expand="true"/>
+            <task id="241" name="Link Budget" color="#990099" meeting="false" start="2013-11-18" duration="12" complete="0" expand="true"/>
+            <task id="244" name="Power Budget" color="#990099" meeting="false" start="2013-11-18" duration="12" complete="0" expand="true"/>
+        </task>
         <task id="139" name="Final Report Documentation Process" color="#3333ff" meeting="false" start="2013-10-13" duration="54" complete="0" expand="true"/>
         <task id="8" name="Critical Design Review (CDR)" color="#009933" meeting="true" start="2014-05-16" duration="1" complete="0" priority="4" expand="true">
             <notes><![CDATA[Prototype designs, advanced budgets, final design configuration, etc.]]></notes>
