@@ -40,7 +40,7 @@ deltaV_total=struct('rstar_',{},'dr_',{},'deltav_x',{},...
 
 %Define number of cases to observe
 
-norbits=2;
+norbits=5;
 
 %Create initial displacement and velocity vector arrays for each case
 
@@ -275,12 +275,12 @@ figure(10)
 hold on
 for i=1:norbits
     plot(deltaV_total(i).numorbits,deltaV_total(i).deltav_total,'color',cc(i,:))
-    legendinfo{i}=['Initial Separation (km): ' num2str(sqrt(3*dr_(1,i)^2))];
+    legendinfo{i}=['Initial Relative Velocity (km/s): ' num2str(sqrt(3*dv_initial(1,i)^2))];
 end
 legend(legendinfo)
 xlabel('Number of Orbits Until Rendezvous')
 ylabel('Total Delta V (km/s)')
-title(['Total Delta V vs Number of Orbits Until Rendezvous, Starting Range between 0.001 km and ' num2str(sqrt(dr_(1,length(Ra))^2+dr_(2,length(Ra))^2+dr_(3,length(Ra))^2)) ' km. Assumptions: Coplaner, Impulsive, Hohmann Transfer, With no Atmospheric Considerations and Final CGs in Same Location'])
+title(['Total Delta V vs Number of Orbits Until Rendezvous, Starting Displacement of ' num2str(sqrt(dr_(1,length(Ra))^2+dr_(2,length(Ra))^2+dr_(3,length(Ra))^2)) ' km'])
 
     
 
