@@ -106,7 +106,7 @@ for i=1:2
             sin(w(i))*sin(inc(i)), cos(w(i))*sin(inc(i)), cos(inc(i))];
     
 
-    for k=1:(2*T(i))/60
+    for k=1:5*(T(1))
 %========================Find Eccentric Anomaly============================
         E_ratio=1;
         M = M + sqrt(mew/a(i)^3)*(t(i));
@@ -138,3 +138,19 @@ for i=1:2
         z(i,k)=rtemp_(3);
     end
 end
+
+cc=jet(2);
+satellite=['Target';'Chaser'];
+
+hold on
+for i=1:2
+    plot3(x(i,:),y(i,:),z(i,:),'color',cc(i,:))
+    legendinfo{i}=[satellite(i,:) ' Satellite Orbit for Initial Relative Velocity of ' num2str(dv_(1)*100000) 'cm/s in x Direction'];
+end
+
+legend(legendinfo)
+xlabel('X Position (km)')
+ylabel('Y Position (km)')
+zlabel('Z Position (km)')
+
+
