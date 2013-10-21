@@ -73,24 +73,23 @@ for i=1:2
     else
         w(i) = acos(dot(tempN_,tempe_)/(N(i)*e(i)));
     end
+
+%=========================Find True Anomaly================================
+    theta(i)= acos(dot(tempe_,tempr_)/(e(i)*r(i)));
+    if (theta < 0)
+        theta(i) = 2*pi-theta;
+    else
+        theta(i)=theta(i);
+    end
+%===========================Find Inclination===============================
+    inc(i) = acos( htemp_(3) / h(i));
+%===============Find Longitude of Ascending Node===========================
+    if( tempN_(2) < 0)
+        omega(i) = 2*pi() - acos(tempN_(1)/N(i));
+    else
+        omega(i) = acos(tempN_(1)/N(i));
+    end
 end
-% 
-% %=========================Find True Anomaly================================
-% theta= acos(dot(e_,r_)/(e*r));
-% if (theta < 0)
-%     theta = 2*pi-theta;
-% end
-% 
-% %===========================Find Inclination===============================
-% i = acos( h_(3) / h);
-% 
-% %===============Find Longitude of Ascending Node===========================
-% if( N_(2) < 0)
-%     omega = 2*pi() - acos(N_(1)/N);
-% else
-%     omega = acos(N_(1)/N);
-% end
-% 
 % %========================Find Mean Anomaly=================================
 % Mnot = 2*atan(sqrt((1-e)/(1+e))*tan(theta/2))-(e*sqrt(1-e^2)*sin(theta))/(1+e*cos(theta));
 % Enot = acos((e+cos(theta))/(1+e*cos(theta)));
