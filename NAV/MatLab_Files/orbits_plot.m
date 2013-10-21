@@ -53,31 +53,27 @@ for i=1:2
 end
 
 %===========Find Magnitude of Positon and Velocity Vectors=================
-% r = sqrt( r_(1)^2+r_(2)^2+r_(3)^2);
-% v=sqrt(dot(v_,v_));
-% Vr = dot(v_, r_)/r;
-% 
-% %===================Find Specific Momentum Vector==========================
-% h_ = cross(r_,v_);
-% h = sqrt(dot(h_,h_));
-% 
-% %========================Find Eccentricity=================================
-% 
-% e_ = (1/mew)*((v^2-(mew/r))*r_-r*Vr*v_);
-% e=sqrt(dot(e_,e_));
-% 
-% 
-% %===========================Find Semi-Major Axis===========================
-% a= -mew * r/(dot(v_,v_) * r - 2*mew);
-% N_ = cross([0 0 1], h_);
-% N = sqrt(dot(N_,N_));
-% 
-% %========================Find Argument of Perigee==========================
-% w = acos(dot(N_,e_)/(N*e));
-% if(e_(3) < 0)
-%     w=2*pi() - w;
-% end
-% N = sqrt(dot(N_,N_));
+for i=1:2
+    v(i)=sqrt(v_(i,1)^2+v_(i,2)^2+v_(i,3)^2);
+%===================Find Specific Momentum Vector==========================
+    tempr_=[r_(i,1) r_(i,2) r_(i,3)];
+    tempv_=[v_(i,1) v_(i,2) v_(i,3)];
+    htemp_ = cross(tempr_,tempv_);
+    h(i) = sqrt(dot(htemp_,htemp_));
+%========================Find Eccentricity=================================
+    tempe_ = (1/mew)*((v(i)^2-(mew/r(i)))*tempr_-dot(tempr_,tempv_)*tempv_);
+    e(i)=sqrt(dot(tempe_,tempe_));
+%===========================Find Semi-Major Axis===========================
+    tempN_ = cross([0 0 1], htemp_);
+    N(i) = sqrt(dot(tempN_,tempN_));
+
+%========================Find Argument of Perigee==========================
+    if(tempe_(3) < 0)
+        w(i)=2*pi() - w;
+    else
+        w(i) = acos(dot(tempN_,tempe_)/(N(i)*e(i)));
+    end
+end
 % 
 % %=========================Find True Anomaly================================
 % theta= acos(dot(e_,r_)/(e*r));
