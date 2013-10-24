@@ -34,8 +34,8 @@ re=6371; % Radius of Earth, km
 
 %=========================Define Inital Conditions=========================
 
-r_ = [6863.700    5877.350    -3347.670]; % km
-v_ = [-5.1039    3.2546    4.68185]; % km/s
+r_ = [3212.59    4572    -3877.23]; % km
+v_ = [-6.379    1.003    -4.106]; % km/s
 dr_=[0 0 0]; %km
 dv_=[0.0005 0 0]; %km/s
 
@@ -47,7 +47,7 @@ end
 %======================Find Period of Orbit================================
 for i=1:2
     r(i) = sqrt( r_(i,1)^2+r_(i,2)^2+r_(i,3)^2);
-    a(i)= -mew * r(i)/((v_(i,1)^2+v_(i,2)^2+v_(i,3)^2)*r(i)-2*mew);
+    a(i)= r(i)/(2-((r(i)*(v_(i,1)^2+v_(i,2)^2+v_(i,3)^2))/mew));
     T(i)=(2*pi)/sqrt(mew)*a(i)^(3/2);
     t(i)=T(i)/1000;
 end
@@ -106,14 +106,14 @@ for i=1:2
             sin(w(i))*sin(inc(i)), cos(w(i))*sin(inc(i)), cos(inc(i))];
     
 
-    for k=1:5*(T(1))
+    for k=1:T(1)/2
 %========================Find Eccentric Anomaly============================
         E_ratio=1;
         M = M + sqrt(mew/a(i)^3)*(t(i));
         if M<pi
             E=M+e/2;
         else
-            E=M-e/2;
+            E=M-e/2; 
         end
     
         while E_ratio>10^-8
@@ -139,12 +139,16 @@ for i=1:2
     end
 end
 
-cc=jet(2);
+%cc=jet(2);
 satellite=['Target';'Chaser'];
 
-hold on
-for i=1:2
-    plot3(x(i,:),y(i,:),z(i,:),'color',cc(i,:))
+tstep= 1;
+
+for j=1:tstep:T(1)
+        b=round(1+j*t/tstep);
+        line(x(1,1:b),y(1,1:b),z(1,1:b),'color','b')
+        line(x(2,1:b),y(2,1:b),z(2,1:b),'color','r')
+        drawnow
     legendinfo{i}=[satellite(i,:) ' Satellite Orbit for Initial Relative Velocity of ' num2str(dv_(1)*100000) 'cm/s in x Direction'];
 end
 
