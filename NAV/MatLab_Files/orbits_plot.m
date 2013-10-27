@@ -37,22 +37,7 @@ re=6371; % Radius of Earth, km
 r_ = [3212.59    4572    -3877.23]; % km
 v_ = [-6.379    1.003    -4.106]; % km/s
 dr_=[0 0 0]; %km
-dv_=[0.0005 0 0]; %km/s
-
-%==========================Create Spacecraft Points========================
-
-target=hgtransform;
-chaser=hgtransform;
-border = 1.25*r_(1);
-axis([-border border -border border -border border])
-view(0,0)
-a=axes;
-[xSphere ySphere zSphere] = sphere;
-
-Target=surface('xdata',xSphere*4,'ydata',ySphere*4,'zdata',zSphere*4,...
-    'facecolor','b','edgecolor','none','parent',target);
-Chaser=surface('xdata',xSphere*4,'ydata',ySphere*4,'zdata',zSphere*4,...
-    'facecolor','r','edgecolor','none','parent',chaser);
+dv_=[0.0005 .0005 .0005]; %km/s
 
 for i=1:3
     r_(2,i)=r_(1,i)+dr_(1,i);
@@ -121,7 +106,7 @@ for i=1:2
             sin(w(i))*sin(inc(i)), cos(w(i))*sin(inc(i)), cos(inc(i))];
     
 
-    for k=1:T(1)/2
+    for k=1:T(1)
 %========================Find Eccentric Anomaly============================
         E_ratio=1;
         M = M + sqrt(mew/a(i)^3)*(t(i));
@@ -151,27 +136,50 @@ for i=1:2
         x(i,k)=rtemp_(1);
         y(i,k)=rtemp_(2);
         z(i,k)=rtemp_(3);
+        
+        dx(i,k)=vtemp_(1);
+        dy(i,k)=vtemp_(2);
+        dz(i,k)=vtemp_(3);
     end
+end
+
+for k=1:T(1)
+    dr_realtime(k)=((x(1,k)-x(2,k))^2+(y(1,k)-y(2,k))^2+(z(1,k)-z(2,k))^2)^(1/2);
+    dv_realtime(k)=((dx(1,k)-dx(2,k))^2+(dy(1,k)-dy(2,k))^2+(dz(1,k)-dz(2,k))^2)^(1/2);
+    dx_realtime(k)=dx(1,k)-dx(2,k);
+    dy_realtime(k)=dy(1,k)-dy(2,k);
+    dz_realtime(k)=dz(1,k)-dz(2,k);
 end
 
 %cc=jet(2);
 satellite=['Target';'Chaser'];
 
-tstep= 1;
+tstep=1:T(1);
 
-for j=1:tstep:T(1)
-        b=round(1+j*t/tstep);
-        %set(Target,'matrix',makehgtform('translate',x(1,b),y(1,b),z(1,b)));
-        %set(Chaser,'matrix',makehgtform('translate',x(2,b),y(2,b),z(2,b)));
-        line(x(1,1:b),y(1,1:b),z(1,1:b),'color','b')
-        line(x(2,1:b),y(2,1:b),z(2,1:b),'color','r')
-        drawnow
-    legendinfo{i}=[satellite(i,:) ' Satellite Orbit for Initial Relative Velocity of ' num2str(dv_(1)*100000) 'cm/s in x Direction'];
-end
 
-legend(legendinfo)
-xlabel('X Position (km)')
-ylabel('Y Position (km)')
-zlabel('Z Position (km)')
+figure(1)
+plot(tstep./60,dr_realtime)
+
+figure(2)
+plot(tstep./60,dv_realtime.*100000)
+
+figure(3)
+plot(tstep./60,dx_realtime.*100000,tstep./60,dy_realtime.*100000,tstep./60,dz_realtime.*100000)
+
+
+% % for j=1:tstep:T(1)/2
+% %         b=round(1+j*t/tstep);
+% %         set(Target,'matrix',makehgtform('translate',x(1,b),y(1,b),z(1,b)));
+% %         set(Chaser,'matrix',makehgtform('translate',x(2,b),y(2,b),z(2,b)));
+% %         line(x(1,1:b),y(1,1:b),z(1,1:b),'color','b')
+% %         line(x(2,1:b),y(2,1:b),z(2,1:b),'color','r')
+% %         drawnow
+% %     legendinfo{i}=[satellite(i,:) ' Satellite Orbit for Initial Relative Velocity of ' num2str(dv_(1)*100000) 'cm/s in x Direction'];
+% % end
+
+% legend(legendinfo)
+% xlabel('X Position (km)')
+% ylabel('Y Position (km)')
+% zlabel('Z Position (km)')
 
 
