@@ -1,4 +1,4 @@
-function [dr_realtime,dv_realtime,x,y,z,dx,dy,dz,dx_realtime,dy_realtime,dz_realtime,x_realtime,y_realtime,z_realtime] = orbits_plot(r_,v_,dr_,dv_,orbitnumber)
+function [dr_realtime,dv_realtime,x,y,z,dx,dy,dz,dx_realtime,dy_realtime,dz_realtime,x_realtime,y_realtime,z_realtime,theta,a] = orbits_plot(r_,v_,dr_,dv_,orbitnumber)
 %=======================Rascal Senior Design===============================
 %============================RCL-C-NAV3====================================
 %=======================Author: Tom Moline=================================
@@ -24,9 +24,6 @@ function [dr_realtime,dv_realtime,x,y,z,dx,dy,dz,dx_realtime,dy_realtime,dz_real
 % Plot of orbits over a specified time
 
 %==========================Begin Code======================================
-
-clear
-clc
 
 %========================Define Constants==================================
 
@@ -75,7 +72,7 @@ for i=1:2
 %=========================Find True Anomaly================================
     theta(i)= acos(dot(tempe_,tempr_)/(e(i)*r(i)));
     if (theta < 0)
-        theta(i) = 2*pi-theta;
+        theta(i) = 2*pi-theta(i);
     else
         theta(i)=theta(i);
     end
@@ -122,6 +119,7 @@ for i=1:2
             E=E-E_ratio;
         end
         thetatemp=2*atan(sqrt((1+e(i))/(1-e(i)))*tan(E(1)/2));
+        theta(i,k)=thetatemp;
         rp_=(h(i)^2/mew)*(1/(1+e(i)*cos(thetatemp)))*[cos(thetatemp);sin(thetatemp);0];
         vp_=(mew/h(i))*[-sin(thetatemp);e(i)+cos(thetatemp);0];
 
