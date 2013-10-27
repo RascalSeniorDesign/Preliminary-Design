@@ -39,6 +39,21 @@ v_ = [-6.379    1.003    -4.106]; % km/s
 dr_=[0 0 0]; %km
 dv_=[0.0005 0 0]; %km/s
 
+%==========================Create Spacecraft Points========================
+
+target=hgtransform;
+chaser=hgtransform;
+border = 1.25*r_(1);
+axis([-border border -border border -border border])
+view(0,0)
+a=axes;
+[xSphere ySphere zSphere] = sphere;
+
+Target=surface('xdata',xSphere*4,'ydata',ySphere*4,'zdata',zSphere*4,...
+    'facecolor','b','edgecolor','none','parent',target);
+Chaser=surface('xdata',xSphere*4,'ydata',ySphere*4,'zdata',zSphere*4,...
+    'facecolor','r','edgecolor','none','parent',chaser);
+
 for i=1:3
     r_(2,i)=r_(1,i)+dr_(1,i);
     v_(2,i)=v_(1,i)+dv_(1,i);
@@ -146,6 +161,8 @@ tstep= 1;
 
 for j=1:tstep:T(1)
         b=round(1+j*t/tstep);
+        %set(Target,'matrix',makehgtform('translate',x(1,b),y(1,b),z(1,b)));
+        %set(Chaser,'matrix',makehgtform('translate',x(2,b),y(2,b),z(2,b)));
         line(x(1,1:b),y(1,1:b),z(1,1:b),'color','b')
         line(x(2,1:b),y(2,1:b),z(2,1:b),'color','r')
         drawnow
