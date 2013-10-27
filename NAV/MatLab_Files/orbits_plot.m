@@ -52,6 +52,10 @@ for i=1:2
     t(i)=T(i)/1000;
 end
 
+%===========================Define Plot Range==============================
+
+plotrange=T(1);
+
 for i=1:2
 %===================Find Specific Momentum Vector==========================
     tempr_=[r_(i,1) r_(i,2) r_(i,3)];
@@ -106,7 +110,7 @@ for i=1:2
             sin(w(i))*sin(inc(i)), cos(w(i))*sin(inc(i)), cos(inc(i))];
     
 
-    for k=1:T(1)
+    for k=1:plotrange
 %========================Find Eccentric Anomaly============================
         E_ratio=1;
         M = M + sqrt(mew/a(i)^3)*(t(i));
@@ -143,7 +147,7 @@ for i=1:2
     end
 end
 
-for k=1:T(1)
+for k=1:plotrange
     dr_realtime(k)=((x(1,k)-x(2,k))^2+(y(1,k)-y(2,k))^2+(z(1,k)-z(2,k))^2)^(1/2);
     dv_realtime(k)=((dx(1,k)-dx(2,k))^2+(dy(1,k)-dy(2,k))^2+(dz(1,k)-dz(2,k))^2)^(1/2);
     dx_realtime(k)=dx(1,k)-dx(2,k);
@@ -154,32 +158,28 @@ end
 %cc=jet(2);
 satellite=['Target';'Chaser'];
 
-tstep=1:T(1);
+tstep=1:plotrange;
+orbitnumber=plotrange/T(1);
 
 
 figure(1)
 plot(tstep./60,dr_realtime)
+xlabel('Time (min)')
+ylabel('Absolute Relative Displacement (km)')
 
 figure(2)
 plot(tstep./60,dv_realtime.*100000)
+xlabel('Time (min)')
+ylabel('Absolute Relative Velocity (cm/s)')
 
 figure(3)
 plot(tstep./60,dx_realtime.*100000,tstep./60,dy_realtime.*100000,tstep./60,dz_realtime.*100000)
+legend(['Relative Velocity in X Direction for ', num2str(orbitnumber) ' orbits'],...
+    ['Relative Velocity in Y Direction for ', num2str(orbitnumber), ' orbits'],...
+    ['Relative Velocity in Z Direction for ', num2str(orbitnumber), ' orbits'] )
+xlabel('Time (min)')
+ylabel('Relative Velocity (cm/s)')
 
 
-% % for j=1:tstep:T(1)/2
-% %         b=round(1+j*t/tstep);
-% %         set(Target,'matrix',makehgtform('translate',x(1,b),y(1,b),z(1,b)));
-% %         set(Chaser,'matrix',makehgtform('translate',x(2,b),y(2,b),z(2,b)));
-% %         line(x(1,1:b),y(1,1:b),z(1,1:b),'color','b')
-% %         line(x(2,1:b),y(2,1:b),z(2,1:b),'color','r')
-% %         drawnow
-% %     legendinfo{i}=[satellite(i,:) ' Satellite Orbit for Initial Relative Velocity of ' num2str(dv_(1)*100000) 'cm/s in x Direction'];
-% % end
-
-% legend(legendinfo)
-% xlabel('X Position (km)')
-% ylabel('Y Position (km)')
-% zlabel('Z Position (km)')
 
 
