@@ -1,3 +1,4 @@
+function [dr_realtime,dv_realtime,x,y,z,dx,dy,dz,dx_realtime,dy_realtime,dz_realtime,x_realtime,y_realtime,z_realtime] = orbits_plot(r_,v_,dr_,dv_,orbitnumber)
 %=======================Rascal Senior Design===============================
 %============================RCL-C-NAV3====================================
 %=======================Author: Tom Moline=================================
@@ -33,12 +34,6 @@ mew = 398600; %Gravity Constant for Earth
 re=6371; % Radius of Earth, km
 
 %=========================Define Inital Conditions=========================
-
-r_ = [3212.59    4572    -3877.23]; % km
-v_ = [-6.379    1.003    -4.106]; % km/s
-dr_=[0 0 0]; %km
-dv_=[0.0005 0 0]; %km/s
-
 for i=1:3
     r_(2,i)=r_(1,i)+dr_(1,i);
     v_(2,i)=v_(1,i)+dv_(1,i);
@@ -52,9 +47,9 @@ for i=1:2
     t(i)=T(i)/1000;
 end
 
-%===========================Define Plot Range==============================
+%==========================Define Plot Range===============================
 
-plotrange=T(1);
+plotrange=round(orbitnumber*T(1));
 
 for i=1:2
 %===================Find Specific Momentum Vector==========================
@@ -147,6 +142,8 @@ for i=1:2
     end
 end
 
+%==========================Find 
+
 for k=1:plotrange
     dr_realtime(k)=((x(1,k)-x(2,k))^2+(y(1,k)-y(2,k))^2+(z(1,k)-z(2,k))^2)^(1/2);
     dv_realtime(k)=((dx(1,k)-dx(2,k))^2+(dy(1,k)-dy(2,k))^2+(dz(1,k)-dz(2,k))^2)^(1/2);
@@ -158,38 +155,7 @@ for k=1:plotrange
     z_realtime(k)=z(1,k)-z(2,k);
 end
 
-%cc=jet(2);
-satellite=['Target';'Chaser'];
-
-tstep=1:plotrange;
-orbitnumber=plotrange/T(1);
-
-
-figure(1)
-plot(tstep./60,dr_realtime)
-xlabel('Time (min)')
-ylabel('Absolute Relative Displacement (km)')
-
-figure(2)
-plot(tstep./60,dv_realtime.*100000)
-xlabel('Time (min)')
-ylabel('Absolute Relative Velocity (cm/s)')
-
-figure(3)
-plot(tstep./60,dx_realtime.*100000,tstep./60,dy_realtime.*100000,tstep./60,dz_realtime.*100000)
-legend(['Relative Velocity in X Direction for ', num2str(orbitnumber) ' orbits'],...
-    ['Relative Velocity in Y Direction for ', num2str(orbitnumber), ' orbits'],...
-    ['Relative Velocity in Z Direction for ', num2str(orbitnumber), ' orbits'] )
-xlabel('Time (min)')
-ylabel('Relative Velocity (cm/s)')
-
-figure(4)
-plot(tstep./60,x_realtime,tstep./60,y_realtime,tstep./60,z_realtime)
-legend(['Relative Displacement in X Direction for ', num2str(orbitnumber) ' orbits'],...
-    ['Relative Displacement in Y Direction for ', num2str(orbitnumber), ' orbits'],...
-    ['Relative Displacement in Z Direction for ', num2str(orbitnumber), ' orbits'] )
-xlabel('Time (min)')
-ylabel('Relative Displacement (km)')
+end
 
 
 
