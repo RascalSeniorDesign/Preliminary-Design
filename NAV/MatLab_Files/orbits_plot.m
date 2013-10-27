@@ -37,7 +37,7 @@ re=6371; % Radius of Earth, km
 r_ = [3212.59    4572    -3877.23]; % km
 v_ = [-6.379    1.003    -4.106]; % km/s
 dr_=[0 0 0]; %km
-dv_=[0.0005 .0005 .0005]; %km/s
+dv_=[0.0005 0 0]; %km/s
 
 for i=1:3
     r_(2,i)=r_(1,i)+dr_(1,i);
@@ -153,6 +153,9 @@ for k=1:plotrange
     dx_realtime(k)=dx(1,k)-dx(2,k);
     dy_realtime(k)=dy(1,k)-dy(2,k);
     dz_realtime(k)=dz(1,k)-dz(2,k);
+    x_realtime(k)=x(1,k)-x(2,k);
+    y_realtime(k)=y(1,k)-y(2,k);
+    z_realtime(k)=z(1,k)-z(2,k);
 end
 
 %cc=jet(2);
@@ -179,6 +182,14 @@ legend(['Relative Velocity in X Direction for ', num2str(orbitnumber) ' orbits']
     ['Relative Velocity in Z Direction for ', num2str(orbitnumber), ' orbits'] )
 xlabel('Time (min)')
 ylabel('Relative Velocity (cm/s)')
+
+figure(4)
+plot(tstep./60,x_realtime,tstep./60,y_realtime,tstep./60,z_realtime)
+legend(['Relative Displacement in X Direction for ', num2str(orbitnumber) ' orbits'],...
+    ['Relative Displacement in Y Direction for ', num2str(orbitnumber), ' orbits'],...
+    ['Relative Displacement in Z Direction for ', num2str(orbitnumber), ' orbits'] )
+xlabel('Time (min)')
+ylabel('Relative Displacement (km)')
 
 
 
