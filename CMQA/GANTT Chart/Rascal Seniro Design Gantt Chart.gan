@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="Rascal Senior Desgin" company="SSRL" webLink="https://sites.google.com/a/slu.edu/aeng-senior-design/team-websites/rascal" view-date="2013-07-01" view-index="0" gantt-divider-location="564" resource-divider-location="300" version="2.0">
+<project name="Rascal Senior Desgin" company="SSRL" webLink="https://sites.google.com/a/slu.edu/aeng-senior-design/team-websites/rascal" view-date="2013-08-01" view-index="0" gantt-divider-location="564" resource-divider-location="300" version="2.0">
     <description><![CDATA[GANTT Chart for Rascal Senior Design Project 1st and 2nd semester]]></description>
-    <view zooming-state="default:10" id="gantt-chart"/>
+    <view zooming-state="default:9" id="gantt-chart"/>
     <view id="resource-table">
         <field id="0" name="Name" width="50" order="0"/>
         <field id="1" name="Default role" width="50" order="1"/>
@@ -48,7 +48,7 @@
             <task id="68" name="Create Rendezvous Delta V Caclulations" color="#cc6600" meeting="false" start="2013-10-12" duration="3" complete="0" expand="true"/>
         </task>
         <task id="69" name="Final RFP Revision" color="#ffcc00" meeting="true" start="2013-10-24" duration="1" complete="0" priority="4" expand="true"/>
-        <task id="78" name="Systems Requirments Review (SRR)" color="#ff9900" meeting="true" start="2013-11-01" duration="1" complete="0" priority="4" expand="true">
+        <task id="78" name="Systems Requirments Review (SRR)" color="#ff9900" meeting="true" start="2013-11-11" duration="1" complete="0" priority="4" expand="true">
             <depend id="80" type="4" difference="0" hardness="Strong"/>
             <depend id="86" type="4" difference="0" hardness="Strong"/>
             <depend id="92" type="4" difference="0" hardness="Strong"/>
@@ -61,23 +61,23 @@
             <depend id="127" type="4" difference="0" hardness="Strong"/>
             <depend id="137" type="4" difference="0" hardness="Strong"/>
         </task>
-        <task id="80" name="Full Mission Success Criteria Checklist" color="#cc0033" meeting="false" start="2013-10-16" duration="16" complete="0" priority="4" expand="true">
-            <task id="86" name="Second Revision of Delta V Calculations" color="#ffff00" meeting="false" start="2013-10-17" duration="15" complete="0" expand="true"/>
-            <task id="92" name="Second Revision of Alternative Mission Trade Studies" color="#ffff00" meeting="false" start="2013-10-17" duration="15" complete="0" expand="true"/>
-            <task id="110" name="Preliminary CONOPS Plan" color="#ffff00" meeting="false" start="2013-10-22" duration="10" complete="0" expand="true"/>
-            <task id="112" name="CONOPS Success Checklist" color="#ffff00" meeting="false" start="2013-10-22" duration="10" complete="0" expand="true"/>
-            <task id="137" name="Event Timeline Plan" color="#ffff00" meeting="false" start="2013-10-16" duration="16" complete="0" expand="true"/>
+        <task id="80" name="Full Mission Success Criteria Checklist" color="#cc0033" meeting="false" start="2013-10-26" duration="16" complete="0" priority="4" expand="true">
+            <task id="86" name="Second Revision of Delta V Calculations" color="#ffff00" meeting="false" start="2013-10-27" duration="15" complete="0" expand="true"/>
+            <task id="92" name="Second Revision of Alternative Mission Trade Studies" color="#ffff00" meeting="false" start="2013-10-27" duration="15" complete="0" expand="true"/>
+            <task id="110" name="Preliminary CONOPS Plan" color="#ffff00" meeting="false" start="2013-11-01" duration="10" complete="0" expand="true"/>
+            <task id="112" name="CONOPS Success Checklist" color="#ffff00" meeting="false" start="2013-11-01" duration="10" complete="0" expand="true"/>
+            <task id="137" name="Event Timeline Plan" color="#ffff00" meeting="false" start="2013-10-26" duration="16" complete="0" expand="true"/>
         </task>
-        <task id="345" name="Mission Success Criteria Checklist Second Revison" color="#8cb6ce" meeting="false" start="2013-10-31" duration="27" complete="0" expand="true">
-            <task id="347" name="CONOPS Second Revision" color="#8cb6ce" meeting="false" start="2013-10-31" duration="9" complete="0" expand="true"/>
-            <task id="349" name="Event Time Line Plan Second Revision" color="#8cb6ce" meeting="false" start="2013-10-31" duration="9" complete="0" expand="true"/>
+        <task id="345" name="Mission Success Criteria Checklist Second Revison" color="#8cb6ce" meeting="false" start="2013-11-11" duration="16" complete="0" expand="true">
+            <task id="347" name="CONOPS Second Revision" color="#8cb6ce" meeting="false" start="2013-11-11" duration="9" complete="0" expand="true"/>
+            <task id="349" name="Event Time Line Plan Second Revision" color="#8cb6ce" meeting="false" start="2013-11-11" duration="9" complete="0" expand="true"/>
             <task id="351" name="Final Mission Succes Criterea Checklist" color="#8cb6ce" meeting="false" start="2013-11-11" duration="16" complete="0" expand="true"/>
         </task>
-        <task id="237" name="Preliminary Budgets" color="#990099" meeting="false" start="2013-10-31" duration="30" complete="0" expand="true">
-            <task id="239" name="Mass Budget" color="#990099" meeting="false" start="2013-10-31" duration="30" complete="0" expand="true"/>
-            <task id="241" name="Link Budget" color="#990099" meeting="false" start="2013-10-31" duration="30" complete="0" expand="true"/>
-            <task id="244" name="Power Budget" color="#990099" meeting="false" start="2013-10-31" duration="30" complete="0" expand="true"/>
-            <task id="294" name="Data Budget" color="#990099" meeting="false" start="2013-10-31" duration="30" complete="0" expand="true"/>
+        <task id="237" name="Preliminary Budgets" color="#990099" meeting="false" start="2013-11-11" duration="16" complete="0" expand="true">
+            <task id="239" name="Mass Budget" color="#990099" meeting="false" start="2013-11-11" duration="16" complete="0" expand="true"/>
+            <task id="241" name="Link Budget" color="#990099" meeting="false" start="2013-11-11" duration="16" complete="0" expand="true"/>
+            <task id="244" name="Power Budget" color="#990099" meeting="false" start="2013-11-11" duration="16" complete="0" expand="true"/>
+            <task id="294" name="Data Budget" color="#990099" meeting="false" start="2013-11-11" duration="16" complete="0" expand="true"/>
         </task>
         <task id="139" name="Final Report Documentation Process" color="#3333ff" meeting="false" start="2013-10-13" duration="54" complete="0" expand="true"/>
         <task id="265" name="Preliminary Design Review (PDR)" color="#990000" meeting="true" start="2013-12-06" duration="1" complete="0" priority="4" expand="false">
