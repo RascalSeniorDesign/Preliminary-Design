@@ -1,0 +1,20 @@
+Rascal RFP Meeting 10-23-2013
+Members Present: Tom Moline, Tyler Olson, Nate Richard
+
+Figuring Out Mission Success Criterea
+---------------------------------------------------
+-Not too difficult to remove orbital analysis figure.
+	-Making results into list form is also fairly trivial
+
+-Do we care how we go about acheiving orbital maneuvers?
+	-Thus, is a key goal of the mission to prove the useability of a propulsion system?
+	-Or do we want to focus on undergoing orbital maneuvers?
+	-What are we trying to prove?
+		-Perform Proximity Operations and Rendezvous through the use of a 6U spacecraft architecture (mission objective)
+
+-Make sure to define each term used in proximity operations
+
+-Mission Success Criterea
+	-Stationkeeping within a 10-75 m sphere of a resident space object (or keep old one)
+	-Rendezvous within a distance of 1-10 m from a distance of at least 100 m (or keep old one)
+	-Do we want to demonstrate collision avoidance? (Escape, etc.)
