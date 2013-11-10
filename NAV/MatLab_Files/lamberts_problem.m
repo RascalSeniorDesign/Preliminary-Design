@@ -37,8 +37,11 @@ re=6371; %Earth's radius, km
 r_ = [3212.59    4572    -3877.23]; % km
 v_ = [-6.379    1.003    -4.106]; % km/s
 dr_=[0 0 0]; %km
-dv_=[0 .00005 0]; %km/s
+dv_=[0 .00050 0];
+
+
 orbitnumber=1;
+
 
 [dr_realtime,dv_realtime,x,y,z,dx,dy,dz,dx_realtime,dy_realtime,dz_realtime,x_realtime,y_realtime,z_realtime,theta,T] = orbits_plot(r_,v_,dr_,dv_,orbitnumber);
 
