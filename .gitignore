@@ -4,3 +4,7 @@
 *~*.tmp
 *~*.xlsx
 *.db
+*~*.doc
+*~*.xls
+*~*.ppt
+*~*.pptx
