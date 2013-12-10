@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project name="Rascal Senior Desgin" company="SSRL" webLink="https://sites.google.com/a/slu.edu/aeng-senior-design/team-websites/rascal" view-date="2013-08-01" view-index="0" gantt-divider-location="564" resource-divider-location="300" version="2.0">
+<?xml version="1.0" encoding="UTF-8"?><project name="Rascal Senior Desgin" company="SSRL" webLink="https://sites.google.com/a/slu.edu/aeng-senior-design/team-websites/rascal" view-date="2013-08-01" view-index="0" gantt-divider-location="564" resource-divider-location="300" version="2.0">
     <description><![CDATA[GANTT Chart for Rascal Senior Design Project 1st and 2nd semester]]></description>
     <view zooming-state="default:9" id="gantt-chart"/>
     <view id="resource-table">
@@ -52,13 +51,8 @@
             <depend id="80" type="4" difference="0" hardness="Strong"/>
             <depend id="86" type="4" difference="0" hardness="Strong"/>
             <depend id="92" type="4" difference="0" hardness="Strong"/>
-            <depend id="94" type="4" difference="0" hardness="Strong"/>
-            <depend id="101" type="4" difference="0" hardness="Strong"/>
             <depend id="110" type="4" difference="0" hardness="Strong"/>
             <depend id="112" type="4" difference="0" hardness="Strong"/>
-            <depend id="114" type="4" difference="0" hardness="Strong"/>
-            <depend id="121" type="4" difference="0" hardness="Strong"/>
-            <depend id="127" type="4" difference="0" hardness="Strong"/>
             <depend id="137" type="4" difference="0" hardness="Strong"/>
         </task>
         <task id="80" name="Full Mission Success Criteria Checklist" color="#cc0033" meeting="false" start="2013-10-26" duration="16" complete="0" priority="4" expand="true">
@@ -73,11 +67,11 @@
             <task id="349" name="Event Time Line Plan Second Revision" color="#8cb6ce" meeting="false" start="2013-11-11" duration="9" complete="0" expand="true"/>
             <task id="351" name="Final Mission Succes Criterea Checklist" color="#8cb6ce" meeting="false" start="2013-11-11" duration="16" complete="0" expand="true"/>
         </task>
-        <task id="237" name="Preliminary Budgets" color="#990099" meeting="false" start="2013-11-11" duration="16" complete="0" expand="true">
-            <task id="239" name="Mass Budget" color="#990099" meeting="false" start="2013-11-11" duration="16" complete="0" expand="true"/>
-            <task id="241" name="Link Budget" color="#990099" meeting="false" start="2013-11-11" duration="16" complete="0" expand="true"/>
-            <task id="244" name="Power Budget" color="#990099" meeting="false" start="2013-11-11" duration="16" complete="0" expand="true"/>
-            <task id="294" name="Data Budget" color="#990099" meeting="false" start="2013-11-11" duration="16" complete="0" expand="true"/>
+        <task id="237" name="Preliminary Budgets" color="#990099" meeting="false" start="2014-01-13" duration="16" complete="0" expand="true">
+            <task id="239" name="Mass Budget" color="#990099" meeting="false" start="2014-01-13" duration="16" complete="0" expand="true"/>
+            <task id="241" name="Link Budget" color="#990099" meeting="false" start="2014-01-13" duration="16" complete="0" expand="true"/>
+            <task id="244" name="Power Budget" color="#990099" meeting="false" start="2014-01-13" duration="16" complete="0" expand="true"/>
+            <task id="294" name="Data Budget" color="#990099" meeting="false" start="2014-01-13" duration="16" complete="0" expand="true"/>
         </task>
         <task id="139" name="Final Report Documentation Process" color="#3333ff" meeting="false" start="2013-10-13" duration="54" complete="0" expand="true"/>
         <task id="265" name="Preliminary Design Review (PDR)" color="#990000" meeting="true" start="2013-12-06" duration="1" complete="0" priority="4" expand="false">
