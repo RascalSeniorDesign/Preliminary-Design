@@ -38,39 +38,52 @@ deltaV_total=struct('rstar_',{},'dr_',{},'deltav_x',{},...
     'deltav_y',{},'Rp',{},'Ra',{},'period',{},'n',{},'t',{},'deltav',{},'numorbits',{},'deltav_total',{},'deltav_z',{},...
     'deltav_xi',{},'deltav_xf',{},'deltav_yi',{},'deltav_yf',{},'deltav_zi',{},'deltav_zf',{});
 
-%Define number of cases to observe
+%Define number of cases to observe (norbits) and Number of Orbits to Plot
+%(orbitnumber)
 
-norbits=5;
+orbitnumber=1;
+norbits=1;
 
 %Create initial displacement and velocity vector arrays for each case
 
-Ra=linspace(300+6731,300+6731,norbits);
-Rp=linspace(300+6731,300+6731,norbits);
-dr_=[linspace(.1,.1,norbits);linspace(.1,.1,norbits);linspace(.1,.1,norbits)];
-rstar_=[linspace(300+6731,300+6731,norbits);linspace(0,0,norbits);linspace(0,0,norbits)];
-dv_initial=[linspace(.001,.0025,norbits);linspace(.001,.0025,norbits);linspace(.001,.0025,norbits)];
+r_ = [3212.59    4572    -3877.23]; % km
+v_ = [-6.379    1.003    -4.106]; % km/s
+dr_=[0 0 0]; %km
+dv_=[0 .00050 0];
+
+%Call orbits_plot function to obtain relative distance and velocity data
+%between chaser and target satellite for orbit duration
+
+[dr_realtime,dv_realtime,x,y,z,dx,dy,dz,dx_realtime,dy_realtime,dz_realtime,x_realtime,y_realtime,z_realtime,theta,T,e] = orbits_plot(r_,v_,dr_,dv_,orbitnumber);
+
+%Define initial conditions for initial displacement and velocity
+
+dr_=[linspace(mean(x_realtime),mean(x_realtime),norbits);linspace(mean(y_realtime),mean(y_realtime),norbits);linspace(mean(z_realtime),mean(z_realtime),norbits)];
+rstar_=[linspace(3212.59,3212.59,norbits);linspace(4572,4572,norbits);linspace(-3877.23,-3877.23,norbits)];
+dv_initial=[linspace(mean(dx_realtime),mean(dx_realtime),norbits);linspace(mean(dy_realtime),mean(dy_realtime),norbits);linspace(mean(dz_realtime),mean(dz_realtime),norbits)];
 
 % Calculate Orbital Parameters
 
 mu = 398600; %Gravitational Coefficient of Earth
-maxorbitnumber=100;%Desired number of orbits until rendezvous
+maxorbitnumber=1;%Desired number of orbits until rendezvous
 
 %Define Orbit Range and Step Size
 
-tvalue=linspace(0.1*pi,maxorbitnumber*2*pi,25000);
+tvalue=linspace(0.1*pi,maxorbitnumber*2*pi,10000);
 
 %Find n value (Eq. 8.15 in Orbital Mechanics, Page 143, Conway)
 
-for i=1:length(Ra)
-    e=0;
-    a = Ra(1,i)/(1+e); %Semi-Major Axis, km
+%Define Orbit Parameters and Fill Proper Structure Fields
+for i=1:norbits
+    e=e(1);
+    a = sqrt(r_(1)^2+r_(2)^2+r_(3)^2)/(1+e(1)); %Semi-Major Axis, km
     period_value=2*pi*sqrt(a^3/mu);
     deltaV_total(i).period=period_value;
     deltaV_total(i).dr_=dr_(:,i);
     deltaV_total(i).rstar_=rstar_(:,i);
     deltaV_total(i).n=sqrt(mu/(rstar_(1,i))^3);
-    deltaV_total(i).Ra=Ra(i);
-    deltaV_total(i).Rp=Rp(i);
+    deltaV_total(i).Ra=sqrt(r_(1)^2+r_(2)^2+r_(3)^2);
+    deltaV_total(i).Rp=sqrt(r_(1)^2+r_(2)^2+r_(3)^2);
 end
 
 %Find State Transition Matrix (Equation 8.26, page 149-150)
@@ -81,7 +94,7 @@ end
 %Note: Values above and below 0.25 and -.25 km/s are ignored
 
 
-for j=1:length(Ra)
+for j=1:norbits
     for i=1:length(tvalue)
 	
 	%Calculate Delta V
@@ -163,114 +176,114 @@ cc=jet(2*norbits);
 
 figure(1)
 
-hold on
-for i=1:norbits
-    plot(deltaV_total(i).numorbits,deltaV_total(i).deltav_x,'color',cc(i,:))
-    legendinfo{i}=['Initial Separation (km): ' num2str(sqrt(3*dr_(1,i)^2))];
-end
-legend(legendinfo)
-xlabel('Number of Orbits Until Rendezvous')
-ylabel('Delta V in Local X Direction (km/s)')
-title(['Total Delta Vx vs Number of Orbits Until Rendezvous, Starting Range between 0.001 km and ' num2str(sqrt(dr_(1,length(Ra))^2+dr_(2,length(Ra))^2+dr_(3,length(Ra))^2)) ' km'])
-
-figure(2)
-
-hold on
-for i=1:norbits
-    plot(deltaV_total(i).numorbits,deltaV_total(i).deltav_xi,'color',cc(i,:))
-    legendinfo{i}=['Initial Separation (km): ' num2str(sqrt(3*dr_(1,i)^2))];
-end
-legend(legendinfo)
-xlabel('Number of Orbits Until Rendezvous')
-ylabel('Initial Delta V in Local X Direction (km/s)')
-title(['Initial Delta Vx vs Number of Orbits Until Rendezvous, Starting Range between 0.001 km and ' num2str(sqrt(dr_(1,length(Ra))^2+dr_(2,length(Ra))^2+dr_(3,length(Ra))^2)) ' km'])
-
-figure(3)
-
-hold on
-for i=1:norbits
-    plot(deltaV_total(i).numorbits,deltaV_total(i).deltav_xf,'color',cc(i,:))
-    legendinfo{i}=['Initial Separation (km): ' num2str(sqrt(3*dr_(1,i)^2))];
-end
-legend(legendinfo)
-xlabel('Number of Orbits Until Rendezvous')
-ylabel('Final Delta V in Local X Direction (km/s)')
-title(['Final Delta Vx vs Number of Orbits Until Rendezvous, Starting Range between 0.001 km and ' num2str(sqrt(dr_(1,length(Ra))^2+dr_(2,length(Ra))^2+dr_(3,length(Ra))^2)) ' km'])
-
-figure(4)
-
-hold on
-for i=1:norbits
-    plot(deltaV_total(i).numorbits,deltaV_total(i).deltav_y,'color',cc(i,:))
-    legendinfo{i}=['Initial Separation (km): ' num2str(sqrt(3*dr_(1,i)^2))];
-end
-legend(legendinfo)
-xlabel('Number of Orbits Until Rendezvous')
-ylabel('Delta V in Local Y Direction (km/s)')
-title(['Total Delta Vy vs Number of Orbits Until Rendezvous, Starting Range between 0.001 km and ' num2str(sqrt(dr_(1,length(Ra))^2+dr_(2,length(Ra))^2+dr_(3,length(Ra))^2)) ' km'])
-
-figure(5)
-
-hold on
-for i=1:norbits
-    plot(deltaV_total(i).numorbits,deltaV_total(i).deltav_yi,'color',cc(i,:))
-    legendinfo{i}=['Initial Separation (km): ' num2str(sqrt(3*dr_(1,i)^2))];
-end
-legend(legendinfo)
-xlabel('Number of Orbits Until Rendezvous')
-ylabel('Initial Delta V in Local Y Direction (km/s)')
-title(['Initial Delta Vy vs Number of Orbits Until Rendezvous, Starting Range between 0.001 km and ' num2str(sqrt(dr_(1,length(Ra))^2+dr_(2,length(Ra))^2+dr_(3,length(Ra))^2)) ' km'])
-
-figure(6)
-
-hold on
-for i=1:norbits
-    plot(deltaV_total(i).numorbits,deltaV_total(i).deltav_yf,'color',cc(i,:))
-    legendinfo{i}=['Initial Separation (km): ' num2str(sqrt(3*dr_(1,i)^2))];
-end
-legend(legendinfo)
-xlabel('Number of Orbits Until Rendezvous')
-ylabel('Final Delta V in Local Y Direction (km/s)')
-title(['Fianl Delta Vy vs Number of Orbits Until Rendezvous, Starting Range between 0.001 km and ' num2str(sqrt(dr_(1,length(Ra))^2+dr_(2,length(Ra))^2+dr_(3,length(Ra))^2)) ' km'])
-
-
-figure(7)
-
-hold on
-for i=1:norbits
-    plot(deltaV_total(i).numorbits,deltaV_total(i).deltav_z,'color',cc(i,:))
-    legendinfo{i}=['Initial Separation (km): ' num2str(sqrt(3*dr_(1,i)^2))];
-end
-legend(legendinfo)
-xlabel('Number of Orbits Until Rendezvous')
-ylabel('Delta V in Local Z Direction (km/s)')
-title(['Total Delta Vz vs Number of Orbits Until Rendezvous, Starting Range between 0.001 km and ' num2str(sqrt(dr_(1,length(Ra))^2+dr_(2,length(Ra))^2+dr_(3,length(Ra))^2)) ' km'])
-
-figure(8)
-
-hold on
-for i=1:norbits
-    plot(deltaV_total(i).numorbits,deltaV_total(i).deltav_zi,'color',cc(i,:))
-    legendinfo{i}=['Initial Separation (km): ' num2str(sqrt(3*dr_(1,i)^2))];
-end
-legend(legendinfo)
-xlabel('Number of Orbits Until Rendezvous')
-ylabel('Initial Delta V in Local Z Direction (km/s)')
-title(['Initial Delta Vz vs Number of Orbits Until Rendezvous, Starting Range between 0.001 km and ' num2str(sqrt(dr_(1,length(Ra))^2+dr_(2,length(Ra))^2+dr_(3,length(Ra))^2)) ' km'])
-
-figure(9)
-
-hold on
-for i=1:norbits
-    plot(deltaV_total(i).numorbits,deltaV_total(i).deltav_zf,'color',cc(i,:))
-    legendinfo{i}=['Initial Separation (km): ' num2str(sqrt(3*dr_(1,i)^2))];
-end
-legend(legendinfo)
-xlabel('Number of Orbits Until Rendezvous')
-ylabel('Final Delta V in Local Z Direction (km/s)')
-title(['Final Delta Vz vs Number of Orbits Until Rendezvous, Starting Range between 0.001 km and ' num2str(sqrt(dr_(1,length(Ra))^2+dr_(2,length(Ra))^2+dr_(3,length(Ra))^2)) ' km'])
-
-figure(10)
+% hold on
+% for i=1:norbits
+%     plot(deltaV_total(i).numorbits,deltaV_total(i).deltav_x,'color',cc(i,:))
+%     legendinfo{i}=['Initial Separation (km): ' num2str(sqrt(3*dr_(1,i)^2))];
+% end
+% legend(legendinfo)
+% xlabel('Number of Orbits Until Rendezvous')
+% ylabel('Delta V in Local X Direction (km/s)')
+% title(['Total Delta Vx vs Number of Orbits Until Rendezvous, Starting Range between 0.001 km and ' num2str(sqrt(dr_(1,length(r_))^2+dr_(2,length(r_))^2+dr_(3,length(r_))^2)) ' km'])
+% 
+% figure(2)
+% 
+% hold on
+% for i=1:norbits
+%     plot(deltaV_total(i).numorbits,deltaV_total(i).deltav_xi,'color',cc(i,:))
+%     legendinfo{i}=['Initial Separation (km): ' num2str(sqrt(3*dr_(1,i)^2))];
+% end
+% legend(legendinfo)
+% xlabel('Number of Orbits Until Rendezvous')
+% ylabel('Initial Delta V in Local X Direction (km/s)')
+% title(['Initial Delta Vx vs Number of Orbits Until Rendezvous, Starting Range between 0.001 km and ' num2str(sqrt(dr_(1,length(r_))^2+dr_(2,length(r_))^2+dr_(3,length(r_))^2)) ' km'])
+% 
+% figure(3)
+% 
+% hold on
+% for i=1:norbits
+%     plot(deltaV_total(i).numorbits,deltaV_total(i).deltav_xf,'color',cc(i,:))
+%     legendinfo{i}=['Initial Separation (km): ' num2str(sqrt(3*dr_(1,i)^2))];
+% end
+% legend(legendinfo)
+% xlabel('Number of Orbits Until Rendezvous')
+% ylabel('Final Delta V in Local X Direction (km/s)')
+% title(['Final Delta Vx vs Number of Orbits Until Rendezvous, Starting Range between 0.001 km and ' num2str(sqrt(dr_(1,length(r_))^2+dr_(2,length(r_))^2+dr_(3,length(r_))^2)) ' km'])
+% 
+% figure(4)
+% 
+% hold on
+% for i=1:norbits
+%     plot(deltaV_total(i).numorbits,deltaV_total(i).deltav_y,'color',cc(i,:))
+%     legendinfo{i}=['Initial Separation (km): ' num2str(sqrt(3*dr_(1,i)^2))];
+% end
+% legend(legendinfo)
+% xlabel('Number of Orbits Until Rendezvous')
+% ylabel('Delta V in Local Y Direction (km/s)')
+% title(['Total Delta Vy vs Number of Orbits Until Rendezvous, Starting Range between 0.001 km and ' num2str(sqrt(dr_(1,length(r_))^2+dr_(2,length(r_))^2+dr_(3,length(r_))^2)) ' km'])
+% 
+% figure(5)
+% 
+% hold on
+% for i=1:norbits
+%     plot(deltaV_total(i).numorbits,deltaV_total(i).deltav_yi,'color',cc(i,:))
+%     legendinfo{i}=['Initial Separation (km): ' num2str(sqrt(3*dr_(1,i)^2))];
+% end
+% legend(legendinfo)
+% xlabel('Number of Orbits Until Rendezvous')
+% ylabel('Initial Delta V in Local Y Direction (km/s)')
+% title(['Initial Delta Vy vs Number of Orbits Until Rendezvous, Starting Range between 0.001 km and ' num2str(sqrt(dr_(1,length(r_))^2+dr_(2,length(r_))^2+dr_(3,length(r_))^2)) ' km'])
+% 
+% figure(6)
+% 
+% hold on
+% for i=1:norbits
+%     plot(deltaV_total(i).numorbits,deltaV_total(i).deltav_yf,'color',cc(i,:))
+%     legendinfo{i}=['Initial Separation (km): ' num2str(sqrt(3*dr_(1,i)^2))];
+% end
+% legend(legendinfo)
+% xlabel('Number of Orbits Until Rendezvous')
+% ylabel('Final Delta V in Local Y Direction (km/s)')
+% title(['Fianl Delta Vy vs Number of Orbits Until Rendezvous, Starting Range between 0.001 km and ' num2str(sqrt(dr_(1,length(r_))^2+dr_(2,length(r_))^2+dr_(3,length(r_))^2)) ' km'])
+% 
+% 
+% figure(7)
+% 
+% hold on
+% for i=1:norbits
+%     plot(deltaV_total(i).numorbits,deltaV_total(i).deltav_z,'color',cc(i,:))
+%     legendinfo{i}=['Initial Separation (km): ' num2str(sqrt(3*dr_(1,i)^2))];
+% end
+% legend(legendinfo)
+% xlabel('Number of Orbits Until Rendezvous')
+% ylabel('Delta V in Local Z Direction (km/s)')
+% title(['Total Delta Vz vs Number of Orbits Until Rendezvous, Starting Range between 0.001 km and ' num2str(sqrt(dr_(1,length(r_))^2+dr_(2,length(r_))^2+dr_(3,length(r_))^2)) ' km'])
+% 
+% figure(8)
+% 
+% hold on
+% for i=1:norbits
+%     plot(deltaV_total(i).numorbits,deltaV_total(i).deltav_zi,'color',cc(i,:))
+%     legendinfo{i}=['Initial Separation (km): ' num2str(sqrt(3*dr_(1,i)^2))];
+% end
+% legend(legendinfo)
+% xlabel('Number of Orbits Until Rendezvous')
+% ylabel('Initial Delta V in Local Z Direction (km/s)')
+% title(['Initial Delta Vz vs Number of Orbits Until Rendezvous, Starting Range between 0.001 km and ' num2str(sqrt(dr_(1,length(r_))^2+dr_(2,length(r_))^2+dr_(3,length(r_))^2)) ' km'])
+% 
+% figure(9)
+% 
+% hold on
+% for i=1:norbits
+%     plot(deltaV_total(i).numorbits,deltaV_total(i).deltav_zf,'color',cc(i,:))
+%     legendinfo{i}=['Initial Separation (km): ' num2str(sqrt(3*dr_(1,i)^2))];
+% end
+% legend(legendinfo)
+% xlabel('Number of Orbits Until Rendezvous')
+% ylabel('Final Delta V in Local Z Direction (km/s)')
+% title(['Final Delta Vz vs Number of Orbits Until Rendezvous, Starting Range between 0.001 km and ' num2str(sqrt(dr_(1,length(r_))^2+dr_(2,length(r_))^2+dr_(3,length(r_))^2)) ' km'])
+% 
+% figure(10)
 
 hold on
 for i=1:norbits
@@ -280,7 +293,7 @@ end
 legend(legendinfo)
 xlabel('Number of Orbits Until Rendezvous')
 ylabel('Total Delta V (km/s)')
-title(['Total Delta V vs Number of Orbits Until Rendezvous, Starting Displacement of ' num2str(sqrt(dr_(1,length(Ra))^2+dr_(2,length(Ra))^2+dr_(3,length(Ra))^2)) ' km'])
+% title(['Total Delta V vs Number of Orbits Until Rendezvous, Starting Displacement of ' num2str(sqrt(dr_(1,norbits)^2+dr_(2,norbits)^2+dr_(3,norbits)^2)) ' km'])
 
     
 

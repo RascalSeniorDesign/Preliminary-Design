@@ -1,4 +1,4 @@
-function [dr_realtime,dv_realtime,x,y,z,dx,dy,dz,dx_realtime,dy_realtime,dz_realtime,x_realtime,y_realtime,z_realtime,theta,T] = orbits_plot(r_,v_,dr_,dv_,orbitnumber)
+function [dr_realtime,dv_realtime,x,y,z,dx,dy,dz,dx_realtime,dy_realtime,dz_realtime,x_realtime,y_realtime,z_realtime,theta,T,e] = orbits_plot(r_,v_,dr_,dv_,orbitnumber)
 %=======================Rascal Senior Design===============================
 %============================RCL-C-NAV3====================================
 %=======================Author: Tom Moline=================================
