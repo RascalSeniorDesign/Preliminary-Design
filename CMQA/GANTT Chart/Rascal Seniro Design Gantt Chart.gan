@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="Rascal Senior Desgin" company="SSRL" webLink="https://sites.google.com/a/slu.edu/aeng-senior-design/team-websites/rascal" view-date="2013-08-01" view-index="0" gantt-divider-location="564" resource-divider-location="300" version="2.0">
+<?xml version="1.0" encoding="UTF-8"?><project name="Rascal Senior Desgin" company="SSRL" webLink="https://sites.google.com/a/slu.edu/aeng-senior-design/team-websites/rascal" view-date="2013-07-01" view-index="0" gantt-divider-location="564" resource-divider-location="300" version="2.0">
     <description><![CDATA[GANTT Chart for Rascal Senior Design Project 1st and 2nd semester]]></description>
-    <view zooming-state="default:9" id="gantt-chart"/>
+    <view zooming-state="default:10" id="gantt-chart"/>
     <view id="resource-table">
         <field id="0" name="Name" width="50" order="0"/>
         <field id="1" name="Default role" width="50" order="1"/>
@@ -67,37 +67,30 @@
             <task id="349" name="Event Time Line Plan Second Revision" color="#8cb6ce" meeting="false" start="2013-11-11" duration="9" complete="0" expand="true"/>
             <task id="351" name="Final Mission Succes Criterea Checklist" color="#8cb6ce" meeting="false" start="2013-11-11" duration="16" complete="0" expand="true"/>
         </task>
-        <task id="237" name="Preliminary Budgets" color="#990099" meeting="false" start="2014-01-13" duration="16" complete="0" expand="true">
-            <task id="239" name="Mass Budget" color="#990099" meeting="false" start="2014-01-13" duration="16" complete="0" expand="true"/>
-            <task id="241" name="Link Budget" color="#990099" meeting="false" start="2014-01-13" duration="16" complete="0" expand="true"/>
-            <task id="244" name="Power Budget" color="#990099" meeting="false" start="2014-01-13" duration="16" complete="0" expand="true"/>
-            <task id="294" name="Data Budget" color="#990099" meeting="false" start="2014-01-13" duration="16" complete="0" expand="true"/>
-        </task>
         <task id="139" name="Final Report Documentation Process" color="#3333ff" meeting="false" start="2013-10-13" duration="54" complete="0" expand="true"/>
         <task id="265" name="Preliminary Design Review (PDR)" color="#990000" meeting="true" start="2013-12-06" duration="1" complete="0" priority="4" expand="false">
             <notes><![CDATA[Includes mass budgets, advanced CONOPS, configuration designs, etc.]]></notes>
         </task>
-        <task id="259" name="Preliminary Satellite Attachment Configuration Design" color="#ffff00" meeting="false" start="2014-01-13" duration="19" complete="0" expand="true">
-            <task id="258" name="Preliminary Baseplate Orientation Plan" color="#99ff33" meeting="false" start="2014-01-13" duration="19" complete="0" expand="false"/>
-            <task id="257" name="Preliminary Separtion Reaction Calculations" color="#99ff33" meeting="false" start="2014-01-13" duration="19" complete="0" expand="false"/>
+        <task id="237" name="Preliminary Budgets" color="#990099" meeting="false" start="2014-01-23" duration="16" complete="0" expand="true">
+            <task id="239" name="Mass Budget" color="#990099" meeting="false" start="2014-01-23" duration="16" complete="0" expand="true"/>
+            <task id="241" name="Link Budget" color="#990099" meeting="false" start="2014-01-23" duration="16" complete="0" expand="true"/>
+            <task id="244" name="Power Budget" color="#990099" meeting="false" start="2014-01-23" duration="16" complete="0" expand="true"/>
+            <task id="294" name="Data Budget" color="#990099" meeting="false" start="2014-01-23" duration="16" complete="0" expand="true"/>
+            <task id="354" name="Volume Budget" color="#cc00cc" meeting="false" start="2014-01-23" duration="16" complete="0" expand="true"/>
         </task>
-        <task id="256" name="Preliminary Satellite Component List" color="#00cc99" meeting="false" start="2014-01-13" duration="47" complete="0" expand="true">
-            <task id="255" name="Commercial Off the Shelf Components Trade Studies" color="#00cc99" meeting="false" start="2014-01-13" duration="47" complete="0" expand="false"/>
-            <task id="254" name="Subsystem Component Breakdown" color="#00cc99" meeting="false" start="2014-01-13" duration="47" complete="0" expand="false"/>
+        <task id="259" name="Preliminary Satellite Attachment Configuration Design" color="#ffff00" meeting="false" start="2014-01-23" duration="16" complete="0" expand="true">
+            <task id="258" name="Preliminary Baseplate Orientation Plan" color="#99ff33" meeting="false" start="2014-01-23" duration="16" complete="0" expand="false"/>
+            <task id="257" name="Preliminary Separtion Reaction Calculations" color="#99ff33" meeting="false" start="2014-01-23" duration="16" complete="0" expand="false"/>
         </task>
-        <task id="252" name="Second Revision of Satellite Component List" color="#666666" meeting="false" start="2014-03-01" duration="31" complete="0" expand="true">
-            <task id="251" name="Second Revision of COTS Trade Studies" color="#666666" meeting="false" start="2014-03-01" duration="31" complete="0" expand="false"/>
-            <task id="250" name="Attitude Determination and Control Sensor Studies" color="#666666" meeting="false" start="2014-03-01" duration="31" complete="0" expand="false"/>
-            <task id="249" name="Image Processing Sensor Design Decisions" color="#666666" meeting="false" start="2014-03-01" duration="31" complete="0" expand="false"/>
-            <task id="248" name="Propulsion Unit Design Decisions" color="#666666" meeting="false" start="2014-03-01" duration="31" complete="0" expand="false"/>
-            <task id="247" name="Specific Subsystem Component Breakdown" color="#666666" meeting="false" start="2014-03-01" duration="31" complete="0" expand="false"/>
+        <task id="368" name="Propellant Tank Sizing and Feasibility" color="#ffff00" meeting="false" start="2014-01-23" duration="16" complete="0" expand="true">
+            <task id="370" name="Matlab Linear Orbit Analysis Refinement" color="#8cb6ce" meeting="false" start="2014-01-23" duration="16" complete="0" expand="true"/>
         </task>
-        <task id="246" name="Second Revision of Satellite Attachement Configuration Design" color="#660066" meeting="false" start="2014-02-01" duration="28" complete="0" expand="false"/>
-        <task id="341" name="Propulsion Unit Prototyping" color="#8cb6ce" meeting="false" start="2014-04-01" duration="30" complete="0" expand="true"/>
-        <task id="343" name="Structure Prototyping" color="#8cb6ce" meeting="false" start="2014-04-01" duration="30" complete="0" expand="true"/>
-        <task id="8" name="Critical Design Review (CDR)" color="#009933" meeting="true" start="2014-05-16" duration="1" complete="0" priority="4" expand="true">
-            <notes><![CDATA[Prototype designs, advanced budgets, final design configuration, etc.]]></notes>
-        </task>
+        <task id="356" name="Design Freeze" color="#ff0000" meeting="true" start="2014-02-11" duration="1" complete="0" expand="true"/>
+        <task id="358" name="AIAA Paper Abstracts Due" color="#ff0000" meeting="true" start="2014-02-21" duration="1" complete="0" expand="true"/>
+        <task id="360" name="AIAA Paper Submission Due" color="#ff0000" meeting="true" start="2014-03-14" duration="1" complete="0" expand="true"/>
+        <task id="362" name="AIAA Conference" color="#8cb6ce" meeting="false" start="2014-04-02" duration="3" complete="0" expand="true"/>
+        <task id="364" name="Final Presentation" color="#ff0000" meeting="true" start="2014-05-01" duration="1" complete="0" expand="true"/>
+        <task id="366" name="Final Paper Due" color="#ff0000" meeting="true" start="2014-05-08" duration="1" complete="0" expand="true"/>
     </tasks>
     <resources/>
     <allocations/>
