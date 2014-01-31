@@ -64,10 +64,10 @@ while i<Nmax
     phintemp=(phiup+philow)/2;
     if phintemp>10^-6
         c2=(1-cos(sqrt(phintemp)))/phintemp;
-        c3=(sqrt(phintemp)-sin(sqrt(phintemp)))/phintemp;
+        c3=(sqrt(phintemp)-sin(sqrt(phintemp)))/sqrt(phintemp^3);
     elseif phintemp<-10^-6
         c2=(1-cosh(sqrt(-phintemp)))/phintemp;
-        c3=(sqrt(-phintemp)-sinh(sqrt(-phintemp)))/-phintemp;
+        c3=(sqrt(-phintemp)-sinh(sqrt(-phintemp)))/sqrt((-phintemp)^3);
     else
         c2=.5;
         c3=1/6;
