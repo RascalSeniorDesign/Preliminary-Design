@@ -85,7 +85,13 @@ xlabel('Time (mins)')
 ylabel('Delta V (km/s)')
 
 figure(2)
+[x,y,z]=sphere;
+r=6378.1;
+hsurface=surf(r*x,r*y,r*z);
+set(hsurface,'FaceColor',[0 0 1], 'FaceAlpha', 0.99)
+hold on
 plot3(rtgtx,rtgty,rtgtz,rintx,rinty,rintz,rtransx,rtransy,rtransz)
+axis equal
 xlabel('X (km)')
 ylabel('Y (km)')
 zlabel('Z (km)')
