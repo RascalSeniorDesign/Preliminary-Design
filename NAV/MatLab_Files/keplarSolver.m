@@ -38,6 +38,7 @@ h=sqrt(sum(abs(h_).^2)); %Specific angular momentum magnitude
 
 Khat=[0 0 1];
 n_=cross(Khat,h_); %Nodal vector line
+n=sqrt(sum(abs(n_).^2));
 
 %==========================================================================
 %                       Find Keplarian Elements
@@ -61,8 +62,8 @@ Omega=acosd(n_(1)/n); %RAAN, deg
 if n_(2)<0
     Omega=360-Omega; %Correction for quadrent change
 end
-omega=acosd(dot(n_,r0_)/(n*e)); %Argument of perigee, deg
-if e_(3)>0
+omega=acosd(dot(n_,e_)/(n*e)); %Argument of perigee, deg
+if e_(3)<0
     omega=360-omega;
 end
 theta=acosd(dot(e_,r0_)/(r0*e)); %True Anomoly
