@@ -37,6 +37,11 @@ tm=1; %Taking the Short Path
 deltaVa_=vtransa_-vint_;
 deltaVb_=vtgtb_-vtransb_;
 
+% deltaVa=sqrt(sum(abs(deltaVa_).^2));
+% deltaVb=sqrt(sum(abs(deltaVb_).^2));
+
+% totalDeltaV=deltaVa+deltaVb;
+
 %==========================================================================
 %                     Find Keps for Transfer Orbit
 %==========================================================================
