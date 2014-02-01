@@ -22,15 +22,16 @@ function [r_,v_] = keplarSolver(r0_,v0_,tf)
 %                       Initialize Variables
 %==========================================================================
 r0_=r0_./6378.1; %Convert from km to canonical distance, DU
-v0_=v0_./6378.1; %Convert from km/s to DU/TU
+v0_=v0_./7.9053838; %Convert from km/s to DU/TU
 r0=sqrt(sum(abs(r0_).^2)); %Initial displacement magnitude
 v0=sqrt(sum(abs(v0_).^2)); %Initial velocity magnitude
-
+tf=tf/13.446849;
 %==========================================================================
 %                       Define Universal Variables
 %==========================================================================
-zi=(v0^2/2)-(1/r0); %Energy
-alpha=-v0^2+(2/r0); %Universal variable, replaces eccentricity, DU^-1
+zi=v0^2/2-1/r0;
+a=-1/(2*zi);
+alpha=1/a; %Universal variable, replaces eccentricity, DU^-1
 
 if alpha>0.000001 %For circular or elliptical case
     xi0=tf*alpha;
@@ -45,7 +46,7 @@ elseif abs(alpha)<0.000001 %For parabolic case
     xi0=sqrt(p)*2*cotd(2*w);
 elseif alpha<-0.000001 %For hyperbolic case
     a=1/alpha;
-    x0=sign(tf)*sqrt(-a)*log((-2*alpha*tf)/(dot(r0_,v0_)+sign(tf)*sqrt(-a)...
+    xi0=sign(tf)*sqrt(-a)*log((-2*alpha*tf)/(dot(r0_,v0_)+sign(tf)*sqrt(-a)...
         *(1-r0*alpha)));
 end
 
@@ -69,7 +70,7 @@ while i<Nmax
         c3=1/6;
     end
     r=xi0^2*c2+dotrv0*xi0*(1-psi*c3)+r0*(1-psi*c2);
-    xi1=xi0+(tf-xi0^3*cr-dotrv0*xi0^2*c2-r0*xi0*(1-psi*cr))/r;
+    xi1=xi0+(tf-xi0^3*c3-dotrv0*xi0^2*c2-r0*xi0*(1-psi*c3))/r;
     if abs(xi1-xi0)<10^-6
         break
     else
@@ -81,7 +82,7 @@ end
 %==========================================================================
 %                               Find r_ and v_
 %==========================================================================
-f=1-(xi^2/r0)*c2;
+f=1-(xi1^2/r0)*c2;
 g=tf-xi1^3*c3;
 gdot=1-(xi1^2/r)*c2;
 fdot=(1/(r*r0))*xi1*(psi*c3-1);
