@@ -1,5 +1,5 @@
 function [p,a,e,i,Omega,omega,theta] = keplarElements(r0_,v0_)
-%The keplarSolver function finds the keplarian elements associated with the
+%The keplarElements function finds the keplarian elements associated with 
 %position and velocity vectors (r0_, v0_) at a particular point in time.
 %These parameters include the semiparameter, semi-major axis, eccentricity,
 %inclination, right ascension of the ascending node, argument of perigee,
@@ -20,6 +20,7 @@ function [p,a,e,i,Omega,omega,theta] = keplarElements(r0_,v0_)
 %      theta     True Anamoly                  Scalar             deg
 %==========================================================================
 %Initial Release, keplarSolver.m, Tom Moline, 1/31/2014
+%Fixed Bugs, keplarElements.m, Tom Moline, 1/31/2014
 
 %Begin Code
 
