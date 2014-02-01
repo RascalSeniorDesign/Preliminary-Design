@@ -37,6 +37,10 @@ deltaVaz=zeros(1,length(tf));
 deltaVbx=zeros(1,length(tf));%X, Y, and Z components of final deltaV
 deltaVby=zeros(1,length(tf));
 deltaVbz=zeros(1,length(tf));
+rtransx=zeros(1,length(tf));
+rtransy=zeros(1,length(tf));
+rtransz=zeros(1,length(tf));
+[deltaVatemp1_,deltaVbtemp2_] = targetFinder(rint_,rtgt_,vint_,vtgt_,tf(5000));
 
 %==========================================================================
 %        Find Orbit Positions/Velocities and Calculate Transfer DeltaV
@@ -45,12 +49,16 @@ for i=1:length(tf)
     [deltaVatemp_,deltaVbtemp_] = targetFinder(rint_,rtgt_,vint_,vtgt_,tf(i));
     [rtgttemp_,vtgttemp_] = keplarSolver(rtgt_,vtgt_,tf(i));
     [rinttemp_,vinttemp_] = keplarSolver(rint_,vint_,tf(i));
+    [rtranstemp_,vtranstemp_] = keplarSolver(rint_,(vint_+deltaVatemp1_),tf(i));
     rtgtx(i)=rtgttemp_(1);
     rtgty(i)=rtgttemp_(2);
     rtgtz(i)=rtgttemp_(3);
     rintx(i)=rinttemp_(1);
     rinty(i)=rinttemp_(2);
     rintz(i)=rinttemp_(3);
+    rtransx(i)=rtranstemp_(1);
+    rtransy(i)=rtranstemp_(2);
+    rtransz(i)=rtranstemp_(3);
     deltaVax(i)=deltaVatemp_(1);
     deltaVay(i)=deltaVatemp_(2);
     deltaVaz(i)=deltaVatemp_(3);
@@ -77,7 +85,7 @@ xlabel('Time (mins)')
 ylabel('Delta V (km/s)')
 
 figure(2)
-plot3(rtgtx,rtgty,rtgtz,rintx,rinty,rintz)
+plot3(rtgtx,rtgty,rtgtz,rintx,rinty,rintz,rtransx,rtransy,rtransz)
 xlabel('X (km)')
 ylabel('Y (km)')
 zlabel('Z (km)')
