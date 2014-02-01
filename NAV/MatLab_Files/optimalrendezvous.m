@@ -1,4 +1,4 @@
-function deltaV = optimalRendezvous(x0, t0, xf, tf, dVtime, n)
+function deltaV = optimalrendezvous(x0, t0, xf, tf, dVtime, n)
 % deltaV = optimalRendezvous(x0, t0, xf, tf, dVtime, n) computes the 
 % impulsive thrusts for optimal transfer from x0 (at time t0) to xf  
 % (at time tf) given thrusts at the time vector dVtime.
