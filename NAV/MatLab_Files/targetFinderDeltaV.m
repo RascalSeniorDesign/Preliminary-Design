@@ -40,17 +40,24 @@ deltaVbz=zeros(1,length(tf));
 rtransx=zeros(1,length(tf));
 rtransy=zeros(1,length(tf));
 rtransz=zeros(1,length(tf));
-[deltaVatemp1_,deltaVbtemp2_] = targetFinder(rint_,rtgt_,vint_,vtgt_,tf(5000));
+[deltaVatemp1_,deltaVbtemp2_] = targetFinder(rint_,rtgt_,vint_,vtgt_,tf(2000),1);
 
 %==========================================================================
 %        Find Orbit Positions/Velocities and Calculate Transfer DeltaV
 %==========================================================================
 for i=1:length(tf)
-    [deltaVatemp_,deltaVbtemp_] = targetFinder(rint_,rtgt_,vint_,vtgt_,tf(i));
+    tm=1;
+    [deltaVatempshort_,deltaVbtempshort_] = targetFinder(rint_,rtgt_,vint_,vtgt_,tf(i),tm);
+    tm=-1;
+    [deltaVatemplong_,deltaVbtemplong_] = targetFinder(rint_,rtgt_,vint_,vtgt_,tf(i),tm);
+    deltaVatempshortmag=sqrt(sum(abs(deltaVatempshort_).^2));
+    deltaVatemplongmag=sqrt(sum(abs(deltaVatemplong_).^2));
+    deltaVbtempshortmag=sqrt(sum(abs(deltaVbtempshort_).^2));
+    deltaVbtemplongmag=sqrt(sum(abs(deltaVbtemplong_).^2));
     [rtgttemp_,vtgttemp_] = keplarSolver(rtgt_,vtgt_,tf(i));
     [rinttemp_,vinttemp_] = keplarSolver(rint_,vint_,tf(i));
     [rtranstemp_,vtranstemp_] = keplarSolver(rint_,(vint_+deltaVatemp1_),tf(i));
-    rtgtx(i)=rtgttemp_(1);
+    rtgtx(i)=rtgttemp_(1); %Fill position/deltaV vector components
     rtgty(i)=rtgttemp_(2);
     rtgtz(i)=rtgttemp_(3);
     rintx(i)=rinttemp_(1);
@@ -59,12 +66,21 @@ for i=1:length(tf)
     rtransx(i)=rtranstemp_(1);
     rtransy(i)=rtranstemp_(2);
     rtransz(i)=rtranstemp_(3);
-    deltaVax(i)=deltaVatemp_(1);
-    deltaVay(i)=deltaVatemp_(2);
-    deltaVaz(i)=deltaVatemp_(3);
-    deltaVbx(i)=deltaVbtemp_(1);
-    deltaVby(i)=deltaVbtemp_(2);
-    deltaVbz(i)=deltaVbtemp_(3);
+    if deltaVatempshortmag<deltaVatemplongmag
+        deltaVax(i)=deltaVatempshort_(1);
+        deltaVay(i)=deltaVatempshort_(2);
+        deltaVaz(i)=deltaVatempshort_(3);
+        deltaVbx(i)=deltaVbtempshort_(1);
+        deltaVby(i)=deltaVbtempshort_(2);
+        deltaVbz(i)=deltaVbtempshort_(3);
+    else
+        deltaVax(i)=deltaVatemplong_(1);
+        deltaVay(i)=deltaVatemplong_(2);
+        deltaVaz(i)=deltaVatemplong_(3);
+        deltaVbx(i)=deltaVbtemplong_(1);
+        deltaVby(i)=deltaVbtemplong_(2);
+        deltaVbz(i)=deltaVbtemplong_(3);
+    end
 end
 
 %==========================================================================
@@ -80,18 +96,21 @@ deltaVtotal=deltaVbmag+deltaVamag;
 %==========================================================================
 
 figure(1)
-plot(tf,deltaVamag,tf,deltaVtotal)
-xlabel('Time (mins)')
+plot(tf,deltaVamag,tf,deltaVtotal) %deltaV plot, km/s
+grid on
+set(gca,'GridLineStyle','-')
+xlabel('Transfer Time (mins)')
 ylabel('Delta V (km/s)')
 
+
 figure(2)
-[x,y,z]=sphere;
-r=6378.1;
-hsurface=surf(r*x,r*y,r*z);
-set(hsurface,'FaceColor',[0 0 1], 'FaceAlpha', 0.99)
-hold on
+[x,y,z]=sphere; %Creates unit sphere, to represent Earth
+r=6378.1; %Earth radius, km
+hsurface=surf(r*x,r*y,r*z); %fills in shpere with grid
+set(hsurface,'FaceColor',[0 0 0], 'FaceAlpha', 0.5) %Black, transperency
+hold on %Allows other data to be plotted
 plot3(rtgtx,rtgty,rtgtz,rintx,rinty,rintz,rtransx,rtransy,rtransz)
-axis equal
+axis equal %maintains constant aspect ration (avoids distortions)
 xlabel('X (km)')
 ylabel('Y (km)')
 zlabel('Z (km)')

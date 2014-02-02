@@ -1,4 +1,4 @@
-function [deltaVa_,deltaVb_] = targetFinder(rint_,rtgt_,vint_,vtgt_,tf)
+function [deltaVa_,deltaVb_] = targetFinder(rint_,rtgt_,vint_,vtgt_,tf,tm)
 %The targetFinder function takes in the current position and velocities of
 %a interceptor and target spacecraft and a time for which to complete a
 %transfer and outputs the deltaV required to accomplish said maneuver.
@@ -11,8 +11,10 @@ function [deltaVa_,deltaVb_] = targetFinder(rint_,rtgt_,vint_,vtgt_,tf)
 %      vint_     Interceptr Velocity vector   3-vector            km/s
 %      vtgt_     Target Velocity vector       3-vector            km/s
 %      tf        Transfer Time                Scalar              s
+%      tm        Long or Short Way            Scalar              +1 or -1
 %==========================================================================
 %Initial Release, targetFinder.m, Tom Moline, 1/31/2014
+%Added Input, targetFinder.m, Tom Moline, 2/1/2014
 
 %Begin Code
 
@@ -25,8 +27,6 @@ function [deltaVa_,deltaVb_] = targetFinder(rint_,rtgt_,vint_,vtgt_,tf)
 %==========================================================================
 %        Calculate the Transfer Orbit Initial and Final Velocities
 %==========================================================================
-
-tm=1; %Taking the Short Path
 
 [vtransa_,vtransb_]=lambertSolver(rint_,rtgtb_,tf,tm);
 
