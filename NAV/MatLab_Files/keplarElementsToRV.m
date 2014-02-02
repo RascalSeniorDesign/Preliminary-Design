@@ -36,8 +36,8 @@ vper_=[-sqrt(1/p)*sind(theta) sqrt(1/p)*(e+cosd(theta)) 0];
 %==========================================================================
 %                      Convert to Geocentric Frame
 %==========================================================================
-transform=[cosd(Omega)*cosd(omega)-sind(Omega)*sind(omega)*sind(i),...%1,1
-     -cosd(Omega)*sind(omega)-sind(Omega)*cosde(omega)*cosd(i),...%(1,2)
+transform=[cosd(Omega)*cosd(omega)-sind(Omega)*sind(omega)*cosd(i),...%1,1
+     -cosd(Omega)*sind(omega)-sind(Omega)*cosd(omega)*cosd(i),...%(1,2)
      sind(Omega)*sind(i);...%(1,3)
      sind(Omega)*cosd(omega)+cosd(Omega)*sind(omega)*cosd(i),...%(2,1)
      -sind(Omega)*sind(omega)+cosd(Omega)*cosd(omega)*cosd(i),...%(2,2)
