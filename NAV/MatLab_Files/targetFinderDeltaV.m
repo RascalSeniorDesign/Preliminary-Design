@@ -24,8 +24,8 @@ rint_=[5328.7862 4436.1273 101.4720]; %Interceptor Position, km
 %==========================================================================
 %             Define Transfer Times and Pre-Allocate for Speed
 %==========================================================================
-tf=linspace(5,250,100); %Transfer time, minutes
-td=linspace(0,250,25);
+tf=linspace(5,250,200); %Transfer time, minutes
+td=linspace(0,250,40);
 rtgtx=zeros(1,length(tf)); %X, Y, and Z components of target position
 rtgty=zeros(1,length(tf));
 rtgtz=zeros(1,length(tf));
@@ -41,7 +41,22 @@ deltaVbz=zeros(length(td),length(tf));
 rtransx=zeros(1,length(tf));
 rtransy=zeros(1,length(tf));
 rtransz=zeros(1,length(tf));
-% [deltaVatemp1_,deltaVbtemp2_] = targetFinder(rint_,rtgt_,vint_,vtgt_,tf(9000),-1);
+[deltaVatemp1_,deltaVbtemp2_] = targetFinder(rint_,rtgt_,vint_,vtgt_,tf(60),-1);
+
+for i=1:length(tf)
+    [rtgttemp_,vtgttemp_] = keplarSolver(rtgt_,vtgt_,tf(i));
+    [rinttemp_,vinttemp_] = keplarSolver(rint_,vint_,tf(i));
+    [rtranstemp_,vtranstemp_] = keplarSolver(rint_,(vint_+deltaVatemp1_),tf(i));
+    rtgtx(i)=rtgttemp_(1); %Fill position/deltaV vector components
+    rtgty(i)=rtgttemp_(2);
+    rtgtz(i)=rtgttemp_(3);
+    rintx(i)=rinttemp_(1);
+    rinty(i)=rinttemp_(2);
+    rintz(i)=rinttemp_(3);
+    rtransx(i)=rtranstemp_(1);
+    rtransy(i)=rtranstemp_(2);
+    rtransz(i)=rtranstemp_(3);
+end
 
 %==========================================================================
 %        Find Orbit Positions/Velocities and Calculate Transfer DeltaV
@@ -100,12 +115,13 @@ deltaVtotal=deltaVbmag+deltaVamag;
 %                             Plot Results
 %==========================================================================
 
-mesh(tf,td,deltaVtotal,'EdgeColor','black')
-axis xy
+figure(1)
+mesh(tf,td,deltaVtotal,'EdgeColor','black','FaceColor','None')
+view(10,20)
+set(gca,'GridLineStyle','-')
 xlabel('Transfer Time (mins)')
 ylabel('Delay Time (mins)')
 zlabel('Total Delta V (km/s)')
-
 
 % figure(1)
 % plot(tf,deltaVamag,tf,deltaVtotal) %deltaV plot, km/s
@@ -114,18 +130,17 @@ zlabel('Total Delta V (km/s)')
 % xlabel('Transfer Time (mins)')
 % ylabel('Delta V (km/s)')
 
-
-% figure(2)
-% [x,y,z]=sphere; %Creates unit sphere, to represent Earth
-% r=6378.1; %Earth radius, km
-% hsurface=surf(r*x,r*y,r*z); %fills in shpere with grid
-% set(hsurface,'FaceColor',[0 0 0], 'FaceAlpha', 0.5) %Black, transperency
-% hold on %Allows other data to be plotted
-% plot3(rtgtx,rtgty,rtgtz,rintx,rinty,rintz,rtransx,rtransy,rtransz)
-% axis equal %maintains constant aspect ration (avoids distortions)
-% xlabel('X (km)')
-% ylabel('Y (km)')
-% zlabel('Z (km)')
+figure(2)
+[x,y,z]=sphere; %Creates unit sphere, to represent Earth
+r=6378.1; %Earth radius, km
+hsurface=surf(r*x,r*y,r*z); %fills in shpere with grid
+set(hsurface,'FaceColor',[0 0 0], 'FaceAlpha', 0.5) %Black, transperency
+hold on %Allows other data to be plotted
+plot3(rtgtx,rtgty,rtgtz,rintx,rinty,rintz,rtransx,rtransy,rtransz)
+axis equal %maintains constant aspect ration (avoids distortions)
+xlabel('X (km)')
+ylabel('Y (km)')
+zlabel('Z (km)')
 
 
 
