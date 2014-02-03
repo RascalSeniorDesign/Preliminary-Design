@@ -73,18 +73,6 @@ for j=1:length(td)
         deltaVatemplongmag=sqrt(sum(abs(deltaVatemplong_).^2));
         deltaVbtempshortmag=sqrt(sum(abs(deltaVbtempshort_).^2));
         deltaVbtemplongmag=sqrt(sum(abs(deltaVbtemplong_).^2));
-%         [rtgttemp_,vtgttemp_] = keplarSolver(rtgt_,vtgt_,tf(i));
-%         [rinttemp_,vinttemp_] = keplarSolver(rint_,vint_,tf(i));
-%         [rtranstemp_,vtranstemp_] = keplarSolver(rint_,(vint_+deltaVatemp1_),tf(i));
-%         rtgtx(i)=rtgttemp_(1); %Fill position/deltaV vector components
-%         rtgty(i)=rtgttemp_(2);
-%         rtgtz(i)=rtgttemp_(3);
-%         rintx(i)=rinttemp_(1);
-%         rinty(i)=rinttemp_(2);
-%         rintz(i)=rinttemp_(3);
-%         rtransx(i)=rtranstemp_(1);
-%         rtransy(i)=rtranstemp_(2);
-%         rtransz(i)=rtranstemp_(3);
         if deltaVatempshortmag<deltaVatemplongmag
             deltaVax(j,i)=deltaVatempshort_(1);
             deltaVay(j,i)=deltaVatempshort_(2);
@@ -123,16 +111,9 @@ xlabel('Transfer Time (mins)')
 ylabel('Delay Time (mins)')
 zlabel('Total Delta V (km/s)')
 
-% figure(1)
-% plot(tf,deltaVamag,tf,deltaVtotal) %deltaV plot, km/s
-% grid on
-% set(gca,'GridLineStyle','-')
-% xlabel('Transfer Time (mins)')
-% ylabel('Delta V (km/s)')
-
 figure(2)
 [x,y,z]=sphere; %Creates unit sphere, to represent Earth
-r=6378.1; %Earth radius, km
+r=6378.137; %Earth radius, km
 hsurface=surf(r*x,r*y,r*z); %fills in shpere with grid
 set(hsurface,'FaceColor',[0 0 0], 'FaceAlpha', 0.5) %Black, transperency
 hold on %Allows other data to be plotted

@@ -21,7 +21,7 @@ function [r_,v_] = keplarSolver(r0_,v0_,tf)
 %==========================================================================
 %                       Initialize Variables
 %==========================================================================
-r0_=r0_./6378.1; %Convert from km to canonical distance, DU
+r0_=r0_./6378.137; %Convert from km to canonical distance, DU
 v0_=v0_./7.9053838; %Convert from km/s to DU/TU
 r0=sqrt(sum(abs(r0_).^2)); %Initial displacement magnitude
 v0=sqrt(sum(abs(v0_).^2)); %Initial velocity magnitude
@@ -88,7 +88,7 @@ gdot=1-(xi1^2/r)*c2;
 fdot=(1/(r*r0))*xi1*(psi*c3-1);
 r_=f.*r0_+g.*v0_;
 v_=fdot.*r0_+gdot.*v0_;
-r_=r_.*6378.1; %Converting final position from canonical to km
+r_=r_.*6378.137; %Converting final position from canonical to km
 v_=v_.*7.9053838; %Converting final velocity from canonical to km/s
     
         
