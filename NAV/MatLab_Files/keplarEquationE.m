@@ -36,6 +36,7 @@ while i<Nmax
         i=i+1;
     end
 end
+E=Entemp;
     
     
     

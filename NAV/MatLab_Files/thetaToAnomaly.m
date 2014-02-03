@@ -1,4 +1,4 @@
-function [E,B,H] = thetaToAnomaly(e,theta)
+function [E] = thetaToAnomaly(e,theta)
 %The thetaToAnomaly function takes in the eccentricity and true anamoly and
 %finds the Eccentric, Parabolic, or Hyperbolic anamoly at that point.
 %
@@ -18,12 +18,12 @@ function [E,B,H] = thetaToAnomaly(e,theta)
 %==========================================================================
 %                       Find Eccentric Anamolies
 %==========================================================================
-if e<1.0
+% if e<1.0
     E=asind((sind(theta)*sqrt(1-e^2))/(1+e*cosd(theta))); %Ellipse
-elseif e==1.0
-    B=tand(theta/2); %Parabola
-else
-    H=asinhd((sind(theta)*sqrt(e^2-1))/(1+e*cosd(theta))); %Hyperbola
-end
+% elseif e==1.0
+%     B=tand(theta/2); %Parabola
+% else
+%     H=asinhd((sind(theta)*sqrt(e^2-1))/(1+e*cosd(theta))); %Hyperbola
+% end
 
 
