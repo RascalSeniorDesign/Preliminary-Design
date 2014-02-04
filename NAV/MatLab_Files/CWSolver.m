@@ -25,16 +25,18 @@ function [x,y,z,xdot,ydot,zdot] = CWSolver(x0,y0,z0,x0dot,y0dot,z0dot,rtgt,tf)
 %==========================================================================
 %                       Initialize Variables
 %==========================================================================
-x0=x0/6378.137;
-y0=y0/6378.137;
-z0=z0/6378.137;
-rtgt=rtgt/6378.137;
-x0dot=x0dot/7.9053838;
-y0dot=y0dot/7.9053838;
-z0dot=z0dot/7.9053838;
-tf=tf/13.446849;
+% x0=x0/6378.137;
+% y0=y0/6378.137;
+% z0=z0/6378.137;
+% rtgt=rtgt/6378.137;
+% x0dot=x0dot/7.9053838;
+% y0dot=y0dot/7.9053838;
+% z0dot=z0dot/7.9053838;
+% tf=tf/13.446849;
 
-omegatgt=sqrt(1/rtgt^3);
+tf=tf*60;
+
+omegatgt=sqrt(398600.5/rtgt^3);
 
 %==========================================================================
 %                       Update to tf Position
@@ -50,12 +52,14 @@ ydot=(6*omegatgt*x0+4*y0dot)*cos(omegatgt*tf)-2*x0dot*sin(omegatgt*tf)...
     -(6*omegatgt*x0+3*y0dot);
 zdot=-z0*omegatgt*sin(omegatgt*tf)+z0dot*cos(omegatgt*tf);
 
-x0=x0*6378.137;
-y0=y0*6378.137;
-z0=z0*6378.137;
-rtgt=rtgt*6378.137;
-x0dot=x0dot*7.9053838;
-y0dot=y0dot*7.9053838;
-z0dot=z0dot*7.9053838;
-tf=tf*13.446849;
+tf=tf/60;
+
+% x0=x0*6378.137;
+% y0=y0*6378.137;
+% z0=z0*6378.137;
+% rtgt=rtgt*6378.137;
+% x0dot=x0dot*7.9053838;
+% y0dot=y0dot*7.9053838;
+% z0dot=z0dot*7.9053838;
+% tf=tf*13.446849;
 end
