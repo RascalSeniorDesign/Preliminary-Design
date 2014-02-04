@@ -12,6 +12,9 @@
 
 %Begin Code
 
+clear
+clc
+
 %==========================================================================
 %             Define Target/Interceptor Positions/Velocities
 %==========================================================================
@@ -24,7 +27,7 @@ rint_=[5328.7862 4436.1273 101.4720]; %Interceptor Position, km
 %==========================================================================
 %             Define Transfer Times and Pre-Allocate for Speed
 %==========================================================================
-tf=linspace(5,250,200); %Transfer time, minutes
+tf=linspace(0,250,200); %Transfer time, minutes
 td=linspace(0,250,40);
 rtgtx=zeros(1,length(tf)); %X, Y, and Z components of target position
 rtgty=zeros(1,length(tf));
@@ -41,7 +44,7 @@ deltaVbz=zeros(length(td),length(tf));
 rtransx=zeros(1,length(tf));
 rtransy=zeros(1,length(tf));
 rtransz=zeros(1,length(tf));
-[deltaVatemp1_,deltaVbtemp2_] = targetFinder(rint_,rtgt_,vint_,vtgt_,tf(60),-1);
+[deltaVatemp1_,deltaVbtemp2_] = targetFinder(rint_,rtgt_,vint_,vtgt_,tf(110),-1);
 
 for i=1:length(tf)
     [rtgttemp_,vtgttemp_] = keplarSolver(rtgt_,vtgt_,tf(i));
@@ -122,6 +125,7 @@ axis equal %maintains constant aspect ration (avoids distortions)
 xlabel('X (km)')
 ylabel('Y (km)')
 zlabel('Z (km)')
+hold off
 
 
 
