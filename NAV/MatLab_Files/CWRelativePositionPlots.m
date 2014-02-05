@@ -1,35 +1,41 @@
 clear
 clc
 
-tf=linspace(5,250,100);
+tf=linspace(0,250,100);
+tp=linspace(5,250,100);
 
-x=zeros(length(tf),length(tf));
-y=zeros(length(tf),length(tf));
-z=zeros(length(tf),length(tf));
-xdot=zeros(length(tf),length(tf));
-ydot=zeros(length(tf),length(tf));
-zdot=zeros(length(tf),length(tf));
-deltaV=zeros(length(tf),length(tf));
+x=zeros(length(tf),length(tp));
+y=zeros(length(tf),length(tp));
+z=zeros(length(tf),length(tp));
+xdot=zeros(length(tf),length(tp));
+ydot=zeros(length(tf),length(tp));
+zdot=zeros(length(tf),length(tp));
+deltaV=zeros(length(tf),length(tp));
+x0dot=zeros(1,length(tp));
+y0dot=zeros(1,length(tp));
+z0dot=zeros(1,length(tp));
+
 
 rtgt=6378.137+580;
-x0=-100;
-y0=-100;
-z0=-100;
+x0=1000;
+y0=1000;
+z0=10000;
 % x0dot=-.1;
 % y0dot=-.04;
 % z0dot=-.02;
 
 for i=1:length(tf)
-    [x0dot,y0dot,z0dot] = CWDocking(x0,y0,z0,rtgt,tf(i));
-    for j=1:length(tf)
-        [x(i,j),y(i,j),z(i,j),xdot(i,j),ydot(i,j),zdot(i,j)] = CWSolver(x0,y0,z0,x0dot,y0dot,z0dot,rtgt,tf(j));
+    [x0dot(i),y0dot(i),z0dot(i)] = CWDocking(x0,y0,z0,rtgt,tf(i));
+    deltaV(i)=sqrt(abs(x0dot(i))^2+abs(y0dot(i))^2+abs(z0dot(i))^2);
+    for j=1:length(tp)
+        [x(i,j),y(i,j),z(i,j),xdot(i,j),ydot(i,j),zdot(i,j)] = CWSolver(x0,y0,z0,x0dot(i),y0dot(i),z0dot(i),rtgt,tp(j));
     end
 end
 
-% figure (1)
-% plot(tf,deltaV,tf,abs(xdot),tf,abs(ydot),tf,abs(zdot))
-% xlabel('Time of Transfer (min)')
-% ylabel('Delta V Required (min)')
+figure (1)
+plot(tf,deltaV,tf,x0dot,tf,y0dot,tf,z0dot)
+xlabel('Time of Transfer (min)')
+ylabel('Delta V Required (min)')
 
 % figure(2)
 % plot(tf,x,tf,y,tf,z)
@@ -43,10 +49,23 @@ end
 % ylabel('Relative Velocity (m/s)')
 % legend('dx','dy','dz')
 
-figure(1)
-mesh(tf,tf,y,'EdgeColor','black','FaceColor','None')
+figure(2)
+subplot(2,1,1)
+mesh(tf,tp,x,'EdgeColor','black','FaceColor','None')
+view(44,28)
 grid on
 set(gca,'GridLineStyle','-')
-xlabel('X (m)')
-ylabel('Y (m)')
-zlabel('Z (m)')
+subplot(2,1,2)
+mesh(tf,tp,y,'EdgeColor','black','FaceColor','None')
+view(44,28)
+grid on
+set(gca,'GridLineStyle','-')
+
+figure(3)
+mesh(tf,tp,z,'EdgeColor','black','FaceColor','None')
+view(44,28)
+grid on
+set(gca,'GridLineStyle','-')
+xlabel('Transfer Time (m)')
+ylabel('Plot Time (m)')
+zlabel('Relative Y Position (m)')

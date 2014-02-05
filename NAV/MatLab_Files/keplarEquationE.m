@@ -36,7 +36,7 @@ while i<Nmax
         i=i+1;
     end
 end
-E=Entemp;
+E=Entemp*180/pi;
     
     
     
