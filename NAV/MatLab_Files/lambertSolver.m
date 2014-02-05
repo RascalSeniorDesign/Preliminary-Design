@@ -25,8 +25,8 @@ function [v0_,v_] = lambertSolver(r0_,r_,tf,tm)
 %                       Initialize Variables
 %==========================================================================
 
-r0_=r0_./6378.1; %Convert from km to Distance Units (related to earth radi)
-r_=r_./6378.1;
+r0_=r0_./6378.137; %Convert from km to Distance Units (related to earth radi)
+r_=r_./6378.137;
 
 r0=sqrt(sum(abs(r0_).^2)); %Positon vector magnitudes, DU
 r=sqrt(sum(abs(r_).^2));
