@@ -1,4 +1,4 @@
-function [x,y,z,xdot,ydot,zdot] = CW2ECI(x0,y0,z0,x0dot,y0dot,z0dot,rtgt,tf)
+function [x,y,z,xdot,ydot,zdot] = CWSolver(x0,y0,z0,x0dot,y0dot,z0dot,rtgt,tf)
 %The CWSolver function takes in the intial realtive position and velocity
 %of an interceptor satellite relative to a target spacecraft that is in a
 %circular orbit defined by omegatgt. It outputs the relative positoin and 
