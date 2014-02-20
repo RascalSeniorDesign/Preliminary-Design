@@ -44,7 +44,7 @@ deltaVbz=zeros(length(td),length(tf));
 rtransx=zeros(1,length(tf));
 rtransy=zeros(1,length(tf));
 rtransz=zeros(1,length(tf));
-[deltaVatemp1_,deltaVbtemp2_] = targetFinder(rint_,rtgt_,vint_,vtgt_,tf(110),-1);
+[deltaVatemp1_,deltaVbtemp2_] = targetFinder(rint_,rtgt_,vint_,vtgt_,tf(200),-1);
 
 for i=1:length(tf)
     [rtgttemp_,vtgttemp_] = keplarSolver(rtgt_,vtgt_,tf(i));
