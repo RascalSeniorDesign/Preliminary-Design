@@ -1,4 +1,4 @@
-function [dr_,dv_] = CWPrussing(dr0_,dv0_,rtgt0_,t)
+function [deltaVi,deltaVf] = CWPrussingRendezvousSolver(dr0_,dv0_,rtgt0_,drf_,t)
 %The CWPrussing function takes in the initial displacement and velocity
 %vectors of two spacecraft, as well as the inertial position of a target
 %spacecraft and time of transfer, and finds the deltaV necessary for
@@ -24,6 +24,7 @@ t=t/806.811;
 rtgt0_=rtgt0_./6378.137;
 dr0_=dr0_./6378.137;
 dv0_=dv0_./7.9053838;
+drf_=drf_./6378.137;
 rtgt0=sqrt(sum(abs(rtgt0_).^2));
 n=sqrt(1/rtgt0^3);
 s=sin(n*t);
@@ -48,11 +49,7 @@ phi=[4-3*c 0 0 s/n (2/n)*(1-c) 0;...
 %                       Find Delta dr, dv
 %==========================================================================
 
-dr_=M*dr0_+N*dv0_;
-dv_=S*dr0_+T*dv0_;
-dr_=dr_*6378.137;
-dv_=dv_*7.9053838;
-
-% deltaVi=(-inv(N)*M)*dr0_-dv0_;
-% deltaVf=((T\N)*M-S)*dr0_;
- 
+deltaVi=(-inv(N)*(drf_-M*dr0_))-dv0_;
+deltaVf=-(S*dr0_+T*(dv0_+deltaVi));
+deltaVi=deltaVi*7.9053838;
+deltaVf=deltaVf*7.9053838;
