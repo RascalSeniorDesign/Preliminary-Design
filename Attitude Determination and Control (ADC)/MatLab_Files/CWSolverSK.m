@@ -1,30 +1,36 @@
-%CWPrussingRendezvousSolverTester
-%Rev -
-%Last Edited: 3/3/2014, Tom Moline
-%Functions Called: CWPrussingRendezvousSolver.m
-
-%Desription================================================================
-%The CWPrussingRendezvvousSolverTester script assigns varying levels of
-%initial and final displacement between two spacecraft and plots the result
-%of varying the initial relative velocity between tehm
+function CWSolverSK(drFinalMin,drFinalMax,dv0Max,Nr,Nv,Nt,rtgt_,tmax)
+%The CWSolverSK function takes in information on the maximum initial
+%separtion relative velocity and desired relative final positoin of two s/c
+%and, based on the time over which one wants to simulate, plots Nr cases of
+%total deltaV plots to station keep at varous final relative positons.
+%
 %==========================================================================
+% Variable Name  Variable Description      Variable Type    Variable Units
+%==========================================================================
+%      drFinalMin Min Final Rel Pos            Scalar             km
+%      drFinalMax Max Final Rel Pos            Scalar             km
+%      dv0Max     Max Initial Rel Vel          Scalar             km/s
+%      Nr         Number of Position Cases     Scalar           Unitless
+%      Nv         Number of Velocity Cases     Scalar           Unitless
+%      Nt         Number of Time Cases         Scalar           Unitless
+%      rtgt_      Inertial Target Position     3x1 Vector         km
+%      tmax       Simulation Time              Sclarl             mins
+
+%Initial Release, thetaToAnamoly.m, Tom Moline, 2/01/2014
 
 %Begin Code
 
-%Clear Screen and Variables
-clear
-clc
-
-%Initialize Variables
-drfx=linspace(.01,10,5); %Final separtion vector, km
+%==========================================================================
+%                       Initialize Variables
+%==========================================================================
+drfx=linspace(drFinalMin,drFinalMax,Nr); %Final separtion vector, km
 drfmatrix=[drfx;drfx;drfx]; %Matrix of final separation vectors
 field1='deltaVtotSK'; %Structre field for total deltaV cases
-dvx0=linspace(0.001,0.01,20); %Initial reltative velocity vector, km/s
+dvx0=linspace(0.001,dv0Max,Nv); %Initial reltative velocity vector, km/s
 dvmatrix0=[dvx0;dvx0;dvx0]; %Initial reltative velocity matrix, km/s
 dvmag=sqrt(sum(abs(dvmatrix0).^2));
 dr0_=[0;0;0]; %Case for s/c starting out together
-rtgt_=[6697.4756; 1794.5831; 0.0]; %Target s/c positon, km
-t=linspace(60*.1,60*300,200); %Simultation time, s
+t=linspace(60*.1,60*tmax,Nt); %Simultation time, s
 deltaV=struct(field1,{}); %Create total deltaV structure
 deltaVvoxSK=zeros(length(dvx0),length(drfx)); %Pre-Allocate for speed
 
@@ -62,8 +68,3 @@ title(s)
 colorbar
 legend(legendinfo)
 view(18,26)
-
-
-
-
-
