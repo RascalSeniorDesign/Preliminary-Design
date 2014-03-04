@@ -1,4 +1,4 @@
-function CWSolverSK(drFinalMin,drFinalMax,dv0Max,Nr,Nv,Nt,rtgt_,tmax)
+function CWSolverSK(dr0,Nt,rtgt_,tmax)
 %The CWSolverSK function takes in information on the maximum initial
 %separtion relative velocity and desired relative final positoin of two s/c
 %and, based on the time over which one wants to simulate, plots Nr cases of
@@ -16,55 +16,39 @@ function CWSolverSK(drFinalMin,drFinalMax,dv0Max,Nr,Nv,Nt,rtgt_,tmax)
 %      rtgt_      Inertial Target Position     3x1 Vector         km
 %      tmax       Simulation Time              Sclarl             mins
 
-%Initial Release, thetaToAnamoly.m, Tom Moline, 2/01/2014
+%Initial Release, CWSolverSK.m, Tom Moline, 3/3/2014
 
 %Begin Code
 
 %==========================================================================
 %                       Initialize Variables
 %==========================================================================
-drfx=linspace(drFinalMin,drFinalMax,Nr); %Final separtion vector, km
-drfmatrix=[drfx;drfx;drfx]; %Matrix of final separation vectors
-field1='deltaVtotSK'; %Structre field for total deltaV cases
-dvx0=linspace(0.001,dv0Max,Nv); %Initial reltative velocity vector, km/s
-dvmatrix0=[dvx0;dvx0;dvx0]; %Initial reltative velocity matrix, km/s
-dvmag=sqrt(sum(abs(dvmatrix0).^2));
-dr0_=[0;0;0]; %Case for s/c starting out together
+dv0_=[0;0;0];
+dr0mag=sqrt(sum(abs(dr0).^2));
+drf=dr0;
 t=linspace(60*.1,60*tmax,Nt); %Simultation time, s
-deltaV=struct(field1,{}); %Create total deltaV structure
-deltaVvoxSK=zeros(length(dvx0),length(drfx)); %Pre-Allocate for speed
+deltaVSK=zeros(length(dr0mag),length(dr0mag)); %Pre-Allocate for speed
 
-%Fill deltV structure field with diffrent values for each drfx case within
-%the drfmatrix.
-for k=1:length(drfx)
-    for i=1:length(dvx0)
-        for j=1:length(t)
-            %Call CWPrussingRendezvousSolver Function
-            [deltaViSK,deltaVfSK]=CWPrussingRendezvousSolver(dr0_,dvmatrix0(:,i),rtgt_,drfmatrix(:,k),t(j));
-            deltaVvoxSK(i,j)=sum(sqrt((abs(deltaViSK)+abs(deltaVfSK)).^2)); %Find deltaV for each case
-        if deltaVvoxSK(i,j)>=.15 %Ignore values greater than 0.150 km/s
-            deltaVvoxSK(i,j)=.15;
-        end
+for i=1:length(dr0mag)
+    for j=1:length(t)
+        %Call CWPrussingRendezvousSolver Function
+        [deltaVi,deltaVf]=CWPrussingRendezvousSolver(dr0(:,i),dv0_,rtgt_,drf(:,i),t(j));
+        deltaVSK(i,j)=sum(sqrt((abs(deltaVi)+abs(deltaVf)).^2)); %Find deltaV for each case
+        if deltaVSK(i,j)>=.05 %Ignore values greater than 0.150 km/s
+            deltaVSK(i,j)=.05;
         end
     end
-    deltaV(k).deltaVtotSK=deltaVvoxSK(:,:); %Assign deltaV to strcuture
-end %Move to next drfx value
+end
 
 %Plot Results
-for i=1:length(drfx)
-    hold on;
-    surf(t./60,dvmag*1000,deltaV(i).deltaVtotSK*1000,'FaceAlpha',0.6)
-    legendinfo{i}=['Final Relative Position (m): ' num2str(drfx(i)*1000)];
-end
-hold off
+surf(t./60,dr0mag*1000,deltaVSK*1000,'FaceAlpha',0.6)
 grid on
 set(gca,'GridLineStyle','-')
 xlabel('Transfer Time (min)')
-ylabel('Initial Relative Velocity Magnitude (m/s)')
+ylabel('Initial Relative Position Magnitude (m)')
 zlabel('Total Delta V (m/s)')
-s=sprintf('Total DeltaV Required for Separaton Relative Velociity Magnitudes Between %.2f m/s and %.2f m/s',1000*dvmag(1),...
-    1000*dvmag(length(dvx0)));
+s=sprintf('Total DeltaV Required for Station Keeping at Initial Relative Displacements between %.2f m/s and %.2f m/s',1000*dr0mag(1),...
+    1000*dr0mag(length(dr0mag)));
 title(s)
-colorbar
-legend(legendinfo)
 view(18,26)
+
