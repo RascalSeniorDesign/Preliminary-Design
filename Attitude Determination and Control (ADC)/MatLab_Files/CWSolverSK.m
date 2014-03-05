@@ -34,8 +34,8 @@ for i=1:length(dr0mag)
         %Call CWPrussingRendezvousSolver Function
         [deltaVi,deltaVf]=CWPrussingRendezvousSolver(dr0(:,i),dv0_,rtgt_,drf(:,i),t(j));
         deltaVSK(i,j)=sum(sqrt((abs(deltaVi)+abs(deltaVf)).^2)); %Find deltaV for each case
-        if deltaVSK(i,j)>=.05 %Ignore values greater than 0.150 km/s
-            deltaVSK(i,j)=.05;
+        if deltaVSK(i,j)>=.01 %Ignore values greater than 0.150 km/s
+            deltaVSK(i,j)=.01;
         end
     end
 end
@@ -47,7 +47,7 @@ set(gca,'GridLineStyle','-')
 xlabel('Transfer Time (min)')
 ylabel('Initial Relative Position Magnitude (m)')
 zlabel('Total Delta V (m/s)')
-s=sprintf('Total DeltaV Required for Station Keeping at Initial Relative Displacements between %.2f m/s and %.2f m/s',1000*dr0mag(1),...
+s=sprintf('Total DeltaV Required for Station Keeping at Initial Relative Displacements between %.2f m and %.2f m',1000*dr0mag(1),...
     1000*dr0mag(length(dr0mag)));
 title(s)
 view(18,26)

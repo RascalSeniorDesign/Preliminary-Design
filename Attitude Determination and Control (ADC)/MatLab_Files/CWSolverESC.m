@@ -27,7 +27,7 @@ drfx=linspace(drFinalMin,drFinalMax,Nr); %Final separtion vector, km
 drfmatrix=[drfx;drfx;drfx]; %Matrix of final separation vectors
 field1='deltaVtotESC'; %Structre field for total deltaV cases
 dvx0=linspace(0.001,dv0Max,Nv); %Initial reltative velocity vector, km/s
-dvmatrix0=[dvx0;dvx0;dvx0]; %Initial reltative velocity matrix, km/s
+dvmatrix0=[zeros(1,length(dvx0));dvx0;zeros(1,length(dvx0))]; %Initial reltative velocity matrix, km/s
 dvmag=sqrt(sum(abs(dvmatrix0).^2));
 dr0_=[0;0;0]; %Case for s/c starting out together
 t=linspace(60*.1,60*tmax,Nt); %Simultation time, s
@@ -62,7 +62,7 @@ set(gca,'GridLineStyle','-')
 xlabel('Transfer Time (min)')
 ylabel('Initial Relative Velocity Magnitude (m/s)')
 zlabel('Total Delta V (m/s)')
-s=sprintf('Total DeltaV Required for Separaton Relative Velociity Magnitudes Between %.2f m/s and %.2f m/s',1000*dvmag(1),...
+s=sprintf('Total DeltaV Required for Separaton Relative Velocity Magnitudes Between %.2f m/s and %.2f m/s',1000*dvmag(1),...
     1000*dvmag(length(dvx0)));
 title(s)
 colorbar
