@@ -34,6 +34,8 @@ dr0_=linspace(drFinalMin,drFinalMax,Nr); %Initial Relative Displacement
 dr0Matrix=[dr0_;dr0_;dr0_]; %Matrix Version
 
 %% Find DeltaV Values Associeated with Escape
+
+%Print DeltaV for Various Intial Relative Velocities
 figure (1)
 deltaV=CWSolverESC(drFinalMin,drFinalMax,dv0Max,Nr,Nv,Nt,rtgt_,tmax);
 
@@ -45,6 +47,8 @@ deltaVESC2=deltaV(Nr).deltaVtotESC(1,:).*(deltaV(Nr).deltaVtotESC(1,:)<0.0035);
 [deltaVESC2min,tESC2min]=min(deltaV(Nr).deltaVtotESC(2,(0.8*Nt:Nt)));
 [deltaVESC2max,tESC2max]=max(deltaVESC2);
 %% Find DeltaV Values Associated with Stationkeeping
+
+%Plot for Various Initial Relative Positions
 figure (2)
 deltaVSK=CWSolverSK(dr0Matrix,Nt,rtgt_,tmax);
 
@@ -55,6 +59,8 @@ deltaVSKtot=deltaVSK.*(deltaVSK<=0.0005);
 [deltaVRSKmin,tRSKmin]=min(deltaVSK(Nr,(0.8*Nt:Nt)));
 [deltaVRSKmax,tRSKmax]=max(deltaVSKtot(Nr,:));
 %% Find DeltaV Values Associated with Rendezvous
+
+%Plot for Various INitial Relative Positions
 figure (3)
 deltaVtot=CWSolverRDZ(drFinalMin,drFinalMax,Nr,Nt,rtgt_,tmax);
 
@@ -63,7 +69,7 @@ deltaVRDZtot=deltaVtot.*(deltaVtot<=0.0025);
 [deltaVRDZmax,tRDZmax]=max(deltaVRDZtot(Nr,:));
 [deltaVRDZmin,tRDZmin]=min(deltaVtot(Nr,(0.8*Nt:Nt)));
 
-%% Define Manevuer DeltaV Ranges
+%% Print Results of Max/Min Analysis
 disp('Each Maneuver for The Rascal Mission Involves the following deltaVs')
 fprintf('Initial Separtion to %0.1f m: \nMin: %0.5f m/s for transfer time of %0.1f minutes \nMax: %0.5f m/s for transfer time of %0.1f minutes \n\n',...
     drFinalMin*1000,deltaVESC1min*1000,t(tESC1min+.8*Nt),deltaVESC1max*1000,t(tESC1max))
@@ -75,6 +81,37 @@ fprintf('Remote Stationkeeping at %0.1f m: \nMin: %0.5f m/s for transfer time of
     drFinalMax*1000,deltaVRSKmin*1000,t(tRSKmin+.8*Nt),deltaVRSKmax*1000,t(tRSKmax))
 fprintf('Rendezvous from %0.1f m: \nMin: %0.5f m/s for transfer time of %0.1f minutes \nMax: %0.5f m/s for transfer time of %0.1f minutes \n\n',...
     drFinalMax*1000,deltaVRDZmin*1000,t(tRDZmin+.8*Nt),deltaVRDZmax*1000,t(tRDZmax))
+
+%% Find Total DeltaV Required for Whole Mission (CONOPS-1)
+
+NISK=500;
+NISKm=1:NISK;
+NRSK=500;
+NRSKm=1:NRSK;
+[Nisk, Nrsk] = meshgrid(NISKm,NRSKm);
+Ncombmin=deltaVISKmin*Nisk+deltaVRSKmin*Nrsk;
+Ncombmax=deltaVISKmax*Nisk+deltaVRSKmax*Nrsk;
+deltaVmission1=deltaVESC1min+deltaVESC2min+deltaVRDZmin+Ncombmin;
+deltaVmission1=deltaVmission1.*(deltaVmission1<=.150);
+deltaVmission2=deltaVESC1max+deltaVESC2max+deltaVRDZmax+Ncombmax;
+deltaVmission2=deltaVmission2.*(deltaVmission2<=.150);
+
+figure (4)
+surf(NISKm,NRSKm,deltaVmission1*1000,'EdgeColor','None')
+grid on
+set(gca,'GridLineStyle','-')
+view(110, 45)
+
+figure (5)
+surf(NISKm,NRSKm,deltaVmission2*1000,'EdgeColor','None')
+grid on
+set(gca,'GridLineStyle','-')
+view(37, 45)
+
+
+
+
+
 
 
 
