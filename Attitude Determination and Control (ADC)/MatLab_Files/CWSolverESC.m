@@ -1,4 +1,4 @@
-function CWSolverESC(drFinalMin,drFinalMax,dv0Max,Nr,Nv,Nt,rtgt_,tmax)
+function [deltaV]=CWSolverESC(drFinalMin,drFinalMax,dv0Max,Nr,Nv,Nt,rtgt_,tmax)
 %The CWSolverSK function takes in information on the maximum initial
 %separtion relative velocity and desired relative final positoin of two s/c
 %and, based on the time over which one wants to simulate, plots Nr cases of
@@ -26,7 +26,7 @@ function CWSolverESC(drFinalMin,drFinalMax,dv0Max,Nr,Nv,Nt,rtgt_,tmax)
 drfx=linspace(drFinalMin,drFinalMax,Nr); %Final separtion vector, km
 drfmatrix=[drfx;drfx;drfx]; %Matrix of final separation vectors
 field1='deltaVtotESC'; %Structre field for total deltaV cases
-dvx0=linspace(0.001,dv0Max,Nv); %Initial reltative velocity vector, km/s
+dvx0=linspace(0.0005,dv0Max,Nv); %Initial reltative velocity vector, km/s
 dvmatrix0=[zeros(1,length(dvx0));dvx0;zeros(1,length(dvx0))]; %Initial reltative velocity matrix, km/s
 dvmag=sqrt(sum(abs(dvmatrix0).^2));
 dr0_=[0;0;0]; %Case for s/c starting out together
@@ -42,8 +42,8 @@ for k=1:length(drfx)
             %Call CWPrussingRendezvousSolver Function
             [deltaViESC,deltaVfESC]=CWPrussingRendezvousSolver(dr0_,dvmatrix0(:,i),rtgt_,drfmatrix(:,k),t(j));
             deltaVvoxESC(i,j)=sum(sqrt((abs(deltaViESC)+abs(deltaVfESC)).^2)); %Find deltaV for each case
-        if deltaVvoxESC(i,j)>=.15 %Ignore values greater than 0.150 km/s
-            deltaVvoxESC(i,j)=.15;
+        if deltaVvoxESC(i,j)>=.008 %Ignore values greater than 0.150 km/s
+            deltaVvoxESC(i,j)=.008;
         end
         end
     end

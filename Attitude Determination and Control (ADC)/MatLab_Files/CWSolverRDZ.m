@@ -1,4 +1,4 @@
-function CWSolverRDZ(drInitialMin,drInitialMax,Nr,Nt,rtgt_,tmax)
+function deltaVRDZ=CWSolverRDZ(drInitialMin,drInitialMax,Nr,Nt,rtgt_,tmax)
 %The CWSolverSK function takes in information on the maximum initial
 %separtion relative velocity and desired relative final positoin of two s/c
 %and, based on the time over which one wants to simulate, plots Nr cases of
@@ -38,8 +38,8 @@ for k=1:length(dr0mag)
             %Call CWPrussingRendezvousSolver Function
             [deltaViRDZ,deltaVfRDZ]=CWPrussingRendezvousSolver(dr0matrix(:,k),dv0_,rtgt_,drf_,t(j));
             deltaVRDZ(k,j)=sum(sqrt((abs(deltaViRDZ)+abs(deltaVfRDZ)).^2)); %Find deltaV for each case
-        if deltaVRDZ(k,j)>=.05 %Ignore values greater than 0.150 km/s
-            deltaVRDZ(k,j)=.05;
+        if deltaVRDZ(k,j)>=.015 %Ignore values greater than 0.150 km/s
+            deltaVRDZ(k,j)=.015;
         end
         end
 end %Move to next drfx value
