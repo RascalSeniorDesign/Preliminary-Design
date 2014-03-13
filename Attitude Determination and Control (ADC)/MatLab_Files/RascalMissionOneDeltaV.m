@@ -84,29 +84,45 @@ fprintf('Rendezvous from %0.1f m: \nMin: %0.5f m/s for transfer time of %0.1f mi
 
 %% Find Total DeltaV Required for Whole Mission (CONOPS-1)
 
-NISK=500;
+NISK=100;
 NISKm=1:NISK;
-NRSK=500;
+NISKmdaysmin=(t(tISKmin+.8*Nt)/(60*24))*NISKm;
+NISKmdaysmax=(t(tISKmax)/(60*24))*NISKm;
+NRSK=100;
 NRSKm=1:NRSK;
+NRSKmdaysmin=(t(tRSKmin+.8*Nt)/(60*24))*NISKm;
+NRSKmdaysmax=(t(tRSKmax)/(60*24))*NISKm;
 [Nisk, Nrsk] = meshgrid(NISKm,NRSKm);
 Ncombmin=deltaVISKmin*Nisk+deltaVRSKmin*Nrsk;
 Ncombmax=deltaVISKmax*Nisk+deltaVRSKmax*Nrsk;
 deltaVmission1=deltaVESC1min+deltaVESC2min+deltaVRDZmin+Ncombmin;
-deltaVmission1=deltaVmission1.*(deltaVmission1<=.150);
+deltaVmission1=deltaVmission1.*(deltaVmission1<=.05);
 deltaVmission2=deltaVESC1max+deltaVESC2max+deltaVRDZmax+Ncombmax;
-deltaVmission2=deltaVmission2.*(deltaVmission2<=.150);
+deltaVmission2=deltaVmission2.*(deltaVmission2<=.05);
 
 figure (4)
-surf(NISKm,NRSKm,deltaVmission1*1000,'EdgeColor','None')
+surf(NISKmdaysmin,NRSKmdaysmin,deltaVmission1*1000,'EdgeColor','None')
 grid on
 set(gca,'GridLineStyle','-')
-view(110, 45)
+xlabel('Cummulative ISK Orbit Time (days)')
+ylabel('Cummulative RSK Orbit Time (days)')
+view(100, 35)
 
 figure (5)
-surf(NISKm,NRSKm,deltaVmission2*1000,'EdgeColor','None')
+surf(NISKmdaysmax,NRSKmdaysmax,deltaVmission2*1000,'EdgeColor','None')
 grid on
 set(gca,'GridLineStyle','-')
-view(37, 45)
+xlabel('Cummulative ISK Orbit Time (days)')
+ylabel('Cummulative RSK Orbit Time (days)')
+view(60, 50)
+
+%% Print Times Associated with Average and Max Cases of ISK and RSK
+fprintf('The ideal minimmum deltaV for the first mission phase would then be: %0.2f m/s \n\n',...
+    (deltaVESC1min+deltaVESC2min+deltaVRDZmin+deltaVISKmin+deltaVRSKmin)*1000)
+fprintf('The minimmum deltaV to ISK for one day would then be: %0.2f m/s \n\n',...
+deltaVRSKmin*14*1000)
+fprintf('The total minimmum mission deltaV would then be: %0.2f m/s \n\n',...
+    ((deltaVESC1min+deltaVESC2min+deltaVRDZmin+deltaVISKmin+deltaVRSKmin)*3+deltaVRSKmin*28)*1000);
 
 
 
