@@ -28,21 +28,22 @@ vtgt_=Xtgt_(:,2); %Target ECI Velcity, km
 rtgt=sqrt(sum(abs(rtgt_).^2)); %Magnitude of Target position, km
 
 R=rtgt_./rtgt; %R unit vector in local CW frame, target centered
-W=cross(rtgt_,vtgt_)./sqrt(sum(abs(cross(rtgt_,vtgt_)).^2)); %W unit vector
+rvtgtCross_=cross(rtgt_,vtgt_);
+W=rvtgtCross_./sqrt(sum(abs(rvtgtCross_).^2)); %W unit vector
 S=cross(W,R); %S unit vector
 
-RSW=[R;S;W]; %RSW transformation matrix
+RSW=[R S W]; %RSW transformation matrix
 
 %==========================================================================
 %                    Begin Coordinate Conversion
 %==========================================================================
 XtgtRSW_=RSW'*Xtgt_; %Transform from ECI to RSW coordinates
 XintRSW_=RSW'*Xint_;
-
+rtgtRSW=sqrt(sum(abs(Xtgt_(:,1)).^2));
 %==========================================================================
 %                    Begin Finding Relative Position
 %==========================================================================
-deltaZ=atan(XintRSW_(3,1)/rtgt); %Set up to find 
+deltaZ=atan(XintRSW_(3,1)/rtgtRSW); %Set up to find 
 
 %Define rotation functions to be used for finding realtive interceptor pos.
 rot2= @(theta) [cos(theta) 0 -sin(theta); 0 1 0; sin(theta) 0 cos(theta)];
@@ -52,7 +53,7 @@ rot3= @(beta)  [cos(beta) sin(beta) 0; -sin(beta) cos(beta) 0; 0 0 1];
 rintTem_=rot2(-deltaZ)*XintRSW_(:,1);
 
 %Define second rotation
-deltaY=atan(XintRSW_(2,1)/rtgt);
+deltaY=atan(XintRSW_(2,1)/rtgtRSW);
 rintTemp_=rot3(deltaY)*rintTem_;
 
 %==========================================================================
