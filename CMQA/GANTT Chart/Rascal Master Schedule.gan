@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?><project name="Rascal Master Schedule" company="Saint Louis University" webLink="http://" view-date="2013-07-01" view-index="0" gantt-divider-location="564" resource-divider-location="300" version="2.0">
+    <description><![CDATA[This schedule lists all of mission milestones associated with the Rascal mission, which is being co-developed with resources from Saint Louis University and the Boeing Company.]]></description>
+    <view zooming-state="default:11" id="gantt-chart"/>
+    <view id="resource-table">
+        <field id="0" name="Name" width="70" order="0"/>
+        <field id="1" name="Default role" width="29" order="1"/>
+    </view>
+    <!-- -->
+    <calendars>
+        <day-types>
+            <day-type id="0"/>
+            <day-type id="1"/>
+            <calendar id="1" name="default">
+                <default-week sun="0" mon="0" tue="0" wed="0" thu="0" fri="0" sat="0"/>
+                <only-show-weekends value="true"/>
+                <overriden-day-types/>
+                <days/>
+            </calendar>
+        </day-types>
+    </calendars>
+    <tasks>
+        <taskproperties>
+            <taskproperty id="tpd0" name="type" type="default" valuetype="icon"/>
+            <taskproperty id="tpd1" name="priority" type="default" valuetype="icon"/>
+            <taskproperty id="tpd2" name="info" type="default" valuetype="icon"/>
+            <taskproperty id="tpd3" name="name" type="default" valuetype="text"/>
+            <taskproperty id="tpd4" name="begindate" type="default" valuetype="date"/>
+            <taskproperty id="tpd5" name="enddate" type="default" valuetype="date"/>
+            <taskproperty id="tpd6" name="duration" type="default" valuetype="int"/>
+            <taskproperty id="tpd7" name="completion" type="default" valuetype="int"/>
+            <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
+            <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
+        </taskproperties>
+        <task id="4" name="Primary ADC Subsystem" color="#3333ff" meeting="false" start="2014-03-17" duration="16" complete="0" priority="2" expand="true">
+            <notes><![CDATA[Primary ADC Tasks for the Rascal EDU Work]]></notes>
+            <task id="28" name="Preliminary Relative Orbit Analysis" color="#33ff33" meeting="false" start="2014-03-17" duration="5" complete="0" priority="2" expand="true">
+                <notes><![CDATA[First principles and trend analysis for relative motion betwee two spacecraft]]></notes>
+                <depend id="47" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="47" name="Preliminary Controls Analysis" color="#8cb6ce" meeting="false" start="2014-03-22" duration="4" complete="0" expand="true">
+                <notes><![CDATA[Analyzing ideal oribt path for docking mission type, as to determine the affect of sensor noise, pertubatoins, etc.]]></notes>
+                <depend id="53" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="53" name="Preliminary Controls Implementation" color="#8cb6ce" meeting="false" start="2014-03-26" duration="7" complete="0" expand="true">
+                <notes><![CDATA[Implementing controls analysis into Matlab for testing and simulation]]></notes>
+            </task>
+            <task id="56" name="Preliminary ADC Sensor Research" color="#33ff33" meeting="false" start="2014-03-21" duration="12" complete="0" expand="true">
+                <notes><![CDATA[Figure out what is necessary/available for determining local spacecraft orientation/inertial position.]]></notes>
+            </task>
+        </task>
+        <task id="8" name="Primary PLD Subsystem" color="#3333ff" meeting="false" start="2014-03-17" duration="138" complete="0" priority="2" expand="true">
+            <notes><![CDATA[All tasks associated with the PLD subsystem for work on Rascal EDU]]></notes>
+        </task>
+        <task id="13" name="PRP Subsystem" color="#3333ff" meeting="false" start="2014-03-21" duration="12" complete="0" priority="2" expand="true">
+            <notes><![CDATA[All tasks associated with thePRP subsystem for work on Rascal EDU]]></notes>
+            <task id="60" name="Preliminary PRP System Research" color="#33ff33" meeting="false" start="2014-03-21" duration="12" complete="0" expand="true">
+                <notes><![CDATA[Figuring out the coordinate system terminology that is to be incorperated into the design, picking volume constraints, defining system performance characteristics, etc.]]></notes>
+            </task>
+        </task>
+        <task id="15" name="Primary CDH Subsystem" color="#3333ff" meeting="false" start="2014-03-17" duration="138" complete="0" priority="2" expand="false">
+            <notes><![CDATA[All tasks associated with the primary CDH subsystem for work on Rascal EDU]]></notes>
+        </task>
+        <task id="17" name="DCK Subsystem" color="#cc66ff" meeting="false" start="2014-03-17" duration="138" complete="0" priority="2" expand="false">
+            <notes><![CDATA[All tasks associated with the DCK subsystem for work on Rascal EDU]]></notes>
+        </task>
+        <task id="10" name="Secondary STR Subsystem" color="#ff3333" meeting="false" start="2014-03-17" duration="138" complete="0" priority="2" expand="false">
+            <notes><![CDATA[All tasks associated with the Secondary STR subsystem for work on Rascal EDU]]></notes>
+        </task>
+        <task id="19" name="Secondary COM Subsystem" color="#ff3333" meeting="false" start="2014-03-17" duration="138" complete="0" priority="2" expand="false">
+            <notes><![CDATA[All tasks associated with the Secondary COM subsystem for work on Rascal EDU]]></notes>
+        </task>
+        <task id="21" name="Secondary PWR Subsystem" color="#ff3333" meeting="false" start="2014-03-17" duration="138" complete="0" priority="2" expand="false">
+            <notes><![CDATA[All tasks associated with the Secondary PWR subsystem for work on Rascal EDU]]></notes>
+        </task>
+        <task id="23" name="Secondary ADC Subsystem" color="#ff3333" meeting="false" start="2014-03-17" duration="138" complete="0" priority="2" expand="false">
+            <notes><![CDATA[All tasks associated with the Secondary STR subsystem for work on Rascal EDU]]></notes>
+        </task>
+        <task id="25" name="Secondary CDH Subsystem" color="#ff3333" meeting="false" start="2014-03-17" duration="138" complete="0" priority="2" expand="false">
+            <notes><![CDATA[All tasks associated with the Secondary CDH subsystem for work on Rascal EDU]]></notes>
+        </task>
+        <task id="0" name="Student Graduation" color="#8cb6ce" shape="1,0,1,0,0,1,0,1,1,0,1,0,0,1,0,1" meeting="true" start="2014-05-15" duration="1" complete="0" priority="4" expand="true"/>
+        <task id="2" name="EDU Delivery" color="#8cb6ce" meeting="true" start="2014-08-01" duration="1" complete="0" expand="true"/>
+    </tasks>
+    <resources>
+        <resource id="0" name="Tom Moline" function="5" contacts="tmoline@slu.edu" phone="(630) 401-0791"/>
+        <resource id="1" name="Nate Richard" function="4" contacts="nrichar8@slu.edu" phone="(608) 732-7147"/>
+        <resource id="2" name="Jennifer Babb" function="1" contacts="jbabb1@slu.edu" phone="(636) 579-6816"/>
+        <resource id="3" name="Tyler Olson" function="12" contacts="toslon6@slu.edu" phone="(812) 204-1098"/>
+        <resource id="4" name="Kate Clements" function="3" contacts="clementsk@slu.edu" phone=""/>
+        <resource id="5" name="Nathan Bossart" function="11" contacts="nbossart@slu.edu" phone=""/>
+        <resource id="6" name="Joe Mayer" function="Default:0" contacts="jmayer16@slu.edu" phone=""/>
+    </resources>
+    <allocations>
+        <allocation task-id="4" resource-id="0" function="5" responsible="true" load="75.0"/>
+        <allocation task-id="28" resource-id="0" function="0" responsible="true" load="100.0"/>
+        <allocation task-id="47" resource-id="0" function="0" responsible="true" load="100.0"/>
+        <allocation task-id="60" resource-id="3" function="12" responsible="true" load="100.0"/>
+        <allocation task-id="4" resource-id="4" function="3" responsible="false" load="25.0"/>
+        <allocation task-id="56" resource-id="4" function="3" responsible="true" load="100.0"/>
+    </allocations>
+    <vacations/>
+    <taskdisplaycolumns>
+        <displaycolumn property-id="tpd2" order="-1" width="75" visible="false"/>
+        <displaycolumn property-id="tpd7" order="-1" width="75" visible="false"/>
+        <displaycolumn property-id="tpd8" order="-1" width="75" visible="false"/>
+        <displaycolumn property-id="tpd6" order="-1" width="75" visible="false"/>
+        <displaycolumn property-id="tpd10" order="-1" width="75" visible="false"/>
+        <displaycolumn property-id="tpd9" order="-1" width="75" visible="false"/>
+        <displaycolumn property-id="tpd1" order="-1" width="75" visible="false"/>
+        <displaycolumn property-id="tpd0" order="-1" width="75" visible="false"/>
+        <displaycolumn property-id="tpd3" order="0" width="276" visible="true"/>
+        <displaycolumn property-id="tpd4" order="1" width="139" visible="true"/>
+        <displaycolumn property-id="tpd5" order="2" width="145" visible="true"/>
+    </taskdisplaycolumns>
+    <previous/>
+    <roles roleset-name="Default"/>
+    <roles>
+        <role id="0" name="Primary ADC Lead"/>
+        <role id="1" name="DCK Lead"/>
+        <role id="2" name="Primary CDH Lead"/>
+        <role id="3" name="Primary ADC Co-Lead"/>
+        <role id="4" name="Secondary Spacecraft Program Manager"/>
+        <role id="5" name="Primary Spacecraft Program Manager"/>
+        <role id="6" name="Secondary STR Lead"/>
+        <role id="7" name="Secondary CDH Lead"/>
+        <role id="8" name="Secondary COM Lead"/>
+        <role id="9" name="Secondary ADC Lead"/>
+        <role id="10" name="Secondary PWR Lead"/>
+        <role id="11" name="Primary PLD Lead"/>
+        <role id="12" name="PRP Lead"/>
+        <role id="13" name=""/>
+    </roles>
+</project>
