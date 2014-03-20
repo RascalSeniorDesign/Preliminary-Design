@@ -40,13 +40,15 @@ field4='dv_';
 IdealMission=struct(field1,{},field2,{},field3,{},field4,{});
 
 %% Fill Structure Fields
-for i=1:5
+for i=1:6
     if i==2
         drf_=[0.001;0.01;0.001]; %ISK
     elseif i==3
         drf_=[0.001;.1;0.01]; %Continued Separation
     elseif i==5
         drf_=[0.001;0.01;0.001]; %Rendezvous
+    elseif i==6
+        drf_=[0;0;0];
     end
   [IdealMission(i).deltaVi,...
  IdealMission(i).deltaVf,...
@@ -57,7 +59,7 @@ for i=1:5
 end
 
 %% Print Total DeltaV Used
-for i=1:5
+for i=1:6
     VfViDiff=abs(IdealMission(i).deltaVf-IdealMission(i).deltaVi);
     totaldeltaVm(i)=sqrt(sum(VfViDiff.^2));
 end
@@ -66,8 +68,8 @@ fprintf('The Total DeltaV Used for this mission is: %0.2f m/s\n',totaldeltaV)
 %% Plot Results
 figure(1)
 hold on
-cc=jet(5);
- for i=1:5
+cc=jet(6);
+ for i=1:6
     h=plot3(IdealMission(i).dr_(1,:)*1000,...
          IdealMission(i).dr_(2,:)*1000,...
          IdealMission(i).dr_(3,:)*1000,...
@@ -80,7 +82,7 @@ cc=jet(5);
          'MarkerSize',      5,...
          'MarkerFaceColor', 'k');
  end
- s=sprintf('Rascal Mission Orbit Path, with Total Delta-V of %0.2f m/s',totaldeltaV);
+ s=sprintf('Rascal Mission Orbit Path for Phase 1 of CONOPS-2, with Total Delta-V of %0.2f m/s',totaldeltaV);
  xlabel('Relative Cross-Track Displacement (m)')
  ylabel('Relative In-Track Displacement (m)')
  zlabel('Relative Out-of-Plane Dispacement (m)')
@@ -88,7 +90,7 @@ cc=jet(5);
  grid on
  set(gca,'GridLineStyle','-')
  view(-40,20)
- legend(k,'Transition Points')
+
  
  %% Combine Separate Relative Positions into Single Matrix
  dr_=horzcat(IdealMission(:).dr_);
