@@ -20,17 +20,21 @@ clear
 clc
 clf
 % Initial Separation Relative Velocity (km/s)
-dv0_=[0.0005;0.0005;0];
+dv0_=[0.002;0.0005;0.002];
 % Manevuer Time (mins)
 t=90;
 % Number of Data Points
 Nt=200;
 % Target Spacecraft Inertial Position (km)
 rtgt0_=[6697.4756; 1794.5831; 0.0];
-% Desired Inspection Stationkeeping Distance (km)
-drf_=[0.001;0.01;0.001];
 % Iniital Relative Position (km)
 dr0_=[0;0;0];
+% Mission Type (5=No Docking, 6=Docking)
+Nmission=5;
+% Pertubation (km)
+Pert=0.005;
+% Desired Inspection Stationkeeping Distance (km)
+drf_=[Pert;0.01;Pert];
 
 %% Create Mission Phase Structure
 field1='deltaVi';
@@ -40,14 +44,14 @@ field4='dv_';
 IdealMission=struct(field1,{},field2,{},field3,{},field4,{});
 
 %% Fill Structure Fields
-for i=1:6
+for i=1:Nmission
     if i==2
-        drf_=[0.001;0.01;0.001]; %ISK
+        drf_=[Pert;0.01;Pert]; %ISK
     elseif i==3
-        drf_=[0.001;.1;0.01]; %Continued Separation
+        drf_=[Pert;.1;Pert]; %Continued Separation
     elseif i==5
-        drf_=[0.001;0.01;0.001]; %Rendezvous
-    elseif i==6
+        drf_=[Pert;0.01;Pert]; %Rendezvous
+    elseif i>5
         drf_=[0;0;0];
     end
   [IdealMission(i).deltaVi,...
@@ -58,23 +62,36 @@ for i=1:6
   dr0_=IdealMission(i).dr_(:,Nt); %Reset initial position
 end
 
-%% Print Total DeltaV Used
-for i=1:6
-    VfViDiff=abs(IdealMission(i).deltaVf-IdealMission(i).deltaVi);
-    totaldeltaVm(i)=sqrt(sum(VfViDiff.^2));
+%% Print Total DeltaV Used for Each Case
+deltaVi=horzcat(IdealMission(:).deltaVi);
+deltaVf=horzcat(IdealMission(:).deltaVf);
+deltaVcomp=abs(deltaVi)+abs(deltaVf);
+deltaVmag=sqrt(sum(deltaVcomp.^2))*1000;
+fprintf('The tolta DeltaV used during Initial Separation is: %0.4f m/s\n',deltaVmag(1))
+fprintf('The tolta DeltaV used during ISK is: %0.4f m/s\n',deltaVmag(2))
+fprintf('The tolta DeltaV used during Continued Separation is: %0.4f m/s\n',deltaVmag(3))
+fprintf('The tolta DeltaV used during RSK is: %0.4f m/s\n',deltaVmag(4))
+fprintf('The tolta DeltaV used during Rendezvous is: %0.4f m/s\n',deltaVmag(5))
+if Nmission==6
+    fprintf('The tolta DeltaV used during Docking is: %0.4f m/s\n\n',deltaVmag(6))
 end
-totaldeltaV=sum(totaldeltaVm)*1000;
-fprintf('The Total DeltaV Used for this mission is: %0.2f m/s\n',totaldeltaV)
+
+if Nmission==5
+    deltaVtotalmission=sum(deltaVmag)+deltaVmag(2)*28+2*sum(deltaVmag(2:5));
+else
+    deltaVtotalmission=2*sum(deltaVmag)+14*deltaVmag(2)+sum(deltaVmag(2:5));
+end
+fprintf('Then the total DeltaV for the entire mission is: %0.4f m/s\n\n',deltaVtotalmission)
 %% Plot Results
 figure(1)
 hold on
-cc=jet(6);
- for i=1:6
+cc=jet(Nmission);
+ for i=1:Nmission
     h=plot3(IdealMission(i).dr_(1,:)*1000,...
          IdealMission(i).dr_(2,:)*1000,...
          IdealMission(i).dr_(3,:)*1000,...
          'color',        cc(i,:),...
-         'LineWidth',    2                  );
+         'LineWidth',    3                  );
      k=plot3(IdealMission(i).dr_(1,1)*1000,...
          IdealMission(i).dr_(2,1)*1000,...
          IdealMission(i).dr_(3,1)*1000,...
@@ -82,7 +99,11 @@ cc=jet(6);
          'MarkerSize',      5,...
          'MarkerFaceColor', 'k');
  end
- s=sprintf('Rascal Mission Orbit Path for Phase 1 of CONOPS-2, with Total Delta-V of %0.2f m/s',totaldeltaV);
+ if Nmission==5
+    s=sprintf('Rascal Mission Orbit Path for Phase 1 of CONOPS-1, with Total Delta-V of %0.2f m/s',deltaVtotalmission);
+ else
+    s=sprintf('Rascal Mission Orbit Path for Phase 1 of CONOPS-2, with Total Delta-V of %0.2f m/s',deltaVtotalmission);
+ end
  xlabel('Relative Cross-Track Displacement (m)')
  ylabel('Relative In-Track Displacement (m)')
  zlabel('Relative Out-of-Plane Dispacement (m)')
@@ -90,6 +111,7 @@ cc=jet(6);
  grid on
  set(gca,'GridLineStyle','-')
  view(-40,20)
+ 
 
  
  %% Combine Separate Relative Positions into Single Matrix
