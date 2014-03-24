@@ -1,0 +1,174 @@
+MPX,Microsoft Project for Windows,4.0,ANSI
+10,$,1,2,",",.
+11,2,0,1,8.00,40.00,$10.00/h,$15.00/h,1,0
+12,1,0,480,/,:,am,pm,20,20
+20,Standard,1,1,1,1,1,1,1
+25,1,08:00 am,12:00 pm,01:00 pm,05:00 pm
+25,2,08:00 am,12:00 pm,01:00 pm,05:00 pm
+25,3,08:00 am,12:00 pm,01:00 pm,05:00 pm
+25,4,08:00 am,12:00 pm,01:00 pm,05:00 pm
+25,5,08:00 am,12:00 pm,01:00 pm,05:00 pm
+25,6,08:00 am,12:00 pm,01:00 pm,05:00 pm
+25,7,08:00 am,12:00 pm,01:00 pm,05:00 pm
+30,Project1,,,Standard,06/03/2014,01/08/2014,0,21/03/2014,,$0.00,$0.00,$0.00,0h,0h,0h,0%,0d,0d,0d,0%,,,,,0d,0d
+40,Name,Email Address,ID,Unique ID
+41,1,11,40,49
+50,Tom Moline,tmoline@slu.edu,1,1
+50,Nate Richard,nrichar8@slu.edu,2,2
+50,Jennifer Babb,jbabb1@slu.edu,3,3
+50,Tyler Olson,toslon6@slu.edu,4,4
+50,Kate Clements,clementsk@slu.edu,5,5
+50,Nathan Bossart,nbossart@slu.edu,6,6
+50,Joe Mayer,jmayer16@slu.edu,7,7
+50,Christopher Berry,cberry12@slu.edu,8,8
+50,Alex Howard,ahowar20@slu.edu,9,9
+60,Name,WBS,Outline Level,Duration,Actual Duration,Remaining Duration,% Complete,Start,Finish,Predecessors,Fixed,Milestone,ID,Constraint Type,Priority,Unique ID,Outline Number,Summary
+61,1,2,3,40,42,43,44,50,51,70,80,81,90,91,95,98,99,120
+70,,0,0,149d,,,,06/03/2014,01/08/2014,,No,,0,As Soon As Possible,,0,0
+70,Rascal Mission CONOPS,1,1,28d,0d,28d,0%,06/03/2014,02/04/2014,,No,No,1,As Soon As Possible,Medium,117,1,Yes
+71,"All tasks realted to defining mission requirements, goals, architecture, etc."
+75,1,1,28d,,0d,,,,,06/03/2014,02/04/2014,,1
+76,,0,0,NA,NA
+75,2,1,28d,,0d,,,,,06/03/2014,02/04/2014,,2
+76,,0,0,NA,NA
+70,Rascal CONOPS Trade Study,1.1,2,15d,0d,15d,0%,06/03/2014,20/03/2014,,No,No,2,As Soon As Possible,Medium,119,1.1
+71,Trade study comparing missions with and without docking
+75,1,1,15d,,0d,,,,,06/03/2014,20/03/2014,,1
+76,,0,0,NA,NA
+75,2,1,15d,,0d,,,,,06/03/2014,20/03/2014,,2
+76,,0,0,NA,NA
+70,Rascal CONOPS Selection,1.2,2,1d,0d,1d,0%,20/03/2014,20/03/2014,,No,Yes,3,As Soon As Possible,Medium,121,1.2
+71,Final day to decide which CONOPS to pursue
+70,CONOPS Revision 1,1.3,2,12d,0d,12d,0%,21/03/2014,01/04/2014,,No,No,4,As Soon As Possible,Medium,123,1.3
+71,First revision of CONOPS with docking.
+70,Rascal Mission Objective and Success Criterea,1.4,2,12d,0d,12d,0%,21/03/2014,01/04/2014,4SS,No,No,5,As Soon As Possible,Medium,125,1.4
+71,"Determine success criterea for mission execution, as defined by CONOPS and mission objective."
+75,1,1,12d,,0d,,,,,21/03/2014,01/04/2014,,1
+76,,0,0,NA,NA
+75,2,1,12d,,0d,,,,,21/03/2014,01/04/2014,,2
+76,,0,0,NA,NA
+70,Preliminary Rascal RVM,1.5,2,12d,0d,12d,0%,21/03/2014,01/04/2014,4SS,No,No,6,As Soon As Possible,Medium,127,1.5
+71,Requirments Verification Matrix for Boeing delivery
+75,1,1,12d,,0d,,,,,21/03/2014,01/04/2014,,1
+76,,0,0,NA,NA
+75,2,1,12d,,0d,,,,,21/03/2014,01/04/2014,,2
+76,,0,0,NA,NA
+70,Mission Status Review,1.6,2,1d,0d,1d,0%,02/04/2014,02/04/2014,6,No,Yes,7,As Soon As Possible,Medium,147,1.6
+70,Primary ADC Subsystem,2,1,38d,0d,38d,0%,17/03/2014,23/04/2014,,No,No,8,As Soon As Possible,High,4,2,Yes
+71,Primary ADC Tasks for the Rascal EDU Work
+75,1,0.75,38d,,0d,,,,,17/03/2014,23/04/2014,,1
+76,,0,0,NA,NA
+75,5,0.25,38d,,0d,,,,,17/03/2014,23/04/2014,,5
+76,,0,0,NA,NA
+70,Preliminary Relative Orbit Analysis,2.1,2,5d,0d,5d,0%,17/03/2014,21/03/2014,,No,No,9,As Soon As Possible,High,28,2.1
+71,First principles and trend analysis for relative motion betwee two spacecraft
+75,1,1,5d,,0d,,,,,17/03/2014,21/03/2014,,1
+76,,0,0,NA,NA
+70,Preliminary Controls Analysis,2.2,2,4d,0d,4d,0%,22/03/2014,25/03/2014,9,No,No,10,As Soon As Possible,Medium,47,2.2
+71,"Analyzing ideal oribt path for docking mission type, as to determine the affect of sensor noise, pertubatoins, etc."
+75,1,1,4d,,0d,,,,,22/03/2014,25/03/2014,,1
+76,,0,0,NA,NA
+70,Preliminary Controls Matlab Algorithm,2.3,2,14d,0d,14d,0%,26/03/2014,08/04/2014,10,No,No,11,As Soon As Possible,Medium,53,2.3
+71,Implementing controls analysis into Matlab for testing and simulation
+70,Secondary Controls Matlab Algorithm,2.4,2,15d,0d,15d,0%,09/04/2014,23/04/2014,11,No,No,12,As Soon As Possible,Medium,189,2.4
+70,Preliminary ADC Sensor Research,2.5,2,12d,0d,12d,0%,21/03/2014,01/04/2014,,No,No,13,As Soon As Possible,Medium,56,2.5
+71,Figure out what is necessary/available for determining local spacecraft orientation/inertial position.
+75,5,1,12d,,0d,,,,,21/03/2014,01/04/2014,,5
+76,,0,0,NA,NA
+70,Primary PLD Subsystem,3,1,46d,0d,46d,0%,21/03/2014,05/05/2014,,No,No,14,As Soon As Possible,High,8,3,Yes
+71,All tasks associated with the PLD subsystem for work on Rascal EDU
+70,Verify Operation of Hardware System,3.1,2,4d,0d,4d,0%,21/03/2014,24/03/2014,,No,No,15,As Soon As Possible,Medium,134,3.1
+70,Hardware System Integration,3.2,2,7d,0d,7d,0%,25/03/2014,31/03/2014,15,No,No,16,As Soon As Possible,Medium,136,3.2
+70,Verify Integrated Hardware System,3.3,2,7d,0d,7d,0%,01/04/2014,07/04/2014,16,No,No,17,As Soon As Possible,Medium,138,3.3
+70,Configure Hardware Drivers,3.4,2,7d,0d,7d,0%,08/04/2014,14/04/2014,17,No,No,18,As Soon As Possible,Medium,140,3.4
+70,Finalize and Verify Software in SDK,3.5,2,7d,0d,7d,0%,15/04/2014,21/04/2014,18,No,No,19,As Soon As Possible,Medium,142,3.5
+70,Verify Integrated Hardware and Software System,3.6,2,7d,0d,7d,0%,22/04/2014,28/04/2014,19,No,No,20,As Soon As Possible,Medium,144,3.6
+70,"Test, Calibrate, and Demonstrate",3.7,2,7d,0d,7d,0%,29/04/2014,05/05/2014,20,No,No,21,As Soon As Possible,Medium,146,3.7
+70,PRP Subsystem,4,1,134d,0d,134d,0%,21/03/2014,01/08/2014,,No,No,22,As Soon As Possible,High,13,4,Yes
+71,All tasks associated with thePRP subsystem for work on Rascal EDU
+70,Preliminary PRP System Research,4.1,2,12d,0d,12d,0%,21/03/2014,01/04/2014,,No,No,23,As Soon As Possible,Medium,60,4.1
+71,"Figuring out the coordinate system terminology that is to be incorperated into the design, picking volume constraints, defining system performance characteristics, etc."
+75,4,1,12d,,0d,,,,,21/03/2014,01/04/2014,,4
+76,,0,0,NA,NA
+70,Prototype Design,4.2,2,29d,0d,29d,0%,24/03/2014,21/04/2014,,No,No,24,As Soon As Possible,Medium,150,4.2,Yes
+70,Coordinate System Definitions,4.2.1,3,5d,0d,5d,0%,24/03/2014,28/03/2014,,No,No,25,As Soon As Possible,Medium,152,4.2.1
+70,Sizing Requirements,4.2.2,3,5d,0d,5d,0%,24/03/2014,28/03/2014,,No,No,26,As Soon As Possible,Medium,154,4.2.2
+70,DeltaV Requirements,4.2.3,3,12d,0d,12d,0%,24/03/2014,04/04/2014,,No,No,27,As Soon As Possible,Medium,156,4.2.3
+70,Tank Design,4.2.4,3,22d,0d,22d,0%,24/03/2014,14/04/2014,,No,No,28,As Soon As Possible,Medium,158,4.2.4
+70,Thruster Design/Layout,4.2.5,3,22d,0d,22d,0%,24/03/2014,14/04/2014,,No,No,29,As Soon As Possible,Medium,160,4.2.5
+70,Valve Integration Design,4.2.6,3,15d,0d,15d,0%,07/04/2014,21/04/2014,,No,No,30,As Soon As Possible,Medium,163,4.2.6
+70,Valve Testing,4.2.7,3,15d,0d,15d,0%,07/04/2014,21/04/2014,30SS,No,No,31,As Soon As Possible,Medium,165,4.2.7
+70,Functional Prototype,4.3,2,29d,0d,29d,0%,21/04/2014,19/05/2014,,No,No,32,As Soon As Possible,Medium,169,4.3,Yes
+70,Print Prototype,4.3.1,3,8d,0d,8d,0%,21/04/2014,28/04/2014,,No,No,33,As Soon As Possible,Medium,171,4.3.1
+70,Valve Integration,4.3.2,3,8d,0d,8d,0%,28/04/2014,05/05/2014,,No,No,34,As Soon As Possible,Medium,173,4.3.2
+70,Functional Testing,4.3.3,3,15d,0d,15d,0%,05/05/2014,19/05/2014,,No,No,35,As Soon As Possible,Medium,175,4.3.3
+70,Functional Engineering Unit,4.4,2,75d,0d,75d,0%,19/05/2014,01/08/2014,,No,No,36,As Soon As Possible,Medium,177,4.4,Yes
+70,Print Engineering Unit,4.4.1,3,15d,0d,15d,0%,19/05/2014,02/06/2014,,No,No,37,As Soon As Possible,Medium,178,4.4.1
+70,Functional Testing,4.4.2,3,61d,0d,61d,0%,02/06/2014,01/08/2014,,No,No,38,As Soon As Possible,Medium,180,4.4.2
+70,Pressure Testing,4.4.3,3,22d,0d,22d,0%,09/06/2014,30/06/2014,,No,No,39,As Soon As Possible,Medium,182,4.4.3
+70,Environmental Testing,4.4.4,3,40d,0d,40d,0%,23/06/2014,01/08/2014,,No,No,40,As Soon As Possible,Medium,185,4.4.4
+70,Primary CDH Subsystem,5,1,17d,0d,17d,0%,21/03/2014,06/04/2014,,No,No,41,As Soon As Possible,High,15,5,Yes
+71,All tasks associated with the primary CDH subsystem for work on Rascal EDU
+70,Review Boeing Colony-II Bus User Guide,5.1,2,5d,0d,5d,0%,21/03/2014,25/03/2014,,No,No,42,As Soon As Possible,Medium,63,5.1
+71,"Look-over the user's guide provided by Boeing, as to determine the communication protocal being used between SLU and Colony-II, as well as the type of sensor information being passed between each."
+70,Preliminary Spacecraft Functional Block Diagram,5.2,2,12d,0d,12d,0%,26/03/2014,06/04/2014,42,No,No,43,As Soon As Possible,Medium,101,5.2
+71,Determine functional block diagram for interface between each portion of SLU and Boeing side of primary spacecraft.
+70,DCK Subsystem,6,1,24d,0d,24d,0%,21/03/2014,13/04/2014,,No,No,44,As Soon As Possible,High,17,6,Yes
+71,All tasks associated with the DCK subsystem for work on Rascal EDU
+70,Define Separation Requirements,6.1,2,12d,0d,12d,0%,21/03/2014,01/04/2014,,No,No,45,As Soon As Possible,Medium,109,6.1
+71,Important in determining which designs are feasible. Will result from analysis being done by ADC team.
+75,1,1,12d,,0d,,,,,21/03/2014,01/04/2014,,1
+76,,0,0,NA,NA
+75,3,1,12d,,0d,,,,,21/03/2014,01/04/2014,,3
+76,,0,0,NA,NA
+70,Preliminary Docking Mechanism Research,6.2,2,12d,0d,12d,0%,21/03/2014,01/04/2014,,No,No,46,As Soon As Possible,Medium,103,6.2
+71,Reveiw docking mechanism heritage and determine whether or not it is necessary to have separate dockin/initial separation mechanisms.
+75,3,1,12d,,0d,,,,,21/03/2014,01/04/2014,,3
+76,,0,0,NA,NA
+70,Assess Primary Spacecraft Docking Integration,6.3,2,12d,0d,12d,0%,21/03/2014,01/04/2014,46SS,No,No,47,As Soon As Possible,Medium,115,6.3
+71,Determine orientation of the Colony-II bus and the feasibility of integrating dockin components into its system.
+70,Preliminary Methodology Trade Study,6.4,2,12d,0d,12d,0%,02/04/2014,13/04/2014,46,No,No,48,As Soon As Possible,Medium,113,6.4
+71,"Based on research, determine best method of pursuing docking."
+70,Secondary STR Subsystem,7,1,12d,0d,12d,0%,21/03/2014,01/04/2014,,No,No,49,As Soon As Possible,High,10,7,Yes
+71,All tasks associated with the Secondary STR subsystem for work on Rascal EDU
+70,Review Previous Skeleton Design Work,7.1,2,5d,0d,5d,0%,21/03/2014,25/03/2014,,No,No,50,As Soon As Possible,Medium,66,7.1
+71,"Look over previous skeletion design work (As done by Christopher Berry), and determine what needs to be done going forward with its design."
+75,8,1,5d,,0d,,,,,21/03/2014,25/03/2014,,8
+76,,0,0,NA,NA
+70,Preliminary Mass Budget,7.2,2,8d,0d,8d,0%,25/03/2014,01/04/2014,,No,No,51,As Soon As Possible,Medium,129,7.2
+71,"Preliminary mass budget that allocates, as percentage of total spacecraft mass, subsystem mass properties."
+75,8,1,8d,,0d,,,,,25/03/2014,01/04/2014,,8
+76,,0,0,NA,NA
+70,Preliminary Component Listing,7.3,2,12d,0d,12d,0%,21/03/2014,01/04/2014,,No,No,52,As Soon As Possible,Medium,132,7.3
+71,Determine components necessary to integrate all s/c components.
+70,Secondary COM Subsystem,8,1,12d,0d,12d,0%,21/03/2014,01/04/2014,,No,No,53,As Soon As Possible,High,19,8,Yes
+71,All tasks associated with the Secondary COM subsystem for work on Rascal EDU
+70,Secondary Link Budget Analysis,8.1,2,5d,0d,5d,0%,21/03/2014,25/03/2014,,No,No,54,As Soon As Possible,Medium,75,8.1
+71,"Cointinue assessing link budget, as to determine feasibility of inter-satellite communication."
+70,Preliminary Component Research,8.2,2,12d,0d,12d,0%,21/03/2014,01/04/2014,,No,No,55,As Soon As Possible,Medium,79,8.2
+71,Research the components necessary to acheive mission goals (inter-satellite communication and ground downlink capabilities).
+70,Secondary PWR Subsystem,9,1,26d,0d,26d,0%,21/03/2014,15/04/2014,,No,No,56,As Soon As Possible,High,21,9,Yes
+71,All tasks associated with the Secondary PWR subsystem for work on Rascal EDU
+70,Secondary Power Budget,9.1,2,12d,0d,12d,0%,21/03/2014,01/04/2014,,No,No,57,As Soon As Possible,Medium,90,9.1
+71,"Based on preliminary power budget work, begin determining max lifetime based on realistic battery and EPS figures, as well as on estimates of power consumption of the rest of the spacecraft."
+75,9,1,12d,,0d,,,,,21/03/2014,01/04/2014,,9
+76,,0,0,NA,NA
+70,Preliminary Component Selection,9.2,2,14d,0d,14d,0%,02/04/2014,15/04/2014,57,No,No,58,As Soon As Possible,Medium,93,9.2
+71,"Based on power requirements dictated by the power budget, determine the type and number of batteries necessary to execute the mission, as well as what's necessary to integrate said batteries into the design."
+70,Secondary ADC Subsystem,10,1,33d,0d,33d,0%,21/03/2014,22/04/2014,,No,No,59,As Soon As Possible,High,23,10,Yes
+71,All tasks associated with the Secondary STR subsystem for work on Rascal EDU
+70,Preliminary Detumbling Analysis,10.1,2,19d,0d,19d,0%,21/03/2014,08/04/2014,,No,No,60,As Soon As Possible,Medium,71,10.1
+71,Review work that was done for COPPER and Argus and determine how to implement said analysis for the secondary spacecraft and its tumbling mitigation.
+70,Preliminary Detumbling Requirements,10.2,2,7d,0d,7d,0%,09/04/2014,15/04/2014,60,No,No,61,As Soon As Possible,Medium,87,10.2
+70,Preliminary Detumbling Component Selection,10.3,2,14d,0d,14d,0%,09/04/2014,22/04/2014,60,No,No,62,As Soon As Possible,Medium,83,10.3
+71,"Based on detumbling requirements, determine components necessary to acheive said requirements."
+70,Determine GPS Frequency,10.4,2,5d,0d,5d,0%,21/03/2014,25/03/2014,,No,No,63,As Soon As Possible,Medium,81,10.4
+71,Based on accuracy information and necessary data.
+70,Secondary CDH Subsystem,11,1,24d,0d,24d,0%,21/03/2014,13/04/2014,,No,No,64,As Soon As Possible,High,25,11,Yes
+71,All tasks associated with the Secondary CDH subsystem for work on Rascal EDU
+70,Preliminary Spacecraft Functional Block Diagram,11.1,2,12d,0d,12d,0%,21/03/2014,01/04/2014,,No,No,65,As Soon As Possible,Medium,98,11.1
+71,"Determine the subsystems necessary to execute mission goals, as well as the manner in which each subsystem interacts with the other."
+70,Preliminary Software System Overview,11.2,2,12d,0d,12d,0%,02/04/2014,13/04/2014,65,No,No,66,As Soon As Possible,Medium,77,11.2
+71,Analyze previous software development for COPPER and Argus and determine what can be brought in for Rascal work and what needs to be added/taken away.
+70,Student Graduation,12,1,1d,0d,1d,0%,15/05/2014,15/05/2014,,No,Yes,67,As Soon As Possible,Highest,190,12
+70,EDU Delivery,13,1,1d,0d,1d,0%,01/08/2014,01/08/2014,,No,Yes,68,As Soon As Possible,Medium,2,13
