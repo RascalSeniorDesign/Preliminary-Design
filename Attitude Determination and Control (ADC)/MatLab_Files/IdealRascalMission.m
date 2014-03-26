@@ -20,7 +20,7 @@ clear
 clc
 clf
 % Initial Separation Relative Velocity (km/s)
-dv0_=[0.002;0.0005;0.002];
+dv0_=[0;0.001;0];
 % Manevuer Time (mins)
 t=90;
 % Number of Data Points
@@ -30,7 +30,7 @@ rtgt0_=[6697.4756; 1794.5831; 0.0];
 % Iniital Relative Position (km)
 dr0_=[0;0;0];
 % Mission Type (5=No Docking, 6=Docking)
-Nmission=5;
+Nmission=6;
 % Pertubation (km)
 Pert=0.005;
 % Desired Inspection Stationkeeping Distance (km)
@@ -47,6 +47,7 @@ IdealMission=struct(field1,{},field2,{},field3,{},field4,{});
 for i=1:Nmission
     if i==2
         drf_=[Pert;0.01;Pert]; %ISK
+        dv0_=[0;0.0001;0];
     elseif i==3
         drf_=[Pert;.1;Pert]; %Continued Separation
     elseif i==5
@@ -115,7 +116,24 @@ cc=jet(Nmission);
 
  
  %% Combine Separate Relative Positions into Single Matrix
- dr_=horzcat(IdealMission(:).dr_);
+ dr_=horzcat(IdealMission(:).dr_)*1000;
+ dv_=horzcat(IdealMission(:).dv_)*1000;
+ t=linspace(0.1*60,(90*Nmission)*60,Nmission*Nt);
+ A=vertcat(t,dr_,dv_);
+ file=fopen('rascal_plot.txt','w');
+ fprintf(file,'stk.v.8.0\r\n\r\nBEGIN Ephemeris\r\n\r\n');
+ fprintf(file,'NumberofEphemerisPoints\t%s\r\n',num2str(Nt*Nmission));
+ fprintf(file,'ScenarioEpoch\t\t\t20 Oct 2014 13:21:15.0000\r\n');
+ fprintf(file,'InterpolationMethod\t\tLagrange\r\n');
+ fprintf(file,'InterpolationOrder\t\t5\r\n');
+ fprintf(file,'DistanceUnit\t\t\t\tMeters\r\n');
+ fprintf(file,'CentralBody\t\t\t\tEarth\r\n');
+ fprintf(file,'CoordinateSystem\t\tCW\r\n');
+ fprintf(file,'CoordianteSystemEpoch\t20 Oct 2014 13:21:15.0000\r\n\r\n');
+ fprintf(file,'EphemerisTimePosVel\r\n\r\n');
+ fprintf(file,'%-0.6f\t\t%0.6f\t\t%0.6f\t\t%0.6f\t\t%0.6f\t\t%0.6f\t\t%0.6f\r\n',A);
+ fprintf(file,'\r\nEND Ephemeris');
+ 
  
  
 
