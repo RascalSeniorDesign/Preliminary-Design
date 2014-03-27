@@ -30,9 +30,9 @@ rtgt0_=[6697.4756; 1794.5831; 0.0];
 % Iniital Relative Position (km)
 dr0_=[0;0;0];
 % Mission Type (5=No Docking, 6=Docking)
-Nmission=6;
+Nmission=5;
 % Pertubation (km)
-Pert=0.005;
+Pert=0.001;
 % Desired Inspection Stationkeeping Distance (km)
 drf_=[Pert;0.01;Pert];
 
@@ -47,7 +47,6 @@ IdealMission=struct(field1,{},field2,{},field3,{},field4,{});
 for i=1:Nmission
     if i==2
         drf_=[Pert;0.01;Pert]; %ISK
-        dv0_=[0;0.0001;0];
     elseif i==3
         drf_=[Pert;.1;Pert]; %Continued Separation
     elseif i==5
@@ -120,19 +119,21 @@ cc=jet(Nmission);
  dv_=horzcat(IdealMission(:).dv_)*1000;
  t=linspace(0.1*60,(90*Nmission)*60,Nmission*Nt);
  A=vertcat(t,dr_,dv_);
- file=fopen('rascal_plot.txt','w');
- fprintf(file,'stk.v.8.0\r\n\r\nBEGIN Ephemeris\r\n\r\n');
- fprintf(file,'NumberofEphemerisPoints\t%s\r\n',num2str(Nt*Nmission));
- fprintf(file,'ScenarioEpoch\t\t\t20 Oct 2014 13:21:15.0000\r\n');
- fprintf(file,'InterpolationMethod\t\tLagrange\r\n');
- fprintf(file,'InterpolationOrder\t\t5\r\n');
- fprintf(file,'DistanceUnit\t\t\t\tMeters\r\n');
- fprintf(file,'CentralBody\t\t\t\tEarth\r\n');
- fprintf(file,'CoordinateSystem\t\tCW\r\n');
- fprintf(file,'CoordianteSystemEpoch\t20 Oct 2014 13:21:15.0000\r\n\r\n');
- fprintf(file,'EphemerisTimePosVel\r\n\r\n');
- fprintf(file,'%-0.6f\t\t%0.6f\t\t%0.6f\t\t%0.6f\t\t%0.6f\t\t%0.6f\t\t%0.6f\r\n',A);
- fprintf(file,'\r\nEND Ephemeris');
+ file=fopen('rascal_plot.e','w');
+ fprintf(file,'stk.v.8.0\n\nBEGIN Ephemeris\n\n');
+ fprintf(file,'NumberofEphemerisPoints\t%s\n',num2str(Nt*Nmission));
+ fprintf(file,'ScenarioEpoch\t\t\t26 Mar 2014 17:00:00.0000\n');
+ fprintf(file,'InterpolationMethod\t\tLagrange\n');
+ fprintf(file,'InterpolationOrder\t\t5\n');
+ fprintf(file,'DistanceUnit\t\t\t\tMeters\n');
+ fprintf(file,'CoordinateSystem\t\tCustom RTCS Satellite/Target\n');
+ fprintf(file,'CoordianteSystemEpoch\t26 Mar 2014 17:00:00.0000\n\n');
+ fprintf(file,'BEGIN SegmentBoundaryTimes\n');
+ fprintf(file,'%0.6f\n%0.6f\n%0.6f\n%0.6f\n',t(Nt),t(2*Nt),t(3*Nt),t(4*Nt));
+ fprintf(file,'END SegmentBoundaryTimes\n\n');
+ fprintf(file,'EphemerisTimePosVel\n\n');
+ fprintf(file,'%-0.6f\t%0.6f\t%0.6f\t%0.6f\t%0.6f\t%0.6f\t%0.6f\n',A);
+ fprintf(file,'\nEND Ephemeris');
  
  
  
