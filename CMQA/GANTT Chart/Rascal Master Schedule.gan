@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="Rascal Master Schedule" company="Saint Louis University" webLink="http://" view-date="2013-12-01" view-index="0" gantt-divider-location="564" resource-divider-location="300" version="2.0">
+<?xml version="1.0" encoding="UTF-8"?><project name="Rascal Master Schedule" company="Saint Louis University" webLink="http://" view-date="2013-12-01" view-index="1" gantt-divider-location="564" resource-divider-location="300" version="2.0">
     <description><![CDATA[This schedule lists all of mission milestones associated with the Rascal mission, which is being co-developed with resources from Saint Louis University and the Boeing Company.]]></description>
     <view zooming-state="default:9" id="gantt-chart"/>
     <view id="resource-table">
@@ -218,6 +218,7 @@
         <resource id="6" name="Joe Mayer" function="Default:0" contacts="jmayer16@slu.edu" phone=""/>
         <resource id="7" name="Christopher Berry" function="Default:0" contacts="cberry12@slu.edu" phone=""/>
         <resource id="8" name="Alex Howard" function="10" contacts="ahowar20@slu.edu" phone=""/>
+        <resource id="9" name="Marek Janiczek" function="Default:0" contacts="janiczekm@slu.edu" phone="650-452-8851"/>
     </resources>
     <allocations>
         <allocation task-id="4" resource-id="0" function="5" responsible="true" load="75.0"/>
