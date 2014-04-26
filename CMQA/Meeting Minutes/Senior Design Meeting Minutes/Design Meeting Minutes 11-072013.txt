@@ -1,0 +1,18 @@
+Rascal Weekly Design Meeting Minutes: 11-7-2013
+Attendees: Dr. Lebeau, Bryant Gaume, Tom Moline, Tyler Olson, Nate Richard, Jennifer Babb
+
+RVM
+===
+-Constraint analysis dertermines what is necessary before actually constructing spacecraft
+-What do we have to meet right now?
+	-Know what to do going forward
+-This should be a top-level analysis for constraint
+	-Do all my components have mass less tahn 8 kg
+	-Do I fit volume?
+	-Etc.
+-Should also look into battery sizing and power life
+	-This is a key driver of constraints
+-One example of a good constraint is the release relative velocity
+	-Could perform a trade study on this
+	-Could look into propellent design, thrusters, etc.
+`

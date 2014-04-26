@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?><project name="Rascal Master Schedule" company="Saint Louis University" webLink="http://" view-date="2013-12-01" view-index="1" gantt-divider-location="564" resource-divider-location="300" version="2.0">
+    <description><![CDATA[This schedule lists all of mission milestones associated with the Rascal mission, which is being co-developed with resources from Saint Louis University and the Boeing Company.]]></description>
+    <view zooming-state="default:9" id="gantt-chart"/>
+    <view id="resource-table">
+        <field id="0" name="Name" width="52" order="0"/>
+        <field id="1" name="Default role" width="47" order="1"/>
+    </view>
+    <!-- -->
+    <calendars>
+        <day-types>
+            <day-type id="0"/>
+            <day-type id="1"/>
+            <calendar id="1" name="default">
+                <default-week sun="0" mon="0" tue="0" wed="0" thu="0" fri="0" sat="0"/>
+                <only-show-weekends value="true"/>
+                <overriden-day-types/>
+                <days/>
+            </calendar>
+        </day-types>
+    </calendars>
+    <tasks>
+        <taskproperties>
+            <taskproperty id="tpd0" name="type" type="default" valuetype="icon"/>
+            <taskproperty id="tpd1" name="priority" type="default" valuetype="icon"/>
+            <taskproperty id="tpd2" name="info" type="default" valuetype="icon"/>
+            <taskproperty id="tpd3" name="name" type="default" valuetype="text"/>
+            <taskproperty id="tpd4" name="begindate" type="default" valuetype="date"/>
+            <taskproperty id="tpd5" name="enddate" type="default" valuetype="date"/>
+            <taskproperty id="tpd6" name="duration" type="default" valuetype="int"/>
+            <taskproperty id="tpd7" name="completion" type="default" valuetype="int"/>
+            <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
+            <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
+        </taskproperties>
+        <task id="117" name="Rascal Mission CONOPS" color="#8cb6ce" meeting="false" start="2014-03-06" duration="28" complete="0" expand="true">
+            <notes><![CDATA[All tasks realted to defining mission requirements, goals, architecture, etc.]]></notes>
+            <task id="119" name="Rascal CONOPS Trade Study" color="#ff0033" meeting="false" start="2014-03-06" duration="15" complete="0" expand="true">
+                <notes><![CDATA[Trade study comparing missions with and without docking]]></notes>
+            </task>
+            <task id="121" name="Rascal CONOPS Selection" color="#ff0033" meeting="true" start="2014-03-20" duration="1" complete="0" expand="true">
+                <notes><![CDATA[Final day to decide which CONOPS to pursue]]></notes>
+            </task>
+            <task id="123" name="CONOPS Revision 1" color="#ff0033" meeting="false" start="2014-03-21" duration="12" complete="0" expand="true">
+                <notes><![CDATA[First revision of CONOPS with docking.]]></notes>
+                <depend id="125" type="1" difference="0" hardness="Strong"/>
+                <depend id="127" type="1" difference="0" hardness="Strong"/>
+            </task>
+            <task id="125" name="Rascal Mission Objective and Success Criterea" color="#ff0033" meeting="false" start="2014-03-21" duration="12" complete="0" expand="true">
+                <notes><![CDATA[Determine success criterea for mission execution, as defined by CONOPS and mission objective.]]></notes>
+            </task>
+            <task id="127" name="Preliminary Rascal RVM" color="#ff0033" meeting="false" start="2014-03-21" duration="12" complete="0" expand="true">
+                <notes><![CDATA[Requirments Verification Matrix for Boeing delivery]]></notes>
+                <depend id="147" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="147" name="Mission Status Review" color="#ff3333" meeting="true" start="2014-04-02" duration="1" complete="0" expand="true"/>
+        </task>
+        <task id="4" name="Primary ADC Subsystem" color="#3333ff" shape="1,0,1,0,0,1,0,1,1,0,1,0,0,1,0,1" meeting="false" start="2014-03-17" duration="38" complete="0" priority="2" expand="true">
+            <notes><![CDATA[Primary ADC Tasks for the Rascal EDU Work]]></notes>
+            <task id="28" name="Preliminary Relative Orbit Analysis" color="#33ff33" meeting="false" start="2014-03-17" duration="5" complete="0" priority="2" expand="true">
+                <notes><![CDATA[First principles and trend analysis for relative motion betwee two spacecraft]]></notes>
+                <depend id="47" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="47" name="Preliminary Controls Analysis" color="#8cb6ce" meeting="false" start="2014-03-22" duration="4" complete="0" expand="true">
+                <notes><![CDATA[Analyzing ideal oribt path for docking mission type, as to determine the affect of sensor noise, pertubatoins, etc.]]></notes>
+                <depend id="53" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="53" name="Preliminary Controls Matlab Algorithm" color="#ccccff" meeting="false" start="2014-03-26" duration="14" complete="0" expand="true">
+                <notes><![CDATA[Implementing controls analysis into Matlab for testing and simulation]]></notes>
+                <depend id="189" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="189" name="Secondary Controls Matlab Algorithm" color="#8cb6ce" meeting="false" start="2014-04-09" duration="15" complete="0" expand="true"/>
+            <task id="56" name="Preliminary ADC Sensor Research" color="#33ff33" meeting="false" start="2014-03-21" duration="12" complete="0" expand="true">
+                <notes><![CDATA[Figure out what is necessary/available for determining local spacecraft orientation/inertial position.]]></notes>
+            </task>
+        </task>
+        <task id="8" name="Primary PLD Subsystem" color="#3333ff" meeting="false" start="2014-03-21" duration="46" complete="0" priority="2" expand="true">
+            <notes><![CDATA[All tasks associated with the PLD subsystem for work on Rascal EDU]]></notes>
+            <task id="134" name="Verify Operation of Hardware System" color="#33ff33" meeting="false" start="2014-03-21" duration="4" complete="0" expand="true">
+                <depend id="136" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="136" name="Hardware System Integration" color="#eeeeee" meeting="false" start="2014-03-25" duration="7" complete="0" expand="true">
+                <depend id="138" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="138" name="Verify Integrated Hardware System" color="#8cb6ce" meeting="false" start="2014-04-01" duration="7" complete="0" expand="true">
+                <depend id="140" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="140" name="Configure Hardware Drivers" color="#8cb6ce" meeting="false" start="2014-04-08" duration="7" complete="0" expand="true">
+                <depend id="142" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="142" name="Finalize and Verify Software in SDK" color="#8cb6ce" meeting="false" start="2014-04-15" duration="7" complete="0" expand="true">
+                <depend id="144" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="144" name="Verify Integrated Hardware and Software System" color="#8cb6ce" meeting="false" start="2014-04-22" duration="7" complete="0" expand="true">
+                <depend id="146" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="146" name="Test, Calibrate, and Demonstrate" color="#8cb6ce" meeting="false" start="2014-04-29" duration="7" complete="0" expand="true"/>
+        </task>
+        <task id="13" name="PRP Subsystem" color="#3333ff" meeting="false" start="2014-03-21" duration="134" complete="0" priority="2" expand="true">
+            <notes><![CDATA[All tasks associated with thePRP subsystem for work on Rascal EDU]]></notes>
+            <task id="60" name="Preliminary PRP System Research" color="#33ff33" meeting="false" start="2014-03-21" duration="12" complete="0" expand="true">
+                <notes><![CDATA[Figuring out the coordinate system terminology that is to be incorperated into the design, picking volume constraints, defining system performance characteristics, etc.]]></notes>
+            </task>
+            <task id="150" name="Prototype Design" color="#8cb6ce" meeting="false" start="2014-03-24" duration="29" complete="0" expand="true">
+                <task id="152" name="Coordinate System Definitions" color="#8cb6ce" meeting="false" start="2014-03-24" duration="5" complete="0" expand="true"/>
+                <task id="154" name="Sizing Requirements" color="#8cb6ce" meeting="false" start="2014-03-24" duration="5" complete="0" expand="true"/>
+                <task id="156" name="DeltaV Requirements" color="#8cb6ce" meeting="false" start="2014-03-24" duration="12" complete="0" expand="true"/>
+                <task id="158" name="Tank Design" color="#8cb6ce" meeting="false" start="2014-03-24" duration="22" complete="0" expand="true"/>
+                <task id="160" name="Thruster Design/Layout" color="#8cb6ce" meeting="false" start="2014-03-24" duration="22" complete="0" expand="true"/>
+                <task id="163" name="Valve Integration Design" color="#8cb6ce" meeting="false" start="2014-04-07" duration="15" complete="0" expand="true">
+                    <depend id="165" type="1" difference="0" hardness="Strong"/>
+                </task>
+                <task id="165" name="Valve Testing" color="#8cb6ce" meeting="false" start="2014-04-07" duration="15" complete="0" expand="true"/>
+            </task>
+            <task id="169" name="Functional Prototype" color="#8cb6ce" meeting="false" start="2014-04-21" duration="29" complete="0" expand="true">
+                <task id="171" name="Print Prototype" color="#8cb6ce" meeting="false" start="2014-04-21" duration="8" complete="0" expand="true"/>
+                <task id="173" name="Valve Integration" color="#8cb6ce" meeting="false" start="2014-04-28" duration="8" complete="0" expand="true"/>
+                <task id="175" name="Functional Testing" color="#8cb6ce" meeting="false" start="2014-05-05" duration="15" complete="0" expand="true"/>
+            </task>
+            <task id="177" name="Functional Engineering Unit" color="#8cb6ce" meeting="false" start="2014-05-19" duration="75" complete="0" expand="true">
+                <task id="178" name="Print Engineering Unit" color="#8cb6ce" meeting="false" start="2014-05-19" duration="15" complete="0" expand="true"/>
+                <task id="180" name="Functional Testing" color="#8cb6ce" meeting="false" start="2014-06-02" duration="61" complete="0" expand="true"/>
+                <task id="182" name="Pressure Testing" color="#8cb6ce" meeting="false" start="2014-06-09" duration="22" complete="0" expand="true"/>
+                <task id="185" name="Environmental Testing" color="#8cb6ce" meeting="false" start="2014-06-23" duration="40" complete="0" expand="true"/>
+            </task>
+        </task>
+        <task id="15" name="Primary CDH Subsystem" color="#3333ff" meeting="false" start="2014-03-21" duration="17" complete="0" priority="2" expand="true">
+            <notes><![CDATA[All tasks associated with the primary CDH subsystem for work on Rascal EDU]]></notes>
+            <task id="63" name="Review Boeing Colony-II Bus User Guide" color="#33ff33" meeting="false" start="2014-03-21" duration="5" complete="0" expand="true">
+                <notes><![CDATA[Look-over the user's guide provided by Boeing, as to determine the communication protocal being used between SLU and Colony-II, as well as the type of sensor information being passed between each.]]></notes>
+                <depend id="101" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="101" name="Preliminary Spacecraft Functional Block Diagram" color="#ccccff" meeting="false" start="2014-03-26" duration="12" complete="0" expand="true">
+                <notes><![CDATA[Determine functional block diagram for interface between each portion of SLU and Boeing side of primary spacecraft.]]></notes>
+            </task>
+        </task>
+        <task id="17" name="DCK Subsystem" color="#cc66ff" meeting="false" start="2014-03-21" duration="24" complete="0" priority="2" expand="true">
+            <notes><![CDATA[All tasks associated with the DCK subsystem for work on Rascal EDU]]></notes>
+            <task id="109" name="Define Separation Requirements" color="#cc66ff" meeting="false" start="2014-03-21" duration="12" complete="0" expand="true">
+                <notes><![CDATA[Important in determining which designs are feasible. Will result from analysis being done by ADC team.]]></notes>
+            </task>
+            <task id="103" name="Preliminary Docking Mechanism Research" color="#cc66ff" meeting="false" start="2014-03-21" duration="12" complete="0" expand="true">
+                <notes><![CDATA[Reveiw docking mechanism heritage and determine whether or not it is necessary to have separate dockin/initial separation mechanisms.]]></notes>
+                <depend id="113" type="2" difference="0" hardness="Strong"/>
+                <depend id="115" type="1" difference="0" hardness="Strong"/>
+            </task>
+            <task id="115" name="Assess Primary Spacecraft Docking Integration" color="#8cb6ce" meeting="false" start="2014-03-21" duration="12" complete="0" expand="true">
+                <notes><![CDATA[Determine orientation of the Colony-II bus and the feasibility of integrating dockin components into its system.]]></notes>
+            </task>
+            <task id="113" name="Preliminary Methodology Trade Study" color="#8cb6ce" meeting="false" start="2014-04-02" duration="12" complete="0" expand="true">
+                <notes><![CDATA[Based on research, determine best method of pursuing docking.]]></notes>
+            </task>
+        </task>
+        <task id="10" name="Secondary STR Subsystem" color="#ff3333" meeting="false" start="2014-03-21" duration="12" complete="0" priority="2" expand="true">
+            <notes><![CDATA[All tasks associated with the Secondary STR subsystem for work on Rascal EDU]]></notes>
+            <task id="66" name="Review Previous Skeleton Design Work" color="#3333ff" meeting="false" start="2014-03-21" duration="5" complete="0" expand="true">
+                <notes><![CDATA[Look over previous skeletion design work (As done by Christopher Berry), and determine what needs to be done going forward with its design.]]></notes>
+            </task>
+            <task id="129" name="Preliminary Mass Budget" color="#3333ff" meeting="false" start="2014-03-25" duration="8" complete="0" expand="true">
+                <notes><![CDATA[Preliminary mass budget that allocates, as percentage of total spacecraft mass, subsystem mass properties.]]></notes>
+            </task>
+            <task id="132" name="Preliminary Component Listing" color="#3333ff" meeting="false" start="2014-03-21" duration="12" complete="0" expand="true">
+                <notes><![CDATA[Determine components necessary to integrate all s/c components.]]></notes>
+            </task>
+        </task>
+        <task id="19" name="Secondary COM Subsystem" color="#ff3333" meeting="false" start="2014-03-21" duration="12" complete="0" priority="2" expand="true">
+            <notes><![CDATA[All tasks associated with the Secondary COM subsystem for work on Rascal EDU]]></notes>
+            <task id="75" name="Secondary Link Budget Analysis" color="#3333ff" meeting="false" start="2014-03-21" duration="5" complete="0" expand="true">
+                <notes><![CDATA[Cointinue assessing link budget, as to determine feasibility of inter-satellite communication.]]></notes>
+            </task>
+            <task id="79" name="Preliminary Component Research" color="#3333ff" meeting="false" start="2014-03-21" duration="12" complete="0" expand="true">
+                <notes><![CDATA[Research the components necessary to acheive mission goals (inter-satellite communication and ground downlink capabilities).]]></notes>
+            </task>
+        </task>
+        <task id="21" name="Secondary PWR Subsystem" color="#ff3333" meeting="false" start="2014-03-21" duration="26" complete="0" priority="2" expand="true">
+            <notes><![CDATA[All tasks associated with the Secondary PWR subsystem for work on Rascal EDU]]></notes>
+            <task id="90" name="Secondary Power Budget" color="#3333ff" meeting="false" start="2014-03-21" duration="12" complete="0" expand="true">
+                <notes><![CDATA[Based on preliminary power budget work, begin determining max lifetime based on realistic battery and EPS figures, as well as on estimates of power consumption of the rest of the spacecraft.]]></notes>
+                <depend id="93" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="93" name="Preliminary Component Selection" color="#8cb6ce" meeting="false" start="2014-04-02" duration="14" complete="0" expand="true">
+                <notes><![CDATA[Based on power requirements dictated by the power budget, determine the type and number of batteries necessary to execute the mission, as well as what's necessary to integrate said batteries into the design.]]></notes>
+            </task>
+        </task>
+        <task id="23" name="Secondary ADC Subsystem" color="#ff3333" meeting="false" start="2014-03-21" duration="33" complete="0" priority="2" expand="true">
+            <notes><![CDATA[All tasks associated with the Secondary STR subsystem for work on Rascal EDU]]></notes>
+            <task id="71" name="Preliminary Detumbling Analysis" color="#3333ff" meeting="false" start="2014-03-21" duration="19" complete="0" expand="true">
+                <notes><![CDATA[Review work that was done for COPPER and Argus and determine how to implement said analysis for the secondary spacecraft and its tumbling mitigation.]]></notes>
+                <depend id="83" type="2" difference="0" hardness="Strong"/>
+                <depend id="87" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="87" name="Preliminary Detumbling Requirements" color="#8cb6ce" meeting="false" start="2014-04-09" duration="7" complete="0" expand="true"/>
+            <task id="83" name="Preliminary Detumbling Component Selection" color="#8cb6ce" meeting="false" start="2014-04-09" duration="14" complete="0" expand="true">
+                <notes><![CDATA[Based on detumbling requirements, determine components necessary to acheive said requirements.]]></notes>
+            </task>
+            <task id="81" name="Determine GPS Frequency" color="#3333ff" meeting="false" start="2014-03-21" duration="5" complete="0" expand="true">
+                <notes><![CDATA[Based on accuracy information and necessary data.]]></notes>
+            </task>
+        </task>
+        <task id="25" name="Secondary CDH Subsystem" color="#ff3333" meeting="false" start="2014-03-21" duration="24" complete="0" priority="2" expand="true">
+            <notes><![CDATA[All tasks associated with the Secondary CDH subsystem for work on Rascal EDU]]></notes>
+            <task id="98" name="Preliminary Spacecraft Functional Block Diagram" color="#3333ff" meeting="false" start="2014-03-21" duration="12" complete="0" expand="false">
+                <notes><![CDATA[Determine the subsystems necessary to execute mission goals, as well as the manner in which each subsystem interacts with the other.]]></notes>
+                <depend id="77" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="77" name="Preliminary Software System Overview" color="#3333ff" meeting="false" start="2014-04-02" duration="12" complete="0" expand="true">
+                <notes><![CDATA[Analyze previous software development for COPPER and Argus and determine what can be brought in for Rascal work and what needs to be added/taken away.]]></notes>
+            </task>
+        </task>
+        <task id="0" name="Student Graduation" color="#8cb6ce" shape="1,0,1,0,0,1,0,1,1,0,1,0,0,1,0,1" meeting="true" start="2014-05-15" duration="1" complete="0" priority="4" expand="true"/>
+        <task id="2" name="EDU Delivery" color="#8cb6ce" meeting="true" start="2014-08-01" duration="1" complete="0" expand="true"/>
+    </tasks>
+    <resources>
+        <resource id="0" name="Tom Moline" function="5" contacts="tmoline@slu.edu" phone="(630) 401-0791"/>
+        <resource id="1" name="Nate Richard" function="4" contacts="nrichar8@slu.edu" phone="(608) 732-7147"/>
+        <resource id="2" name="Jennifer Babb" function="1" contacts="jbabb1@slu.edu" phone="(636) 579-6816"/>
+        <resource id="3" name="Tyler Olson" function="12" contacts="toslon6@slu.edu" phone="(812) 204-1098"/>
+        <resource id="4" name="Kate Clements" function="3" contacts="clementsk@slu.edu" phone=""/>
+        <resource id="5" name="Nathan Bossart" function="11" contacts="nbossart@slu.edu" phone=""/>
+        <resource id="6" name="Joe Mayer" function="Default:0" contacts="jmayer16@slu.edu" phone=""/>
+        <resource id="7" name="Christopher Berry" function="Default:0" contacts="cberry12@slu.edu" phone=""/>
+        <resource id="8" name="Alex Howard" function="10" contacts="ahowar20@slu.edu" phone=""/>
+        <resource id="9" name="Marek Janiczek" function="Default:0" contacts="janiczekm@slu.edu" phone="650-452-8851"/>
+    </resources>
+    <allocations>
+        <allocation task-id="4" resource-id="0" function="5" responsible="true" load="75.0"/>
+        <allocation task-id="28" resource-id="0" function="0" responsible="true" load="100.0"/>
+        <allocation task-id="47" resource-id="0" function="0" responsible="true" load="100.0"/>
+        <allocation task-id="109" resource-id="0" function="0" responsible="false" load="100.0"/>
+        <allocation task-id="117" resource-id="0" function="5" responsible="true" load="100.0"/>
+        <allocation task-id="119" resource-id="0" function="5" responsible="true" load="100.0"/>
+        <allocation task-id="125" resource-id="0" function="5" responsible="true" load="100.0"/>
+        <allocation task-id="127" resource-id="0" function="5" responsible="true" load="100.0"/>
+        <allocation task-id="117" resource-id="1" function="4" responsible="true" load="100.0"/>
+        <allocation task-id="119" resource-id="1" function="4" responsible="false" load="100.0"/>
+        <allocation task-id="125" resource-id="1" function="4" responsible="false" load="100.0"/>
+        <allocation task-id="127" resource-id="1" function="4" responsible="false" load="100.0"/>
+        <allocation task-id="109" resource-id="2" function="1" responsible="true" load="100.0"/>
+        <allocation task-id="103" resource-id="2" function="1" responsible="true" load="100.0"/>
+        <allocation task-id="60" resource-id="3" function="12" responsible="true" load="100.0"/>
+        <allocation task-id="4" resource-id="4" function="3" responsible="false" load="25.0"/>
+        <allocation task-id="56" resource-id="4" function="3" responsible="true" load="100.0"/>
+        <allocation task-id="66" resource-id="7" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="129" resource-id="7" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="90" resource-id="8" function="10" responsible="true" load="100.0"/>
+    </allocations>
+    <vacations/>
+    <taskdisplaycolumns>
+        <displaycolumn property-id="tpd2" order="-1" width="75" visible="false"/>
+        <displaycolumn property-id="tpd7" order="-1" width="75" visible="false"/>
+        <displaycolumn property-id="tpd8" order="-1" width="75" visible="false"/>
+        <displaycolumn property-id="tpd6" order="-1" width="75" visible="false"/>
+        <displaycolumn property-id="tpd10" order="-1" width="75" visible="false"/>
+        <displaycolumn property-id="tpd9" order="-1" width="75" visible="false"/>
+        <displaycolumn property-id="tpd1" order="-1" width="75" visible="false"/>
+        <displaycolumn property-id="tpd0" order="-1" width="75" visible="false"/>
+        <displaycolumn property-id="tpd3" order="0" width="349" visible="true"/>
+        <displaycolumn property-id="tpd4" order="1" width="55" visible="true"/>
+        <displaycolumn property-id="tpd5" order="2" width="141" visible="true"/>
+    </taskdisplaycolumns>
+    <previous/>
+    <roles roleset-name="Default"/>
+    <roles>
+        <role id="0" name="Primary ADC Lead"/>
+        <role id="1" name="DCK Lead"/>
+        <role id="2" name="Primary CDH Lead"/>
+        <role id="3" name="Primary ADC Co-Lead"/>
+        <role id="4" name="Secondary Spacecraft Program Manager"/>
+        <role id="5" name="Primary Spacecraft Program Manager"/>
+        <role id="6" name="Secondary STR Lead"/>
+        <role id="7" name="Secondary CDH Lead"/>
+        <role id="8" name="Secondary COM Lead"/>
+        <role id="9" name="Secondary ADC Lead"/>
+        <role id="10" name="Secondary PWR Lead"/>
+        <role id="11" name="Primary PLD Lead"/>
+        <role id="12" name="PRP Lead"/>
+        <role id="13" name=""/>
+    </roles>
+</project>

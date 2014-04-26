@@ -1,0 +1,40 @@
+Weekly Design Meeting Minutes-10-15-2013
+==================
+
+Updated RFP Comments
+-What are the limits of operation for the orbital maneuvers?
+	-This would depend on the componenets that are selected.
+
+-Should take out orbital analysis figure, too much information for RFP.
+-Results should be in list form, as to ease reading of the RFP to a reviewer. 
+	-Should be able to see if we can meet the parameters with the design we have.
+
+-Take and out of mission statement.
+-Need more specificity in mission objective with regards to sizing contraints.
+	-Don't need to make it seem like the propulsion system is being developed as a mission success criterea.
+	-Should say that a propuslion system fits within a 3U and is capable of acheiving a delta V of X m/s.
+		-Easy way to do this is so say that it meets CubeSat design spec Rev 3
+	-Should say that it has a delta v reqirement and a pointing requriement
+
+-The configuration of the satellite could change depending on what seems reasonable, 6U is total size.
+
+-For CONOPS, should say that inital contact has to be met within X number of weeks
+-Need to include critical requirements associated with launch, not a specific CONOPS, in the RFP.
+-One requirement should be related to range of orbital ranges in which the mission can be acheived.
+
+-Need to specify paylaod capabilities (weight, volume, etc.)
+
+-Components trades studies usually are not until after PDR.
+	-PDR is about architecture, size of solar panels, etc.
+	-VHF/UHF/Laser COM, etc.
+	-CDR is about finiding specific companies to provide parts
+
+-Configruation design can be pushed as well.
+	-Can do rough outlook of what goes into each satelltie.
+	-But, can we do this with two 3U's? Do we want a bigger and smaller one? Etc.
+	-Mission design will take all semseter, component trade-offs are later.
+
+-Also want to add Data budget before the end of the semester.
+
+-Should look into number of image sensors, type of sensors, power trade offs, etc.
+	
